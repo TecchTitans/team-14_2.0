@@ -51,7 +51,7 @@ public class MenuScreen implements Screen {
 
         // Title image
         titleImage = new Image(new Texture(Gdx.files.internal("title.png")));
-        titleImage.setPosition((viewport.getWorldWidth() / 2f) - (titleImage.getWidth() / 2f), 500);
+        titleImage.setPosition((viewport.getWorldWidth() / 2f) - (titleImage.getWidth() / 2f), viewport.getWorldHeight() * 0.75f);
         menuStage.addActor(titleImage);
 
         // Play menu music
@@ -80,14 +80,17 @@ public class MenuScreen implements Screen {
 //        Label title = new Label("Heslington Hustle", game.skin, "title"); // Old title, new uses a texture
         TextButton startButton = new TextButton("New Game", game.skin);
         TextButton settingsButton = new TextButton("Settings", game.skin);
+        TextButton leaderboardButton = new TextButton("Leaderboard", game.skin);
         TextButton creditsButton = new TextButton("Credits", game.skin);
         TextButton exitButton = new TextButton("Exit", game.skin);
 
         // Add everything to the table using row() to go to a new line
         int buttonWidth = 340;
-        buttonTable.add(startButton).uniformX().width(buttonWidth).padBottom(10).padTop(280);
+        buttonTable.add(startButton).uniformX().width(buttonWidth).padBottom(10).padTop(220);
         buttonTable.row();
         buttonTable.add(settingsButton).uniformX().width(buttonWidth).padBottom(10);
+        buttonTable.row();
+        buttonTable.add(leaderboardButton).uniformX().width(buttonWidth).padBottom(10);
         buttonTable.row();
         buttonTable.add(creditsButton).uniformX().width(buttonWidth).padBottom(30);
         buttonTable.row();
@@ -118,6 +121,14 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
                 game.setScreen(new SettingsScreen(game, thisScreen));
+            }
+        });
+
+        // LEADERBOARD BUTTON
+        leaderboardButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new LeaderboardScreen(game, thisScreen));
             }
         });
 

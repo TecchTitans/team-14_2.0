@@ -26,6 +26,7 @@ public class HustleGame extends Game {
 	public String credits, tutorialText;
 	public GameScreen gameScreen;
 	public MenuScreen menuScreen;
+	public LeaderboardScreen leaderboardScreen;
 	public ShapeRenderer shapeRenderer;
 	public SoundManager soundManager;
 	public Stage blueBackground;
