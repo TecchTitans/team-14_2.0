@@ -1,6 +1,7 @@
 Libraries:
 Main game engine
 LibGDX - https://libgdx.com/
+JSON Library - https://github.com/stleary/JSON-java
 
 Tools:
 For compiling UI features together I used LibGDX's skin composer to generate an atlas file of all the components

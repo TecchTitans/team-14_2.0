@@ -51,7 +51,7 @@ public class LeaderboardScreen implements Screen {
 
         // Add elements to show the players and their score ordered from first to last.
         // There are 3 columns and 10 rows.
-        int numRows  = 10;
+        int numRows  = game.leaderboard.length;
         int numColumns = 3;
         int padding = 10;
         for (int i = 0; i < numRows * numColumns; i++) {
@@ -69,14 +69,14 @@ public class LeaderboardScreen implements Screen {
                 }
                 case 1:
                 {
-                    currentButton = new TextButton("Name", game.skin);
+                    currentButton = new TextButton(game.leaderboard[row][0], game.skin);
                     currentButton.setDisabled(true);
                     scrollTable.add(currentButton).width(300f).pad(padding);
                     break;
                 }
                 case 2:
                 {
-                    currentButton = new TextButton("Score", game.skin);
+                    currentButton = new TextButton(game.leaderboard[row][1], game.skin);
                     currentButton.setDisabled(true);
                     scrollTable.add(currentButton).width(300f).pad(padding);
                     break;
@@ -88,7 +88,11 @@ public class LeaderboardScreen implements Screen {
             }
         }
 
-        leaderboardTable.add(scrollWindow).pad(0).height(350).width(scrollTable.getPrefWidth() + padding * numColumns + scrollWindow.getScrollBarWidth());
+        leaderboardTable.add(scrollWindow).height(350).width(
+                scrollTable.getPrefWidth() +
+                padding * numColumns +
+                scrollWindow.getScrollBarWidth()
+        );
         leaderboardTable.row();
 
         // Exit button

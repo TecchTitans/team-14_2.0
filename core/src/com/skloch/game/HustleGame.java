@@ -12,6 +12,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import org.json.*;
+
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.util.ArrayList;
 
 /**
  * A class that is initially created by DesktopLauncher, loads consistent files at the start of the game and initialises lots of important classes.
@@ -24,6 +29,7 @@ public class HustleGame extends Game {
 	public Skin skin;
 	public TiledMap map;
 	public String credits, tutorialText;
+	public String[][] leaderboard;
 	public GameScreen gameScreen;
 	public MenuScreen menuScreen;
 	public LeaderboardScreen leaderboardScreen;
@@ -90,6 +96,8 @@ public class HustleGame extends Game {
 		credits = readTextFile("Text/credits.txt");
 		tutorialText = readTextFile("Text/tutorial_text.txt");
 
+		leaderboard = parseLeaderboardJSON("JSONS/leaderboard.json");
+
 		this.setScreen(new MenuScreen(this));
 	}
 
@@ -128,6 +136,32 @@ public class HustleGame extends Game {
 		} else {
 			return file.readString();
 		}
+	}
 
+	public String[][] parseLeaderboardJSON(String filepath) {
+		ArrayList<String[]> leaderboardData = new ArrayList<>();
+
+		FileHandle file = Gdx.files.internal(filepath);
+
+		if (!file.exists()) {
+			System.out.println("WARNING: Couldn't load file " + filepath);
+			return new String[0][];
+		} else {
+			String contents = new String(file.readBytes());
+			JSONObject obj = new JSONObject(contents);
+			JSONArray players = obj.getJSONArray("players");
+
+			for (int i = 0; i < players.length(); i++) {
+				JSONObject playerData = players.getJSONObject(i);
+				ArrayList<String> playerDataArray = new ArrayList<>();
+
+				playerDataArray.add(playerData.getString("name"));
+				playerDataArray.add(String.valueOf(playerData.getInt("score")));
+
+				leaderboardData.add(playerDataArray.toArray(new String[0]));
+			}
+		}
+
+		return leaderboardData.toArray(new String[0][]);
 	}
 }
