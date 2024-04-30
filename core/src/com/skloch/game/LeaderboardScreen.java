@@ -49,13 +49,11 @@ public class LeaderboardScreen implements Screen {
         ScrollPane scrollWindow = new ScrollPane(scrollTable, game.skin);
         scrollWindow.setFadeScrollBars(false);
 
-        leaderboardTable.add(scrollWindow).padTop(20).height(350);
-        leaderboardTable.row();
-
         // Add elements to show the players and their score ordered from first to last.
         // There are 3 columns and 10 rows.
         int numRows  = 10;
         int numColumns = 3;
+        int padding = 10;
         for (int i = 0; i < numRows * numColumns; i++) {
             int row = i / numColumns;
             int col = i % numColumns;
@@ -66,21 +64,21 @@ public class LeaderboardScreen implements Screen {
                 {
                     currentButton = new TextButton(String.valueOf(row + 1), game.skin);
                     currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(100f).pad(5);
+                    scrollTable.add(currentButton).width(100f).pad(padding);
                     break;
                 }
                 case 1:
                 {
                     currentButton = new TextButton("Name", game.skin);
                     currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(300f).pad(5);
+                    scrollTable.add(currentButton).width(300f).pad(padding);
                     break;
                 }
                 case 2:
                 {
                     currentButton = new TextButton("Score", game.skin);
                     currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(300f).pad(5);
+                    scrollTable.add(currentButton).width(300f).pad(padding);
                     break;
                 }
             }
@@ -89,6 +87,9 @@ public class LeaderboardScreen implements Screen {
                 scrollTable.row();
             }
         }
+
+        leaderboardTable.add(scrollWindow).pad(0).height(350).width(scrollTable.getPrefWidth() + padding * numColumns + scrollWindow.getScrollBarWidth());
+        leaderboardTable.row();
 
         // Exit button
         TextButton exitButton = new TextButton("Exit", game.skin);
