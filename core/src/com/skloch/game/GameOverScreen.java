@@ -106,8 +106,6 @@ public class GameOverScreen implements Screen {
         // Update leaderboard
         // Currently does not calculate score but will provide 500 for the score.
         // NEEDS UPDATING
-        System.out.println(game.gameScreen.player.name);
-
         List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(game.leaderboard));
         String[] playerArrayToAdd = new String[]{game.gameScreen.player.name, "500"};
         newLeaderboardList.add(playerArrayToAdd);
