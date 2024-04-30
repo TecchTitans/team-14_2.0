@@ -21,6 +21,7 @@ public class Player {
     private float stateTime = 0;
     private final Array<Animation<TextureRegion>> walkingAnimation, idleAnimation;
     // Stats
+    public String name;
     public float speed = 300f;
     public Array<GameObject> collidables;
     public int scale = 4;
@@ -37,7 +38,7 @@ public class Player {
      * @param avatar "avatar1" for the more masculine character, "avatar2" for the more feminine character,
      *               player animations are packed in the player_sprites atlas
      */
-    public Player (String avatar) {
+    public Player (String avatar, String name) {
         // Load the player's textures from the atlas
         TextureAtlas playerAtlas = new TextureAtlas(Gdx.files.internal("Sprites/Player/player_sprites.atlas"));
 
@@ -76,6 +77,7 @@ public class Player {
                 sprite.getHeight()*hitboxScaley
         );
 
+        this.name = name;
     }
 
     /**

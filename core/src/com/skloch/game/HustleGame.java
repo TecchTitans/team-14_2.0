@@ -14,9 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import org.json.*;
 
+import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 /**
  * A class that is initially created by DesktopLauncher, loads consistent files at the start of the game and initialises lots of important classes.
@@ -135,6 +137,31 @@ public class HustleGame extends Game {
 			return "Couldn't load " + filepath;
 		} else {
 			return file.readString();
+		}
+	}
+
+	public void writeLeaderboardJSON(String filepath) {
+		JSONArray playerArray = new JSONArray();
+
+		for (int i = 0; i < leaderboard.length; i++) {
+			if (leaderboard[i] == null) {
+				continue;
+			}
+
+			JSONObject playerObject = new JSONObject();
+			playerObject.put("name", leaderboard[i][0]);
+			playerObject.put("score", leaderboard[i][1]);
+			playerArray.put(playerObject);
+		}
+
+		JSONObject outputObject = new JSONObject();
+		outputObject.put("players", playerArray);
+
+		// Write file
+		try (FileWriter writer = new FileWriter(filepath)) {
+			writer.write(outputObject.toString());
+		} catch (Exception e) {
+			System.out.println("Failed to export leaderboard!");
 		}
 	}
 

@@ -305,11 +305,18 @@ public class MenuScreen implements Screen {
         ImageButton choice2 = new ImageButton(game.skin, "avatar2");
         buttonTable.add(choice2).right().expandX();
 
+        // Name input field
+        buttonTable.row();
+        TextField nameField = new TextField("", game.skin);
+        nameField.setMessageText("Enter name:");
+        nameField.setAlignment(3);
+        buttonTable.add(nameField).colspan(2).padTop(10).width(600).height(100).center();
+
         choice1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
-                game.setScreen(new GameScreen(game, 1));
+                game.setScreen(new GameScreen(game, 1, nameField.getText()));
                 game.soundManager.stopMenuMusic();
                 dispose();
             }
@@ -319,7 +326,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
-                game.setScreen(new GameScreen(game, 2));
+                game.setScreen(new GameScreen(game, 2, nameField.getText()));
                 game.soundManager.stopMenuMusic();
                 dispose();
             }

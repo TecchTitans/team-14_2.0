@@ -63,7 +63,7 @@ public class GameScreen implements Screen {
      *             initialised once.
      * @param avatarChoice Which avatar the player has picked, 0 for the more masculine avatar, 1 for the more feminine
      */
-    public GameScreen(final HustleGame game, int avatarChoice) {
+    public GameScreen(final HustleGame game, int avatarChoice, String avatarName) {
         // Important game variables
         this.game = game;
         this.game.gameScreen = this;
@@ -97,9 +97,9 @@ public class GameScreen implements Screen {
 
         // Create a player class
         if (avatarChoice == 1) {
-            player = new Player("avatar1");
+            player = new Player("avatar1", avatarName);
         } else {
-            player = new Player("avatar2");
+            player = new Player("avatar2", avatarName);
         }
 
 
@@ -231,6 +231,9 @@ public class GameScreen implements Screen {
         // Display a little good morning message
         dialogueBox.show();
         dialogueBox.setText(getWakeUpMessage());
+
+        // TEST
+        GameOver();
     }
 
     @Override

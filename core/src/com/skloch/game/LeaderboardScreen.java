@@ -58,6 +58,10 @@ public class LeaderboardScreen implements Screen {
             int row = i / numColumns;
             int col = i % numColumns;
 
+            if (game.leaderboard[row] == null) {
+                continue;
+            }
+
             TextButton currentButton;
             switch (col) {
                 case 0:

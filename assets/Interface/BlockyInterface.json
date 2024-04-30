@@ -171,6 +171,15 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		pressedOffsetY: -4
 	}
 }
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: W95FA3
+		fontColor: black
+		background: button_up
+		messageFont: W95FA3
+		messageFontColor: black
+	}
+}
 com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
 	default: {
 		label: interaction

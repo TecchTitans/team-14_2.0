@@ -13,8 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.sun.tools.javac.util.ArrayUtils;
+import sun.security.util.ArrayUtil;
 
-import java.awt.*;
+import java.util.*;
 
 /**
  * A screen that displays the player's stats at the end of the game.
@@ -100,6 +102,25 @@ public class GameOverScreen implements Screen {
         // Centre the window
         gameOverWindow.setX((viewport.getWorldWidth() / 2) - (gameOverWindow.getWidth() / 2));
         gameOverWindow.setY((viewport.getWorldHeight() / 2) - (gameOverWindow.getHeight() / 2));
+
+        // Update leaderboard
+        // Currently does not calculate score but will provide 500 for the score.
+        // NEEDS UPDATING
+        System.out.println(game.gameScreen.player.name);
+
+        List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(game.leaderboard));
+        String[] playerArrayToAdd = new String[]{game.gameScreen.player.name, "500"};
+        newLeaderboardList.add(playerArrayToAdd);
+
+        String[][] newLeaderboardArray = newLeaderboardList.toArray(new String[0][]);
+
+        Arrays.sort(newLeaderboardArray, Comparator.comparingInt(o -> Integer.parseInt(o[1])));
+        Collections.reverse(Arrays.asList(newLeaderboardArray));
+
+        game.leaderboard = Arrays.copyOf(newLeaderboardArray, Math.min(newLeaderboardArray.length, 10));
+
+        // Write leaderboard to file
+        game.writeLeaderboardJSON("JSONS/leaderboard.json");
     }
 
 
