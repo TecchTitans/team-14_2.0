@@ -316,7 +316,11 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
-                game.setScreen(new GameScreen(game, 1, nameField.getText()));
+                String name = nameField.getText();
+                if (name.isEmpty()) {
+                    name = "T-Rex";
+                }
+                game.setScreen(new GameScreen(game, 1, name));
                 game.soundManager.stopMenuMusic();
                 dispose();
             }
@@ -326,7 +330,11 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
-                game.setScreen(new GameScreen(game, 2, nameField.getText()));
+                String name = nameField.getText();
+                if (name.isEmpty()) {
+                    name = "T-Rex";
+                }
+                game.setScreen(new GameScreen(game, 2, name));
                 game.soundManager.stopMenuMusic();
                 dispose();
             }
