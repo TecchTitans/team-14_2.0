@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- * A screen to display the game menu to the player has the buttons "Start", "Settings", "Credits, "Exit"
- * ALso diaplays a tutorial window and an avatar select screen
+ * A screen to display the game menu to the player has the buttons "Start", "Settings", "Leaderboard", "Credits, "Exit"
+ * Also displays a tutorial window and an avatar select screen
  */
 public class MenuScreen implements Screen {
     final HustleGame game;

@@ -106,11 +106,11 @@ public class HustleGame extends Game {
 	 */
 	@Override
 	public void dispose () {
-		batch.dispose();
-		blueBackground.dispose();
-		skin.dispose();
-		map.dispose();
-		shapeRenderer.dispose();
+		//batch.dispose();
+		//blueBackground.dispose();
+		//skin.dispose();
+		//map.dispose();
+		//shapeRenderer.dispose();
 		soundManager.dispose();
 	}
 
