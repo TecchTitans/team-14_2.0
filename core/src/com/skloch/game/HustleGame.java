@@ -30,6 +30,8 @@ public class HustleGame extends Game {
 	public int HEIGHT;
 	public Skin skin;
 	public TiledMap map;
+	private TiledMap eastMap;
+	private TiledMap townMap;
 	public String credits, tutorialText;
 	public String[][] leaderboard;
 	public GameScreen gameScreen;
@@ -42,6 +44,8 @@ public class HustleGame extends Game {
 	public int mapSquareSize;
 	public float mapScale;
 	public MapProperties mapProperties;
+	private MapProperties eastMapProperties;
+	private MapProperties townMapProperties;
 
 
 	/**
@@ -72,9 +76,17 @@ public class HustleGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		skin = new Skin(Gdx.files.internal("Interface/BlockyInterface.json"));
-		// Map
-		map = new TmxMapLoader().load("Maps/east_campus.tmx");
-		mapProperties = map.getProperties();
+		// Maps
+		TmxMapLoader mapLoader = new TmxMapLoader();
+		//map = new TmxMapLoader().load("Maps/east_campus.tmx");
+		eastMap = mapLoader.load("Maps/east_campus.tmx");
+		townMap = mapLoader.load("Maps/Town.tmx");
+
+		eastMapProperties = eastMap.getProperties();
+		townMapProperties = townMap.getProperties();
+
+		map = eastMap;
+		mapProperties = eastMapProperties;
 
 		// Define background, foreground and object layers
 		// IMPORTANT: CHANGE THESE WHEN UPDATING THE LAYERS IN YOUR EXPORTED MAP FROM TILED
@@ -101,6 +113,16 @@ public class HustleGame extends Game {
 		leaderboard = parseLeaderboardJSON("JSONS/leaderboard.json");
 
 		this.setScreen(new MenuScreen(this));
+	}
+
+	public void switchToTownMap() {
+		map = townMap;
+		mapProperties = townMapProperties;
+	}
+
+	public void switchToEastMap() {
+		map = eastMap;
+		mapProperties = eastMapProperties;
 	}
 
 	/**

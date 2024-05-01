@@ -760,18 +760,19 @@ public class GameScreen implements Screen {
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
     public void changeToTownScreen() {
-        game.map = new TmxMapLoader().load("Maps/town.tmx");
-        game.setScreen(new GameScreen(game, avatarChoice, player.name));
+        //game.map = new TmxMapLoader().load("Maps/town.tmx");
+        //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
+        game.switchToTownMap();
     }
 
     /**
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
     public void changeToCampusEastScreen() {
-        game.map = new TmxMapLoader().load("Maps/east_campus.tmx");
-        game.setScreen(new GameScreen(game, avatarChoice, player.name));
+        //game.map = new TmxMapLoader().load("Maps/east_campus.tmx");
+        //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
+        game.switchToEastMap();
     }
-
 }
