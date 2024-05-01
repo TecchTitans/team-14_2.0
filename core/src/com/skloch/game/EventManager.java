@@ -305,7 +305,7 @@ public class EventManager {
      */
     public void goToTownEvent(String[] args) {
         game.dialogueBox.hide();
-        game.changeToTownScreen();
+        game.changeToTownMap();
     }
 
     /**
@@ -315,7 +315,7 @@ public class EventManager {
      */
     public void goToEastCampusEvent(String[] args) {
         game.dialogueBox.hide();
-        game.changeToCampusEastScreen();
+        game.changeToCampusEastMap();
     }
 
     /**

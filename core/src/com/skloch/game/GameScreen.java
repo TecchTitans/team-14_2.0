@@ -184,7 +184,7 @@ public class GameScreen implements Screen {
         inputMultiplexer.addProcessor(uiStage);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-
+        changeToCampusEastMap();
         setupMap();
 
 
@@ -763,7 +763,7 @@ public class GameScreen implements Screen {
     /**
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
-    public void changeToTownScreen() {
+    public void changeToTownMap() {
         //game.map = new TmxMapLoader().load("Maps/town.tmx");
         //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
@@ -774,7 +774,7 @@ public class GameScreen implements Screen {
     /**
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
-    public void changeToCampusEastScreen() {
+    public void changeToCampusEastMap() {
         //game.map = new TmxMapLoader().load("Maps/east_campus.tmx");
         //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
