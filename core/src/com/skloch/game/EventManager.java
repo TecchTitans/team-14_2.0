@@ -21,8 +21,6 @@ public class EventManager {
     private final HashMap<String, String> objectInteractions;
     private final Array<String> talkTopics;
 
-    public TiledMap map;
-
     /**
      * A class that maps Object's event strings to actual Java functions.
      * To run a function call event(eventString), to add arguments add dashes.
