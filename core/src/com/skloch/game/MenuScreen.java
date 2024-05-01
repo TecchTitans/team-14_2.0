@@ -5,13 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import javax.swing.*;
 
 /**
  * A screen to display the game menu to the player has the buttons "Start", "Settings", "Leaderboard", "Credits, "Exit"
@@ -301,25 +305,34 @@ public class MenuScreen implements Screen {
         table.add(buttonTable).width(600);
 
         ImageButton choice1 = new ImageButton(game.skin, "avatar1");
+        choice1.setDisabled(true);
         buttonTable.add(choice1).left().expandX();
         ImageButton choice2 = new ImageButton(game.skin, "avatar2");
+        choice2.setDisabled(true);
         buttonTable.add(choice2).right().expandX();
 
         // Name input field
         buttonTable.row();
         TextField nameField = new TextField("", game.skin);
-        nameField.setMessageText("Enter name:");
-        nameField.setAlignment(3);
+        nameField.setMessageText("ENTER YOUR NAME HERE");
+        nameField.setAlignment(Align.center);
+        nameField.setMaxLength(12);
         buttonTable.add(nameField).colspan(2).padTop(10).width(600).height(100).center();
+
+        // Choice buttons are disabled when the name field is empty. This makes the user enter a name.
+        nameField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                choice1.setDisabled(nameField.getText().isEmpty());
+                choice2.setDisabled(nameField.getText().isEmpty());
+            }
+        });
 
         choice1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
                 String name = nameField.getText();
-                if (name.isEmpty()) {
-                    name = "T-Rex";
-                }
                 game.setScreen(new GameScreen(game, 1, name));
                 game.soundManager.stopMenuMusic();
                 dispose();
@@ -331,9 +344,6 @@ public class MenuScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
                 String name = nameField.getText();
-                if (name.isEmpty()) {
-                    name = "T-Rex";
-                }
                 game.setScreen(new GameScreen(game, 2, name));
                 game.soundManager.stopMenuMusic();
                 dispose();
