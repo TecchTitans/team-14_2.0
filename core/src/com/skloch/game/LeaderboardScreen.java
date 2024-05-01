@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -62,31 +63,35 @@ public class LeaderboardScreen implements Screen {
                 continue;
             }
 
-            TextButton currentButton;
+            Label currentCell;
             switch (col) {
+                // Position number
                 case 0:
                 {
-                    currentButton = new TextButton(String.valueOf(row + 1), game.skin);
-                    currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(100f).pad(padding);
+                    currentCell = new Label(String.valueOf(row + 1), game.skin);
+                    currentCell.setAlignment(Align.center);
+                    scrollTable.add(currentCell).width(100f).pad(padding);
                     break;
                 }
+                // Name field
                 case 1:
                 {
-                    currentButton = new TextButton(game.leaderboard[row][0], game.skin);
-                    currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(300f).pad(padding);
+                    currentCell = new Label(game.leaderboard[row][0], game.skin);
+                    currentCell.setAlignment(Align.center);
+                    scrollTable.add(currentCell).width(300f).pad(padding);
                     break;
                 }
+                // Score field
                 case 2:
                 {
-                    currentButton = new TextButton(game.leaderboard[row][1], game.skin);
-                    currentButton.setDisabled(true);
-                    scrollTable.add(currentButton).width(300f).pad(padding);
+                    currentCell = new Label(game.leaderboard[row][1], game.skin);
+                    currentCell.setAlignment(Align.center);
+                    scrollTable.add(currentCell).width(300f).pad(padding);
                     break;
                 }
             }
 
+            // All columns have been created for that row so start a new row.
             if ((col + 1) == numColumns) {
                 scrollTable.row();
             }

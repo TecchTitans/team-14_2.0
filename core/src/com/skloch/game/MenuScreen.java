@@ -310,6 +310,7 @@ public class MenuScreen implements Screen {
         TextField nameField = new TextField("", game.skin);
         nameField.setMessageText("Enter name:");
         nameField.setAlignment(3);
+        nameField.setMaxLength(12);
         buttonTable.add(nameField).colspan(2).padTop(10).width(600).height(100).center();
 
         choice1.addListener(new ChangeListener() {

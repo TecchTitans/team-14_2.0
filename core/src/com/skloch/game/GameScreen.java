@@ -231,6 +231,9 @@ public class GameScreen implements Screen {
         // Display a little good morning message
         dialogueBox.show();
         dialogueBox.setText(getWakeUpMessage());
+
+        // TEST
+        GameOver();
     }
 
     @Override
