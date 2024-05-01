@@ -1991,7 +1991,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.g2d.BitmapFont
 						name: font
 						optional: false
-						value: W95FA3
+						value: PixeloidMono_editedwhitepx30
 					}
 					fontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -2003,7 +2003,7 @@ jsonData: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
 						name: background
 						optional: true
-						value: button_disabled
+						value: null
 					}
 				}
 				deletable: false

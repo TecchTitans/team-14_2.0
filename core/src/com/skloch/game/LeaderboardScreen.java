@@ -63,29 +63,32 @@ public class LeaderboardScreen implements Screen {
                 continue;
             }
 
-            Label currentCell;
+            TextButton currentCell;
             switch (col) {
                 // Position field
                 case 0:
                 {
-                    currentCell = new Label(String.valueOf(row + 1), game.skin);
-                    currentCell.setAlignment(Align.center);
+                    currentCell = new TextButton(String.valueOf(row + 1), game.skin);
+                    currentCell.align(Align.center);
+                    currentCell.setDisabled(true);
                     scrollTable.add(currentCell).width(100f).pad(padding);
                     break;
                 }
                 // Name field
                 case 1:
                 {
-                    currentCell = new Label(game.leaderboard[row][0], game.skin);
-                    currentCell.setAlignment(Align.center);
-                    scrollTable.add(currentCell).width(300f).pad(padding);
+                    currentCell = new TextButton(game.leaderboard[row][0], game.skin);
+                    currentCell.align(Align.center);
+                    currentCell.setDisabled(true);
+                    scrollTable.add(currentCell).width(600f).pad(padding);
                     break;
                 }
                 // Score field
                 case 2:
                 {
-                    currentCell = new Label(game.leaderboard[row][1], game.skin);
-                    currentCell.setAlignment(Align.center);
+                    currentCell = new TextButton(game.leaderboard[row][1], game.skin);
+                    currentCell.align(Align.center);
+                    currentCell.setDisabled(true);
                     scrollTable.add(currentCell).width(300f).pad(padding);
                     break;
                 }
