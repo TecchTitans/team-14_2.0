@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -55,15 +56,16 @@ public class GameScreen implements Screen {
     public DialogueBox dialogueBox;
     public final Image blackScreen;
     private boolean sleeping = false;
+    public int avatarChoice;
 
 
     /**
-     *
-     * @param game An instance of the class HustleGame containing variables that only need to be loaded or
-     *             initialised once.
+     * @param game         An instance of the class HustleGame containing variables that only need to be loaded or
+     *                     initialised once.
      * @param avatarChoice Which avatar the player has picked, 0 for the more masculine avatar, 1 for the more feminine
+     * @param name
      */
-    public GameScreen(final HustleGame game, int avatarChoice, String avatarName) {
+    public GameScreen(final HustleGame game, int avatarChoice, String name) {
         // Important game variables
         this.game = game;
         this.game.gameScreen = this;
@@ -94,12 +96,12 @@ public class GameScreen implements Screen {
         uiStage.addActor(uiTable);
 
 
-
+        this.avatarChoice = avatarChoice;
         // Create a player class
         if (avatarChoice == 1) {
-            player = new Player("avatar1", avatarName);
+            player = new Player("avatar1", name);
         } else {
-            player = new Player("avatar2", avatarName);
+            player = new Player("avatar2", name);
         }
 
 
@@ -231,9 +233,6 @@ public class GameScreen implements Screen {
         // Display a little good morning message
         dialogueBox.show();
         dialogueBox.setText(getWakeUpMessage());
-
-        // TEST
-        GameOver();
     }
 
     @Override
@@ -489,6 +488,15 @@ public class GameScreen implements Screen {
         uiStage.dispose();
         mapRenderer.dispose();
     }
+
+    public int getWidth() {
+        return game.WIDTH;
+    }
+
+    public int getHeight() {
+        return game.HEIGHT;
+    }
+
 
     /**
      * DEBUG - Draws the player's 3 hitboxes
@@ -747,4 +755,23 @@ public class GameScreen implements Screen {
     public void GameOver() {
         game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
     }
+
+    /**
+     * Sets the town screen, called when bus event is triggered, switches to town screen
+     */
+    public void changeToTownScreen() {
+        game.map = new TmxMapLoader().load("Maps/town.tmx");
+        game.setScreen(new GameScreen(game, avatarChoice, player.name));
+
+    }
+
+    /**
+     * Sets the town screen, called when bus event is triggered, switches to town screen
+     */
+    public void changeToCampusEastScreen() {
+        game.map = new TmxMapLoader().load("Maps/east_campus.tmx");
+        game.setScreen(new GameScreen(game, avatarChoice, player.name));
+
+    }
+
 }

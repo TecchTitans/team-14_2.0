@@ -73,7 +73,7 @@ public class HustleGame extends Game {
 		batch = new SpriteBatch();
 		skin = new Skin(Gdx.files.internal("Interface/BlockyInterface.json"));
 		// Map
-		map = new TmxMapLoader().load("East Campus/east_campus.tmx");
+		map = new TmxMapLoader().load("Maps/east_campus.tmx");
 		mapProperties = map.getProperties();
 
 		// Define background, foreground and object layers

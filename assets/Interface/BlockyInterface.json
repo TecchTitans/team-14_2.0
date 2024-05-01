@@ -128,9 +128,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
-		font: W95FA3
-		fontColor: black
-		background: button_disabled
+		font: PixeloidMono_editedwhitepx30
 	}
 	button: {
 		font: W95FA3

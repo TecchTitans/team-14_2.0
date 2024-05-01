@@ -1,5 +1,10 @@
 package com.skloch.game;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.Array;
@@ -15,6 +20,8 @@ public class EventManager {
     public HashMap<String, Integer> activityEnergies;
     private final HashMap<String, String> objectInteractions;
     private final Array<String> talkTopics;
+
+    public TiledMap map;
 
     /**
      * A class that maps Object's event strings to actual Java functions.
@@ -43,6 +50,8 @@ public class EventManager {
         objectInteractions.put("accomodation", "Go to sleep for the night?\nYour alarm is set for 8am.");
         objectInteractions.put("rch", null); // Changes, dynamically returned in getObjectInteraction
         objectInteractions.put("tree", "Speak to the tree?");
+        objectInteractions.put("bus_to_town", "Take a ride to town?");
+        objectInteractions.put("bus_to_east_campus", "Take a ride to east campus?");
 
         // Some random topics that can be chatted about
         String[] topics = {"Dogs", "Cats", "Exams", "Celebrities", "Flatmates", "Video games", "Sports", "Food", "Fashion"};
@@ -80,6 +89,12 @@ public class EventManager {
                 break;
             case "accomodation":
                 accomEvent(args);
+                break;
+            case "bus_to_town":
+                goToTownEvent(args);
+                break;
+            case "bus_to_east_campus":
+                goToEastCampusEvent(args);
                 break;
             case "exit":
                 // Should do nothing and just close the dialogue menu
@@ -283,6 +298,26 @@ public class EventManager {
         });
 
         fadeToBlack(setTextAction);
+    }
+
+    /**
+     * The event to be run when the player interacts with the bus
+     * Gives the player the choice to go to town
+     * @param args
+     */
+    public void goToTownEvent(String[] args) {
+        game.dialogueBox.hide();
+        game.changeToTownScreen();
+    }
+
+    /**
+     * The event to be run when the player interacts with the bus
+     * Gives the player the choice to go to east campus
+     * @param args
+     */
+    public void goToEastCampusEvent(String[] args) {
+        game.dialogueBox.hide();
+        game.changeToCampusEastScreen();
     }
 
     /**
