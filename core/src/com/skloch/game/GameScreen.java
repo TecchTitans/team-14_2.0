@@ -185,7 +185,15 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(inputMultiplexer);
 
 
+        setupMap();
 
+
+        // Display a little good morning message
+        dialogueBox.show();
+        dialogueBox.setText(getWakeUpMessage());
+    }
+
+    private void setupMap() {
         // Setup map
         float unitScale = game.mapScale / game.mapSquareSize;
         mapRenderer = new OrthogonalTiledMapRenderer(game.map, unitScale);
@@ -229,10 +237,6 @@ public class GameScreen implements Screen {
                 )
         );
         game.shapeRenderer.setProjectionMatrix(camera.combined);
-
-        // Display a little good morning message
-        dialogueBox.show();
-        dialogueBox.setText(getWakeUpMessage());
     }
 
     @Override
@@ -764,6 +768,7 @@ public class GameScreen implements Screen {
         //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
         game.switchToTownMap();
+        setupMap();
     }
 
     /**
@@ -774,5 +779,6 @@ public class GameScreen implements Screen {
         //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
         game.switchToEastMap();
+        setupMap();
     }
 }
