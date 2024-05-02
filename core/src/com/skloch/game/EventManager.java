@@ -289,8 +289,8 @@ public class EventManager {
                     game.dialogueBox.setText(String.format("You slept for %d hours!\nYou recovered %d energy!", hoursSlept, Math.min(100, hoursSlept*13)), "fadefromblack");
                     // Restore energy and pass time
                     game.setEnergy(hoursSlept*13);
-                    game.passTime(secondsSlept);
                     game.addSleptHours(hoursSlept);
+                    game.passTime(secondsSlept);
                 }
             }
         });

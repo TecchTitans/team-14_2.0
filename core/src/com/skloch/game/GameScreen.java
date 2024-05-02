@@ -38,7 +38,8 @@ public class GameScreen implements Screen {
     final HustleGame game;
     private OrthographicCamera camera;
     private int energy = 100;
-    private int hoursStudied, hoursRecreational, hoursSlept;
+    //private int hoursStudied, hoursRecreational, hoursSlept;
+    private DailyActivities[] daysInfo = new DailyActivities[7];
     private float daySeconds = 0; // Current seconds elapsed in day
     private int day = 1; // What day the game is on
     private Label timeLabel, dayLabel;
@@ -72,7 +73,10 @@ public class GameScreen implements Screen {
         eventManager = new EventManager(this);
 
         // Scores
-        hoursStudied = hoursRecreational = hoursSlept = 0;
+        //hoursStudied = hoursRecreational = hoursSlept = 0;
+        for (int i = 0; i < daysInfo.length; i++) {
+            daysInfo[i] = new DailyActivities();
+        }
 
 
         // Camera and viewport settings
@@ -681,7 +685,8 @@ public class GameScreen implements Screen {
      * @param hours The amount of hours to add
      */
     public void addStudyHours(int hours) {
-        hoursStudied += hours;
+        //hoursStudied += hours;
+        daysInfo[day - 1].addHoursStudied(hours);
     }
 
     /**
@@ -689,7 +694,8 @@ public class GameScreen implements Screen {
      * @param hours The amount of hours to add
      */
     public void addRecreationalHours(int hours) {
-        hoursRecreational += hours;
+        //hoursRecreational += hours;
+        daysInfo[day - 1].addHoursRecreation(hours);
     }
 
     /**
@@ -743,7 +749,8 @@ public class GameScreen implements Screen {
      * @param hours Add this amount of hours to the total hours slept
      */
     public void addSleptHours(int hours) {
-        hoursSlept += hours;
+        //hoursSlept += hours;
+        daysInfo[day - 1].addHoursSlept(hours);
     }
 
     /**
@@ -757,7 +764,16 @@ public class GameScreen implements Screen {
      * Ends the game, called at the end of the 7th day, switches to a screen that displays a score
      */
     public void GameOver() {
-        game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
+        //game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
+        int totalHoursStudied = 0;
+        int totalHoursRecreational = 0;
+        int totalHoursSlept = 0;
+        for (DailyActivities dailyActivities : daysInfo) {
+            totalHoursStudied += dailyActivities.hoursStudied;
+            totalHoursRecreational += dailyActivities.hoursRecreational;
+            totalHoursSlept += dailyActivities.hoursSlept;
+        }
+        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreational, totalHoursSlept));
     }
 
     /**
