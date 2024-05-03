@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import org.json.*;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -34,6 +35,7 @@ public class HustleGame extends Game {
 	private TiledMap townMap;
 	public String credits, tutorialText;
 	public String[][] leaderboard;
+	public String leaderboardFile;
 	public GameScreen gameScreen;
 	public MenuScreen menuScreen;
 	public LeaderboardScreen leaderboardScreen;
@@ -110,7 +112,8 @@ public class HustleGame extends Game {
 		credits = readTextFile("Text/credits.txt");
 		tutorialText = readTextFile("Text/tutorial_text.txt");
 
-		leaderboard = parseLeaderboardJSON("JSONS/leaderboard.json");
+		leaderboardFile = "Jsons/leaderboard.json";
+		leaderboard = parseLeaderboardJSON(leaderboardFile);
 
 		this.setScreen(new MenuScreen(this));
 	}
@@ -178,6 +181,10 @@ public class HustleGame extends Game {
 
 		JSONObject outputObject = new JSONObject();
 		outputObject.put("players", playerArray);
+
+		// Create directory where leaderboard will be stored.
+		File file = new File(filepath);
+		file.getParentFile().mkdirs();
 
 		// Write file
 		try (FileWriter writer = new FileWriter(filepath)) {
