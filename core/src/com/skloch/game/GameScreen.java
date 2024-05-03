@@ -278,7 +278,7 @@ public class GameScreen implements Screen {
 
         // Increment the time and possibly day
         if (!escapeMenu.isVisible() && !sleeping) {
-            passTime(Gdx.graphics.getDeltaTime());
+            //passTime(Gdx.graphics.getDeltaTime());
         }
         timeLabel.setText(formatTime((int) daySeconds));
 
