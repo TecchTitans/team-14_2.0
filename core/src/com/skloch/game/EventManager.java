@@ -156,7 +156,7 @@ public class EventManager {
      * @param args Arguments to be passed, should contain the hours the player wants to study. E.g. ["piazza", "1"]
      */
     public void piazzaEvent(String[] args) {
-        if (game.getSeconds() > 8*60) {
+        if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("meet_friends");
             // If the player is too tired to meet friends
             if (game.getEnergy() < energyCost) {
@@ -208,7 +208,7 @@ public class EventManager {
      * @param args
      */
     public void compSciEvent(String[] args) {
-        if (game.getSeconds() > 8*60) {
+        if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("studying");
             // If the player is too tired for any studying:
             if (game.getEnergy() < energyCost) {
@@ -243,13 +243,13 @@ public class EventManager {
      * @param args
      */
     public void ronCookeEvent(String[] args) {
-        if (game.getSeconds() > 8*60) {
+        if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("eating");
             if (game.getEnergy() < energyCost) {
                 game.dialogueBox.setText("You are too tired to eat right now!");
             } else {
                 game.dialogueBox.setText(String.format("You took an hour to eat %s at the Ron Cooke Hub!\nYou lost %d energy!", game.getMeal(), energyCost));
-                game.decreaseEnergy(energyCost);
+                //game.decreaseEnergy(energyCost);
                 game.passTime(60); // in seconds
             }
         } else {

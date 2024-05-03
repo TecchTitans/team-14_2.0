@@ -1,14 +1,14 @@
 package com.skloch.game;
 
 public class DailyActivities {
-    boolean eatenBreakfast = false;
-    boolean eatenLunch = false;
-    boolean eatenDinner = false;
-    int timesStudied = 0;
-    int hoursStudied = 0;
-    int timesRecreational = 0;
-    int hoursRecreational = 0;
-    int hoursSlept = 0;
+    private boolean eatenBreakfast = false;
+    private boolean eatenLunch = false;
+    private boolean eatenDinner = false;
+    private int timesStudied = 0;
+    private int hoursStudied = 0;
+    private int timesRecreational = 0;
+    private int hoursRecreational = 0;
+    private int hoursSlept = 0;
 
 
     // getters
@@ -59,6 +59,7 @@ public class DailyActivities {
 
     public void addHoursRecreation(int hoursRecreation) {
         this.hoursRecreational += hoursRecreation;
+        addTimesRecreation(1);
     }
 
     public void addHoursSlept(int hoursSlept) {
@@ -67,6 +68,7 @@ public class DailyActivities {
 
     public void addHoursStudied(int hoursStudied) {
         this.hoursStudied += hoursStudied;
+        addTimesStudied(1);
     }
 
     //could just do these whenevr add hours is called.

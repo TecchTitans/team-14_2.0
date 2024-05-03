@@ -769,11 +769,50 @@ public class GameScreen implements Screen {
         int totalHoursRecreational = 0;
         int totalHoursSlept = 0;
         for (DailyActivities dailyActivities : daysInfo) {
-            totalHoursStudied += dailyActivities.hoursStudied;
-            totalHoursRecreational += dailyActivities.hoursRecreational;
-            totalHoursSlept += dailyActivities.hoursSlept;
+            totalHoursStudied += dailyActivities.getHoursStudied();
+            totalHoursRecreational += dailyActivities.getHoursRecreation();
+            totalHoursSlept += dailyActivities.getHoursSlept();
         }
-        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreational, totalHoursSlept));
+        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreational, totalHoursSlept, calculateScore()));
+    }
+
+    // could just do this in the GameOver method.
+    private int calculateScore() {
+        int score = 500;
+        int totalTimesStudied = 0;
+        int totalHoursStudied = 0;
+        int daysStudied = 0;
+        for (DailyActivities dailyActivities : daysInfo) {
+            totalTimesStudied += dailyActivities.getTimesStudied();
+            if(totalTimesStudied > 0){
+                daysStudied++;
+            }
+            totalHoursStudied += dailyActivities.getHoursStudied();
+            if(dailyActivities.isEatenBreakfast()) { score += 50; }
+            if(dailyActivities.isEatenLunch()) { score += 50; }
+            if(dailyActivities.isEatenDinner()) { score += 50; }
+            if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
+        }
+
+        // if they haven't studied enough days, they fail their exam.
+        if(daysStudied < 6) {
+            return 0;
+        } else if (daysStudied == 6 && totalTimesStudied < 7) {
+            // if they didn't catch up from missing a day of studying, they fail their exam.
+            return 0;
+        }
+
+        // check if studied more than 7 times. Reward them between 8 and 10, punish more than that.
+        if(totalTimesStudied > 7) {
+            if(totalTimesStudied > 10) {
+                score += 300 - (50 * (totalTimesStudied - 10));
+            }
+            else {
+                score += 100 * (totalTimesStudied - 7);
+            }
+        }
+
+        return score;
     }
 
     /**
