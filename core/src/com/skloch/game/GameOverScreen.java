@@ -122,7 +122,7 @@ public class GameOverScreen implements Screen {
         game.leaderboard = Arrays.copyOf(newLeaderboardArray, Math.min(newLeaderboardArray.length, 10));
 
         // Write leaderboard to file
-        game.writeLeaderboardJSON("JSONS/leaderboard.json");
+        game.writeLeaderboardJSON(game.leaderboardFile);
     }
 
 
