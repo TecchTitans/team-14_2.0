@@ -50,6 +50,7 @@ public class EventManager {
         objectInteractions.put("tree", "Speak to the tree?");
         objectInteractions.put("bus_to_town", "Take a ride to town?");
         objectInteractions.put("bus_to_east_campus", "Take a ride to east campus?");
+        objectInteractions.put("pub", "Have a few pints and good chit-chat?");
 
         // Some random topics that can be chatted about
         String[] topics = {"Dogs", "Cats", "Exams", "Celebrities", "Flatmates", "Video games", "Sports", "Food", "Fashion"};
@@ -93,6 +94,9 @@ public class EventManager {
                 break;
             case "bus_to_east_campus":
                 goToEastCampusEvent(args);
+                break;
+            case "pub":
+                pubEvent(args);
                 break;
             case "exit":
                 // Should do nothing and just close the dialogue menu
@@ -316,6 +320,28 @@ public class EventManager {
     public void goToEastCampusEvent(String[] args) {
         game.dialogueBox.hide();
         game.changeToCampusEastMap();
+    }
+
+    public void pubEvent(String[] args) {
+        if (game.getSeconds() >= 8*60) {
+            int energyCost = activityEnergies.get("meet_friends");
+            // If the player is too tired to meet friends
+            if (game.getEnergy() < energyCost) {
+                game.dialogueBox.setText("You are too tired to have a few cheeky ones!");
+
+            } else {
+                // Say that the player chatted about this topic for 1-3 hours
+                // RNG factor adds a slight difficulty (may consume too much energy to study)
+                int hours = 2;
+                int pintsPerHour = 2;
+                game.dialogueBox.setText(String.format("You had %d pints in %d hours!", pintsPerHour * hours, hours));
+                game.decreaseEnergy(energyCost * hours);
+                game.passTime(hours * 60); // in seconds
+                game.addRecreationalHours(hours);
+            }
+        } else {
+            game.dialogueBox.setText("It's too early to get on it, go to bed!");
+        }
     }
 
     /**

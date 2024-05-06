@@ -108,8 +108,6 @@ public class GameOverScreen implements Screen {
         gameOverWindow.setY((viewport.getWorldHeight() / 2) - (gameOverWindow.getHeight() / 2));
 
         // Update leaderboard
-        // Currently does not calculate score but will provide 500 for the score.
-        // NEEDS UPDATING
         List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(game.leaderboard));
         String[] playerArrayToAdd = new String[]{game.gameScreen.player.name, String.valueOf(score)};
         newLeaderboardList.add(playerArrayToAdd);
