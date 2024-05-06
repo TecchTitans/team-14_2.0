@@ -38,6 +38,7 @@ public class EventManager {
         activityEnergies.put("studying", 10);
         activityEnergies.put("meet_friends", 10);
         activityEnergies.put("eating", 10);
+        activityEnergies.put("drinking", 10);
 
 
         // Define what to say when interacting with an object who's text won't change
@@ -50,6 +51,7 @@ public class EventManager {
         objectInteractions.put("tree", "Speak to the tree?");
         objectInteractions.put("bus_to_town", "Take a ride to town?");
         objectInteractions.put("bus_to_east_campus", "Take a ride to east campus?");
+        objectInteractions.put("pub", "Drink at the pub?");
 
         // Some random topics that can be chatted about
         String[] topics = {"Dogs", "Cats", "Exams", "Celebrities", "Flatmates", "Video games", "Sports", "Food", "Fashion"};
@@ -93,6 +95,9 @@ public class EventManager {
                 break;
             case "bus_to_east_campus":
                 goToEastCampusEvent(args);
+                break;
+            case "pub":
+                pubEvent(args);
                 break;
             case "exit":
                 // Should do nothing and just close the dialogue menu
@@ -316,6 +321,40 @@ public class EventManager {
     public void goToEastCampusEvent(String[] args) {
         game.dialogueBox.hide();
         game.changeToCampusEastMap();
+    }
+
+    /**
+     * The event to be run when the player interacts with the pub
+     * Gives the player the choice of how long they wish to stay there
+     * @param args
+     */
+    public void pubEvent(String[] args) {
+        if (game.getSeconds() > 8*60) {
+            int energyCost = activityEnergies.get("drinking");
+            // If the player is too tired for any drinking:
+            if (game.getEnergy() < energyCost) {
+                game.dialogueBox.hideSelectBox();
+                game.dialogueBox.setText("You are too tired to drink right now!");
+            } else if (args.length == 1) {
+                // If the player has not yet chosen how many hours, ask
+                game.dialogueBox.setText("Stay for how long?");
+                game.dialogueBox.getSelectBox().setOptions(new String[]{"2 Hours (20)", "3 Hours (30)", "4 Hours (40)"}, new String[]{"pub-2", "pub-3", "pub-4"});
+            } else {
+                int hours = Integer.parseInt(args[1]);
+                // If the player does not have enough energy for the selected hours
+                if (game.getEnergy() < hours*energyCost) {
+                    game.dialogueBox.setText("You don't have the energy to stay at the pub for this long!");
+                } else {
+                    // If they do have the energy to study
+                    game.dialogueBox.setText(String.format("You've spent %s hours at the pub!\nYou lost %d energy", args[1], hours*energyCost));
+                    game.decreaseEnergy(energyCost * hours);
+                    game.addStudyHours(hours);
+                    game.passTime(hours * 60); // in seconds
+                }
+            }
+        } else {
+            game.dialogueBox.setText("It's too early in the morning to go to the pub, go to bed!");
+        }
     }
 
     /**
