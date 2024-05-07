@@ -248,8 +248,10 @@ public class EventManager {
             if (game.getEnergy() < energyCost) {
                 game.dialogueBox.setText("You are too tired to eat right now!");
             } else {
-                game.dialogueBox.setText(String.format("You took an hour to eat %s at the Ron Cooke Hub!\nYou lost %d energy!", game.getMeal(), energyCost));
-                //game.decreaseEnergy(energyCost);
+                String meal = game.getMeal();
+                game.dialogueBox.setText(String.format("You took an hour to eat %s at the Ron Cooke Hub!\nYou lost %d energy!", meal, energyCost));
+                game.hasEaten(meal);
+                game.decreaseEnergy(energyCost);
                 game.passTime(60); // in seconds
             }
         } else {

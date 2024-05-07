@@ -706,15 +706,34 @@ public class GameScreen implements Screen {
         if (hours >= 7 && hours <= 10) {
             //Breakfast between 7:00-10:59am
             return "breakfast";
-        } else if (hours > 10 && hours <= 16) {
-            // Lunch between 10:00am and 4:59pm
+        } else if (hours > 10 && hours <= 15) {
+            // Lunch between 11:00am and 3:59pm
             return "lunch";
-        } else if (hours > 16 && hours <= 21) {
+        } else if (hours > 15 && hours <= 21) {
             // Dinner served between 4:00pm and 9:59pm
             return "dinner";
         } else {
             // Nothing is served between 10:00pm and 6:59am
             return "food";
+        }
+    }
+
+    /**
+     * Sets the daily parameter of whether a certain meal has been eaten that day, true or false.
+     * @param meal The meal of the day that was eaten. Can be breakfast, lunch, or dinner.
+     */
+    public void hasEaten(String meal) {
+        switch(meal) {
+            case "breakfast":
+                daysInfo[day - 1].setEatenBreakfast(true);
+                break;
+            case "lunch":
+                daysInfo[day - 1].setEatenLunch(true);
+                break;
+            case "dinner":
+            default:
+                daysInfo[day - 1].setEatenDinner(true);
+                break;
         }
     }
 
