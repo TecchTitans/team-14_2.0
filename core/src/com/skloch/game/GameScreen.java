@@ -798,19 +798,23 @@ public class GameScreen implements Screen {
     // could just do this in the GameOver method.
     private int calculateScore() {
         int score = 500;
-        int totalTimesStudied = 0;
-        int totalHoursStudied = 0;
-        int daysStudied = 0;
+        int totalTimesStudied = 0,
+                totalHoursStudied = 0,
+                totalTimesRecreation = 0,
+                totalHoursRecreation = 0,
+                daysStudied = 0;
         for (DailyActivities dailyActivities : daysInfo) {
             totalTimesStudied += dailyActivities.getTimesStudied();
+            totalTimesRecreation += dailyActivities.getTimesRecreation();
             if(totalTimesStudied > 0){
                 daysStudied++;
             }
             totalHoursStudied += dailyActivities.getHoursStudied();
+            totalHoursRecreation += dailyActivities.getHoursRecreation();
             if(dailyActivities.isEatenBreakfast()) { score += 50; }
             if(dailyActivities.isEatenLunch()) { score += 50; }
             if(dailyActivities.isEatenDinner()) { score += 50; }
-            if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
+            //if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
         }
 
         // if they haven't studied enough days, they fail their exam.
@@ -820,6 +824,9 @@ public class GameScreen implements Screen {
             // if they didn't catch up from missing a day of studying, they fail their exam.
             return 0;
         }
+
+        // reward student for performing recreational activities
+        score += 50 * totalHoursRecreation;
 
         // check if studied more than 7 times. Reward them between 8 and 10, punish more than that.
         // old, punishes based on times studied rather than hours.
