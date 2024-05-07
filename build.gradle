@@ -1,6 +1,4 @@
 buildscript {
-    
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -8,10 +6,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         google()
     }
-    dependencies {
-
-
-    }
+    dependencies {}
 }
 
 allprojects {
@@ -60,6 +55,14 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation 'org.json:json:20240303'
-
+        implementation 'junit:junit:4.12+'
     }
+
+    test {
+        useJUnit()
+        maxHeapSize = '1G'
+    }
+
 }
+
+
