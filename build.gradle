@@ -37,13 +37,20 @@ allprojects {
 project(":desktop") {
     apply plugin: "java-library"
 
-
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         
+    }
+
+    jar {
+        manifest {
+            attributes(
+                    'Main-Class': 'main.java.org.skloch.game.DesktopLauncher'
+            )
+        }
     }
 }
 
