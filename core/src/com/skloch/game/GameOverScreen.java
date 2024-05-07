@@ -55,11 +55,11 @@ public class GameOverScreen implements Screen {
 
         // Title
         Label title = new Label("Game Over!", game.skin, "button");
-        gameOverTable.add(title).padTop(10);
+        gameOverTable.add(title).padBottom(20);
         gameOverTable.row();
 
         Table scoresTable = new Table();
-        gameOverTable.add(scoresTable).prefHeight(350).prefWidth(450);
+        gameOverTable.add(scoresTable).prefWidth(450);
         gameOverTable.row();
 
         ScrollPane scrollWindow = new ScrollPane(scoresTable, game.skin);
@@ -89,7 +89,7 @@ public class GameOverScreen implements Screen {
         scoresTable.row();
         scoresTable.add(new Label(streaks.toString(), game.skin, "button")).padBottom(20);
 
-        gameOverTable.add(scrollWindow).height(350);
+        gameOverTable.add(scrollWindow).width(gameOverWindow.getPrefWidth()).height(350);
         gameOverTable.row();
 
         // Exit button
