@@ -30,6 +30,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * Handles the majority of the game logic, rendering and user inputs of the game.
  * Responsible for rendering the player and the map, and calling events.
@@ -717,15 +720,34 @@ public class GameScreen implements Screen {
         if (hours >= 7 && hours <= 10) {
             //Breakfast between 7:00-10:59am
             return "breakfast";
-        } else if (hours > 10 && hours <= 16) {
-            // Lunch between 10:00am and 4:59pm
+        } else if (hours > 10 && hours <= 15) {
+            // Lunch between 11:00am and 3:59pm
             return "lunch";
-        } else if (hours > 16 && hours <= 21) {
+        } else if (hours > 15 && hours <= 21) {
             // Dinner served between 4:00pm and 9:59pm
             return "dinner";
         } else {
             // Nothing is served between 10:00pm and 6:59am
             return "food";
+        }
+    }
+
+    /**
+     * Sets the daily parameter of whether a certain meal has been eaten that day, true or false.
+     * @param meal The meal of the day that was eaten. Can be breakfast, lunch, or dinner.
+     */
+    public void hasEaten(String meal) {
+        switch(meal) {
+            case "breakfast":
+                daysInfo[day - 1].setEatenBreakfast(true);
+                break;
+            case "lunch":
+                daysInfo[day - 1].setEatenLunch(true);
+                break;
+            case "dinner":
+            default:
+                daysInfo[day - 1].setEatenDinner(true);
+                break;
         }
     }
 
@@ -776,33 +798,77 @@ public class GameScreen implements Screen {
      */
     public void GameOver() {
         //game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
-        int totalHoursStudied = 0;
-        int totalHoursRecreational = 0;
-        int totalHoursSlept = 0;
-        for (DailyActivities dailyActivities : daysInfo) {
-            totalHoursStudied += dailyActivities.getHoursStudied();
-            totalHoursRecreational += dailyActivities.getHoursRecreation();
-            totalHoursSlept += dailyActivities.getHoursSlept();
-        }
-        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreational, totalHoursSlept, calculateScore()));
-    }
-
-    // could just do this in the GameOver method.
-    private int calculateScore() {
         int score = 500;
-        int totalTimesStudied = 0;
-        int totalHoursStudied = 0;
-        int daysStudied = 0;
+        int totalTimesStudied = 0,
+                totalHoursStudied = 0,
+                totalTimesRecreation = 0,
+                totalHoursRecreation = 0,
+                totalHoursSlept = 0,
+                daysStudied = 0;
+        //ArrayList<Streaks> streaks = new ArrayList<>();
+        HashSet<Streaks> streaks = new HashSet<Streaks>();
         for (DailyActivities dailyActivities : daysInfo) {
             totalTimesStudied += dailyActivities.getTimesStudied();
+            totalTimesRecreation += dailyActivities.getTimesRecreation();
             if(totalTimesStudied > 0){
                 daysStudied++;
             }
             totalHoursStudied += dailyActivities.getHoursStudied();
+            totalHoursRecreation += dailyActivities.getHoursRecreation();
+            totalHoursSlept += dailyActivities.getHoursSlept();
             if(dailyActivities.isEatenBreakfast()) { score += 50; }
             if(dailyActivities.isEatenLunch()) { score += 50; }
             if(dailyActivities.isEatenDinner()) { score += 50; }
-            if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
+
+        }
+
+        // if they haven't studied enough days, they fail their exam.
+        if(daysStudied < 6) {
+            score = 0;
+        } else if (daysStudied == 6 && totalTimesStudied < 7) {
+            // if they didn't catch up from missing a day of studying, they fail their exam.
+            score = 0;
+        } else {
+            // reward student for performing recreational activities
+            score += 50 * totalHoursRecreation;
+
+            // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
+            score += 100 * (totalHoursStudied);
+            if((totalHoursStudied / 7) > 4) {
+                // penalise score depending on how overworked they are.
+                score -= 1000 * ((totalHoursStudied / 7) - 4);
+            }
+
+            // calculate streaks. Need more info in DailyActivites to have streaks for certain buildings, i.e. pub
+            if(totalHoursRecreation >= 6){
+                streaks.add(Streaks.SOCIALBUTTERFLY);
+                score += 250;
+            }
+        }
+
+        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreation, totalHoursSlept, score, streaks));
+    }
+
+    // could just do this in the GameOver method, or pass in totalTimesStudied etc. as parameters, rather than repeating code.
+    private int calculateScore() {
+        int score = 500;
+        int totalTimesStudied = 0,
+                totalHoursStudied = 0,
+                totalTimesRecreation = 0,
+                totalHoursRecreation = 0,
+                daysStudied = 0;
+        for (DailyActivities dailyActivities : daysInfo) {
+            totalTimesStudied += dailyActivities.getTimesStudied();
+            totalTimesRecreation += dailyActivities.getTimesRecreation();
+            if(totalTimesStudied > 0){
+                daysStudied++;
+            }
+            totalHoursStudied += dailyActivities.getHoursStudied();
+            totalHoursRecreation += dailyActivities.getHoursRecreation();
+            if(dailyActivities.isEatenBreakfast()) { score += 50; }
+            if(dailyActivities.isEatenLunch()) { score += 50; }
+            if(dailyActivities.isEatenDinner()) { score += 50; }
+            //if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
         }
 
         // if they haven't studied enough days, they fail their exam.
@@ -813,17 +879,29 @@ public class GameScreen implements Screen {
             return 0;
         }
 
+        // reward student for performing recreational activities
+        score += 50 * totalHoursRecreation;
+
         // check if studied more than 7 times. Reward them between 8 and 10, punish more than that.
-        if(totalTimesStudied > 7) {
+        // old, punishes based on times studied rather than hours.
+        /*if(totalTimesStudied > 7) {
             if(totalTimesStudied > 10) {
                 score += 300 - (50 * (totalTimesStudied - 10));
             }
             else {
                 score += 100 * (totalTimesStudied - 7);
             }
+        }*/
+
+        // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
+        score += 100 * (totalHoursStudied);
+        if((totalHoursStudied / 7) > 4) {
+            // penalise score depending on how overworked they are.
+            score -= 1000 * ((totalHoursStudied / 7) - 4);
         }
 
         return score;
+
     }
 
     /**

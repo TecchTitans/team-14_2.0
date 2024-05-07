@@ -5,10 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -17,6 +14,7 @@ import com.sun.tools.javac.util.ArrayUtils;
 import sun.security.util.ArrayUtil;
 
 import java.util.*;
+import java.util.List;
 
 /**
  * A screen that displays the player's stats at the end of the game.
@@ -38,7 +36,7 @@ public class GameOverScreen implements Screen {
      * @param hoursRecreational The hours of fun had in the playthrough
      * @param hoursSlept The hours slept in the playthrough
      */
-    public GameOverScreen (final HustleGame game, int hoursStudied, int hoursRecreational, int hoursSlept, int score) {
+    public GameOverScreen (final HustleGame game, int hoursStudied, int hoursRecreational, int hoursSlept, int score, HashSet<Streaks> streaks) {
         this.game = game;
         gameOverStage = new Stage(new FitViewport(game.WIDTH, game.HEIGHT));
         Gdx.input.setInputProcessor(gameOverStage);
@@ -61,8 +59,14 @@ public class GameOverScreen implements Screen {
         gameOverTable.row();
 
         Table scoresTable = new Table();
-        gameOverTable.add(scoresTable).prefHeight(380).prefWidth(450);
+        gameOverTable.add(scoresTable).prefHeight(350).prefWidth(450);
         gameOverTable.row();
+
+        ScrollPane scrollWindow = new ScrollPane(scoresTable, game.skin);
+        scrollWindow.setFadeScrollBars(false);
+
+        // Prepare streaks string
+
 
         // Display scores
         scoresTable.add(new Label("Hours Studied", game.skin, "interaction")).padBottom(5);
@@ -80,11 +84,18 @@ public class GameOverScreen implements Screen {
         scoresTable.add(new Label("Score", game.skin, "interaction")).padBottom(5);
         scoresTable.row();
         scoresTable.add(new Label(String.valueOf(score), game.skin, "button")).padBottom(20);
+        scoresTable.row();
+        scoresTable.add(new Label("Streaks", game.skin, "interaction")).padBottom(5);
+        scoresTable.row();
+        scoresTable.add(new Label(streaks.toString(), game.skin, "button")).padBottom(20);
 
+        gameOverTable.add(scrollWindow).height(350);
+        gameOverTable.row();
 
         // Exit button
         TextButton exitButton = new TextButton("Main Menu", game.skin);
         gameOverTable.add(exitButton).bottom().width(300).padTop(10);
+        gameOverTable.row();
 
         exitButton.addListener(new ChangeListener() {
             @Override
