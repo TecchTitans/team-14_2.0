@@ -323,6 +323,11 @@ public class EventManager {
         game.changeToCampusEastMap();
     }
 
+    /**
+     * The event to be run when the player interacts with the pub in town
+     * Gives the player the choice how long they choose to stay in the pub
+     * @param args
+     */
     public void pubEvent(String[] args) {
         if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("drinking");
