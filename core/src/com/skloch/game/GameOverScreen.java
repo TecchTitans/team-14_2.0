@@ -38,7 +38,7 @@ public class GameOverScreen implements Screen {
      * @param hoursRecreational The hours of fun had in the playthrough
      * @param hoursSlept The hours slept in the playthrough
      */
-    public GameOverScreen (final HustleGame game, int hoursStudied, int hoursRecreational, int hoursSlept, int score) {
+    public GameOverScreen (final HustleGame game, int hoursStudied, int hoursRecreational, int hoursSlept, int score, HashSet<Streaks> streaks) {
         this.game = game;
         gameOverStage = new Stage(new FitViewport(game.WIDTH, game.HEIGHT));
         Gdx.input.setInputProcessor(gameOverStage);
@@ -64,6 +64,9 @@ public class GameOverScreen implements Screen {
         gameOverTable.add(scoresTable).prefHeight(380).prefWidth(450);
         gameOverTable.row();
 
+        // Prepare streaks string
+
+
         // Display scores
         scoresTable.add(new Label("Hours Studied", game.skin, "interaction")).padBottom(5);
         scoresTable.row();
@@ -80,6 +83,10 @@ public class GameOverScreen implements Screen {
         scoresTable.add(new Label("Score", game.skin, "interaction")).padBottom(5);
         scoresTable.row();
         scoresTable.add(new Label(String.valueOf(score), game.skin, "button")).padBottom(20);
+        scoresTable.row();
+        scoresTable.add(new Label("Streaks", game.skin, "interaction")).padBottom(5);
+        scoresTable.row();
+        scoresTable.add(new Label(streaks.toString(), game.skin, "button")).padBottom(20);
 
 
         // Exit button
