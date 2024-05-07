@@ -39,6 +39,7 @@ public class EventManager {
         activityEnergies.put("meet_friends", 10);
         activityEnergies.put("eating", 10);
         activityEnergies.put("drinking", 10);
+        activityEnergies.put("shopping", 10);
 
 
         // Define what to say when interacting with an object who's text won't change
@@ -52,6 +53,7 @@ public class EventManager {
         objectInteractions.put("bus_to_town", "Take a ride to town?");
         objectInteractions.put("bus_to_east_campus", "Take a ride to east campus?");
         objectInteractions.put("pub", "Have a few pints and good chit-chat?");
+        objectInteractions.put("himark", "Go shopping in Himark?");
 
         // Some random topics that can be chatted about
         String[] topics = {"Dogs", "Cats", "Exams", "Celebrities", "Flatmates", "Video games", "Sports", "Food", "Fashion"};
@@ -98,6 +100,9 @@ public class EventManager {
                 break;
             case "pub":
                 pubEvent(args);
+                break;
+            case "himark":
+                himarkEvent(args);
                 break;
             case "exit":
                 // Should do nothing and just close the dialogue menu
@@ -349,6 +354,29 @@ public class EventManager {
             }
         } else {
             game.dialogueBox.setText("It's too early to get on it, go to bed!");
+        }
+    }
+
+    public void himarkEvent(String[] args) {
+        if (game.getSeconds() >= 8*60) {
+            int energyCost = activityEnergies.get("shopping");
+            // If the player is too tired to drink
+            if (game.getEnergy() < energyCost) {
+                game.dialogueBox.setText("You are too tired to go shopping!");
+
+            } else if (args.length == 1) {
+                game.dialogueBox.setText("Stay for how long?");
+                game.dialogueBox.getSelectBox().setOptions(new String[]{"2 Hours (20)", "3 Hours (30)", "4 Hours (40)"}, new String[]{"himark-2", "himark-3", "himark-4"});
+            } else {
+                int hours = Integer.parseInt(args[1]);
+
+                game.dialogueBox.setText(String.format("You stayed in Himark for %d hours!\nYou lost %d energy!", hours, hours * energyCost));
+                game.decreaseEnergy(energyCost * hours);
+                game.passTime(hours * 60); // in seconds
+                game.addRecreationalHours(hours);
+            }
+        } else {
+            game.dialogueBox.setText("It's too early to go shopping, go to bed!");
         }
     }
 
