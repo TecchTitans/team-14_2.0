@@ -803,16 +803,25 @@ public class GameScreen implements Screen {
         }
 
         // check if studied more than 7 times. Reward them between 8 and 10, punish more than that.
-        if(totalTimesStudied > 7) {
+        // old, punishes based on times studied rather than hours.
+        /*if(totalTimesStudied > 7) {
             if(totalTimesStudied > 10) {
                 score += 300 - (50 * (totalTimesStudied - 10));
             }
             else {
                 score += 100 * (totalTimesStudied - 7);
             }
+        }*/
+
+        // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
+        score += 100 * (totalHoursStudied);
+        if((totalHoursStudied / 7) > 4) {
+            // penalise score depending on how overworked they are.
+            score -= 1000 * ((totalHoursStudied / 7) - 4);
         }
 
         return score;
+
     }
 
     /**
