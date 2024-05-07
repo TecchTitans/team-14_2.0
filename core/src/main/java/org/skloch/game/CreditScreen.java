@@ -1,4 +1,5 @@
-package com.skloch.game;
+package main.java.org.skloch.game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,10 +21,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class CreditScreen implements Screen{
 
-    private HustleGame game;
-    private Stage creditStage;
-    private OrthographicCamera camera;
-    private Viewport viewport;
+    private final HustleGame game;
+    private final Stage creditStage;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
 
     /**
      * A scene2d window consisting of a title, a scrollable widget and an exit button.
@@ -70,7 +71,6 @@ public class CreditScreen implements Screen{
         creditTable.add(scrollWindow).padTop(20).height(350);
         creditTable.row();
 
-        // Actual credits
         // Credits are loaded when the game is initialised
         Label text = new Label(game.credits, game.skin, "interaction");
         text.setWrap(true);
@@ -121,8 +121,6 @@ public class CreditScreen implements Screen{
 
     /**
      * Correctly resizes the onscreen elements when the window is resized
-     * @param width
-     * @param height
      */
     @Override
     public void resize(int width, int height) {

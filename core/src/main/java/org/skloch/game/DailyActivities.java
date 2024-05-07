@@ -1,4 +1,4 @@
-package com.skloch.game;
+package main.java.org.skloch.game;
 
 public class DailyActivities {
     private boolean eatenBreakfast = false;
@@ -71,7 +71,7 @@ public class DailyActivities {
         addTimesStudied(1);
     }
 
-    //could just do these whenevr add hours is called.
+    //could just do these whenever add hours is called.
     public void addTimesRecreation(int timesRecreation) {
         this.timesRecreational += timesRecreation;
     }

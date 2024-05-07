@@ -1,4 +1,4 @@
-package com.skloch.game;
+package main.java.org.skloch.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
