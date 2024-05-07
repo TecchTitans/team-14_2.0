@@ -38,6 +38,7 @@ public class EventManager {
         activityEnergies.put("studying", 10);
         activityEnergies.put("meet_friends", 10);
         activityEnergies.put("eating", 10);
+        activityEnergies.put("drinking", 10);
 
 
         // Define what to say when interacting with an object who's text won't change
@@ -324,17 +325,19 @@ public class EventManager {
 
     public void pubEvent(String[] args) {
         if (game.getSeconds() >= 8*60) {
-            int energyCost = activityEnergies.get("meet_friends");
-            // If the player is too tired to meet friends
+            int energyCost = activityEnergies.get("drinking");
+            // If the player is too tired to drink
             if (game.getEnergy() < energyCost) {
                 game.dialogueBox.setText("You are too tired to have a few cheeky ones!");
 
+            } else if (args.length == 1) {
+                game.dialogueBox.setText("Stay for how long?");
+                game.dialogueBox.getSelectBox().setOptions(new String[]{"2 Hours (20)", "3 Hours (30)", "4 Hours (40)"}, new String[]{"pub-2", "pub-3", "pub-4"});
             } else {
-                // Say that the player chatted about this topic for 1-3 hours
-                // RNG factor adds a slight difficulty (may consume too much energy to study)
-                int hours = 2;
+                int hours = Integer.parseInt(args[1]);
+
                 int pintsPerHour = 2;
-                game.dialogueBox.setText(String.format("You had %d pints in %d hours!", pintsPerHour * hours, hours));
+                game.dialogueBox.setText(String.format("You had %d pints in %d hours!\nYou lost %d energy!", pintsPerHour * hours, hours, energyCost * hours));
                 game.decreaseEnergy(energyCost * hours);
                 game.passTime(hours * 60); // in seconds
                 game.addRecreationalHours(hours);
