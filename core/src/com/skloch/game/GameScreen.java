@@ -197,7 +197,12 @@ public class GameScreen implements Screen {
         dialogueBox.setText(getWakeUpMessage());
     }
 
+    // Defaults to using default spawn location
     private void setupMap() {
+        setupMap(false);
+    }
+
+    private void setupMap(boolean spawnFromTown) {
         // Setup map
         float unitScale = game.mapScale / game.mapSquareSize;
         mapRenderer = new OrthogonalTiledMapRenderer(game.map, unitScale);
@@ -219,9 +224,15 @@ public class GameScreen implements Screen {
                 // Get the properties of each object
                 MapProperties properties = objects.get(i).getProperties();
                 // If this is the spawn object, move the player there and don't collide
+                // This also changes the spawn location if they have just travelled from town
                 if (properties.get("spawn") != null) {
                     player.setPos(((float) properties.get("x")) *unitScale, ((float) properties.get("y"))*unitScale);
                     camera.position.set(player.getPosAsVec3());
+                } else if (properties.get("spawnFromTown") != null) {
+                    if (spawnFromTown) {
+                        player.setPos(((float) properties.get("x")) *unitScale, ((float) properties.get("y"))*unitScale);
+                        camera.position.set(player.getPosAsVec3());
+                    }
                 } else {
                     // Make a new gameObject with these properties, passing along the scale the map is rendered
                     // at for accurate coordinates
@@ -834,6 +845,6 @@ public class GameScreen implements Screen {
         //game.setScreen(new GameScreen(game, avatarChoice, player.name));
 
         game.switchToEastMap();
-        setupMap();
+        setupMap(true);
     }
 }
