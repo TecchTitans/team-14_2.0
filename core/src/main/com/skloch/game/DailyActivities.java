@@ -1,4 +1,4 @@
-package com.skloch.game;
+package main.com.skloch.game;
 
 public class DailyActivities {
     private boolean eatenBreakfast = false;

@@ -1,4 +1,4 @@
-package com.skloch.game;
+package main.com.skloch.game;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Rectangle;

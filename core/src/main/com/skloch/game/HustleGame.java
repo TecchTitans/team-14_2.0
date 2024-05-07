@@ -1,4 +1,4 @@
-package com.skloch.game;
+package main.com.skloch.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
