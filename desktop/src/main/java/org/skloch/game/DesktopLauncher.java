@@ -1,4 +1,4 @@
-package main.com.skloch.game;
+package main.java.org.skloch.game;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;

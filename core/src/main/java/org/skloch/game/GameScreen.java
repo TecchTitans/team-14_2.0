@@ -1,4 +1,4 @@
-package main.com.skloch.game;
+package main.java.org.skloch.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;

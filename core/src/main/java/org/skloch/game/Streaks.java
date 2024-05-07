@@ -1,4 +1,4 @@
-package main.com.skloch.game;
+package main.java.org.skloch.game;
 
 public enum Streaks {
     EXPLORER,
