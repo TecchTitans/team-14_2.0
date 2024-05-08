@@ -184,6 +184,7 @@ public class EventManager {
                 game.dialogueBox.setText(String.format("You talked about %s for %d hours!", args[1].toLowerCase(), hours));
                 game.decreaseEnergy(energyCost * hours);
                 game.passTime(hours * 60); // in seconds
+                game.addActivityDone(args[0]);
                 game.addRecreationalHours(hours);
             }
         } else {
@@ -238,6 +239,7 @@ public class EventManager {
                     game.dialogueBox.setText(String.format("You studied for %s hours!\nYou lost %d energy", args[1], hours*energyCost));
                     game.decreaseEnergy(energyCost * hours);
                     game.addStudyHours(hours);
+                    game.addActivityDone(args[0]);
                     game.passTime(hours * 60); // in seconds
                 }
             }
@@ -262,6 +264,7 @@ public class EventManager {
                 game.dialogueBox.setText(String.format("You took an hour to eat %s at the Ron Cooke Hub!\nYou lost %d energy!", meal, energyCost));
                 game.hasEaten(meal);
                 game.decreaseEnergy(energyCost);
+                game.addActivityDone(args[0]);
                 game.passTime(60); // in seconds
             }
         } else {
@@ -302,6 +305,7 @@ public class EventManager {
                     // Restore energy and pass time
                     game.setEnergy(hoursSlept*13);
                     game.addSleptHours(hoursSlept);
+                    game.addActivityDone(args[0]);
                     game.passTime(secondsSlept);
                 }
             }
@@ -317,6 +321,7 @@ public class EventManager {
      */
     public void goToTownEvent(String[] args) {
         game.dialogueBox.hide();
+        game.addActivityDone(args[0]);
         game.changeToTownMap();
     }
 
@@ -327,6 +332,7 @@ public class EventManager {
      */
     public void goToEastCampusEvent(String[] args) {
         game.dialogueBox.hide();
+        game.addActivityDone(args[0]);
         game.changeToCampusEastMap();
     }
 
@@ -351,8 +357,9 @@ public class EventManager {
                 int pintsPerHour = 2;
                 game.dialogueBox.setText(String.format("You had %d pints in %d hours!\nYou lost %d energy!", pintsPerHour * hours, hours, energyCost * hours));
                 game.decreaseEnergy(energyCost * hours);
-                game.passTime(hours * 60); // in seconds
+                game.addActivityDone(args[0]);
                 game.addRecreationalHours(hours);
+                game.passTime(hours * 60); // in seconds
             }
         } else {
             game.dialogueBox.setText("It's too early to get on it, go to bed!");
@@ -374,8 +381,9 @@ public class EventManager {
 
                 game.dialogueBox.setText(String.format("You stayed in Himark for %d hours!\nYou lost %d energy!", hours, hours * energyCost));
                 game.decreaseEnergy(energyCost * hours);
-                game.passTime(hours * 60); // in seconds
                 game.addRecreationalHours(hours);
+                game.addActivityDone(args[0]);
+                game.passTime(hours * 60); // in seconds
             }
         } else {
             game.dialogueBox.setText("It's too early to go shopping, go to bed!");

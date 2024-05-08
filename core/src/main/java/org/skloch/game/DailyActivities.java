@@ -1,5 +1,8 @@
 package main.java.org.skloch.game;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DailyActivities {
     private boolean eatenBreakfast = false;
     private boolean eatenLunch = false;
@@ -9,6 +12,8 @@ public class DailyActivities {
     private int timesRecreational = 0;
     private int hoursRecreational = 0;
     private int hoursSlept = 0;
+    //private ArrayList<String> activitiesDone = new ArrayList<String>();
+    private HashMap<String, Integer> activitiesDone = new HashMap<>();
 
 
     // getters
@@ -42,6 +47,13 @@ public class DailyActivities {
 
     public int getTimesStudied() {
         return timesStudied;
+    }
+    //public ArrayList<String> getActivitiesDone() { return activitiesDone; }
+
+    public HashMap<String, Integer> getActivitiesDone() { return activitiesDone; }
+
+    public int getActivityDone(String activity) {
+        return activitiesDone.getOrDefault(activity, 0);
     }
 
     // setters
@@ -78,5 +90,15 @@ public class DailyActivities {
 
     public void addTimesStudied(int timesStudied) {
         this.timesStudied += timesStudied;
+    }
+
+    //public void addActivityDone(String activity) { this.activitiesDone.add(activity); }
+
+    public void addActivityDone(String activity) {
+        if(activitiesDone.containsKey(activity)) {
+            activitiesDone.put(activity, activitiesDone.get(activity) + 1);
+        } else {
+          activitiesDone.put(activity, 1);
+        }
     }
 }
