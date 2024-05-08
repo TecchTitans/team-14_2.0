@@ -373,6 +373,11 @@ public class EventManager {
         }
     }
 
+    /**
+     * The event to be run when the player interacts with himark
+     * Gives the player the choice how long they choose to stay
+     * @param args
+     */
     public void himarkEvent(String[] args) {
         if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("shopping");
@@ -396,6 +401,11 @@ public class EventManager {
         }
     }
 
+    /**
+     * The event to be run when the player interacts with the library
+     * Gives the player the choice how long they choose to study
+     * @param args
+     */
     public void libraryEvent(String[] args) {
         if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("studying");
@@ -425,6 +435,10 @@ public class EventManager {
         }
     }
 
+    /**
+     * The event to be run when the player interacts with kosta koffee
+     * @param args
+     */
     public void kostaEvent(String[] args) {
         if (game.getSeconds() >= 8 * 60) {
             int energyCost = activityEnergies.get("meet_friends");
@@ -451,6 +465,10 @@ public class EventManager {
         }
     }
 
+    /**
+     * The event to be run when the player interacts with luigi's pizza
+     * @param args
+     */
     public void luigisEvent(String[] args) {
         if (game.getSeconds() >= 8*60) {
             int energyCost = activityEnergies.get("eating");
