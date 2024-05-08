@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="169">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="172">
  <tileset firstgid="1" source="Tilemaps/StarRealmsCozyForestPackv2_24x24.tsx"/>
  <tileset firstgid="529" source="Tilemaps/StarRealmsCozyForestPack24x24.tsx"/>
  <tileset firstgid="1057" source="Town.tsx"/>
@@ -116,7 +116,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,79,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,81,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,72,118,0,94,116,98,76,0,0,0,0,0,103,120,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,123,124,125,0,123,124,124,124,124,125,0,123,124,124,124,124,124,124,124,124,124,125,0,123,124,124,125,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,121,0,0,0,0,605,0,0,0,0,0,0,605,0,0,0,0,101,0,0,0,0,0,0,605,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,122,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,79,80,81,79,80,81,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,94,0,0,0,0,0,0,0,0,0,0,120,0,0,0,0,0,0,0,0,0,0,101,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -659,15 +659,42 @@
     <property name="event" value="bus_to_east_campus"/>
    </properties>
   </object>
-  <object id="161" x="456" y="696" width="120" height="96"/>
-  <object id="162" x="624" y="696" width="120" height="96"/>
-  <object id="163" x="912" y="696" width="72" height="96"/>
+  <object id="161" x="456" y="696" width="120" height="96">
+   <properties>
+    <property name="event" value="kosta"/>
+   </properties>
+  </object>
+  <object id="162" x="624" y="696" width="120" height="96">
+   <properties>
+    <property name="event" value="library"/>
+   </properties>
+  </object>
+  <object id="163" x="912" y="696" width="72" height="96">
+   <properties>
+    <property name="event" value="luigis"/>
+   </properties>
+  </object>
   <object id="164" x="816" y="864" width="120" height="48"/>
   <object id="165" x="936" y="864" width="120" height="72"/>
   <object id="167" x="408" y="816" width="24" height="24"/>
   <object id="168" x="624" y="1008" width="24" height="24">
    <properties>
     <property name="text" value="Himark Store"/>
+   </properties>
+  </object>
+  <object id="169" x="696" y="816" width="24" height="24">
+   <properties>
+    <property name="text" value="York Public Library"/>
+   </properties>
+  </object>
+  <object id="170" x="528" y="816" width="24" height="24">
+   <properties>
+    <property name="text" value="Kosta Koffee"/>
+   </properties>
+  </object>
+  <object id="171" x="984" y="816" width="24" height="24">
+   <properties>
+    <property name="text" value="Luigi's Pizza"/>
    </properties>
   </object>
  </objectgroup>
