@@ -435,6 +435,7 @@ public class EventManager {
                     game.dialogueBox.setText(String.format("You studied for %s hours!\nYou lost %d energy", args[1], hours*energyCost));
                     game.decreaseEnergy(energyCost * hours);
                     game.addStudyHours(hours);
+                    game.addActivityDone("library");
                     game.passTime(hours * 60); // in seconds
                 }
             }
@@ -465,8 +466,9 @@ public class EventManager {
                 int hours = ThreadLocalRandom.current().nextInt(1, 4);
                 game.dialogueBox.setText(String.format("You talked about %s for %d hours!", args[1].toLowerCase(), hours));
                 game.decreaseEnergy(energyCost * hours);
-                game.passTime(hours * 60); // in seconds
                 game.addRecreationalHours(hours);
+                game.addActivityDone("kosta");
+                game.passTime(hours * 60); // in seconds
             }
         } else {
             game.dialogueBox.setText("It's too early in the morning to meet your friends, go to bed!");
@@ -487,6 +489,7 @@ public class EventManager {
                 game.dialogueBox.setText(String.format("You took an hour to eat %s at Luigi's Pizza!\nYou lost %d energy!", meal, energyCost));
                 game.hasEaten(meal);
                 game.decreaseEnergy(energyCost);
+                game.addActivityDone("luigis");
                 game.passTime(60); // in seconds
             }
         } else {
