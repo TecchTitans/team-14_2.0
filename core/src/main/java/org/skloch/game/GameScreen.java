@@ -787,6 +787,14 @@ public class GameScreen implements Screen {
     }
 
     /**
+     * Add an activity to the current day's activities done.
+     * @param activity Name of specific activity done as a String
+     */
+    public void addActivityDone(String activity) {
+        daysInfo[day - 1].addActivityDone(activity);
+    }
+
+    /**
      * @return The number of seconds elapsed in the day
      */
     public float getSeconds() {
@@ -804,18 +812,24 @@ public class GameScreen implements Screen {
                 totalTimesRecreation = 0,
                 totalHoursRecreation = 0,
                 totalHoursSlept = 0,
-                daysStudied = 0;
+                daysStudied = 0,
+                totalPiazzaEvents = 0,
+                totalPubEvents = 0,
+                totalTownEvents = 0;
         //ArrayList<Streaks> streaks = new ArrayList<>();
-        HashSet<Streaks> streaks = new HashSet<Streaks>();
+        HashSet<String> streaks = new HashSet<>();
         for (DailyActivities dailyActivities : daysInfo) {
             totalTimesStudied += dailyActivities.getTimesStudied();
             totalTimesRecreation += dailyActivities.getTimesRecreation();
-            if(totalTimesStudied > 0){
+            if(dailyActivities.getTimesStudied() > 0){
                 daysStudied++;
             }
             totalHoursStudied += dailyActivities.getHoursStudied();
             totalHoursRecreation += dailyActivities.getHoursRecreation();
             totalHoursSlept += dailyActivities.getHoursSlept();
+            totalPiazzaEvents += dailyActivities.getActivityDone("piazza");
+            totalPubEvents += dailyActivities.getActivityDone("pub");
+            totalTownEvents += dailyActivities.getActivityDone("bus_to_town");
             if(dailyActivities.isEatenBreakfast()) { score += 50; }
             if(dailyActivities.isEatenLunch()) { score += 50; }
             if(dailyActivities.isEatenDinner()) { score += 50; }
@@ -839,10 +853,22 @@ public class GameScreen implements Screen {
                 score -= 1000 * ((totalHoursStudied / 7) - 4);
             }
 
-            // calculate streaks. Need more info in DailyActivites to have streaks for certain buildings, i.e. pub
-            if(totalHoursRecreation >= 6){
-                streaks.add(Streaks.SOCIALBUTTERFLY);
+            // If met friends at piazza 6 or more times, they are a social butterfly
+            if(totalPiazzaEvents >= 6) {
+                streaks.add("Social Butterfly");
                 score += 250;
+            }
+
+            // If they've been to the pub 4 or more times, they are a party animal
+            if(totalPubEvents >= 4) {
+                streaks.add("Party Animal");
+                score += 150;
+            }
+
+            // if they go to town 6 times or more, they are an explorer
+            if(totalTownEvents >= 6) {
+                streaks.add("Explorer");
+                score += 100;
             }
         }
 
