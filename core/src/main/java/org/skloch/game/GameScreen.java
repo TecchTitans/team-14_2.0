@@ -815,7 +815,8 @@ public class GameScreen implements Screen {
                 daysStudied = 0,
                 totalPiazzaEvents = 0,
                 totalPubEvents = 0,
-                totalTownEvents = 0;
+                totalTownEvents = 0,
+                totalLibraryEvents = 0;
         //ArrayList<Streaks> streaks = new ArrayList<>();
         HashSet<String> streaks = new HashSet<>();
         for (DailyActivities dailyActivities : daysInfo) {
@@ -830,6 +831,7 @@ public class GameScreen implements Screen {
             totalPiazzaEvents += dailyActivities.getActivityDone("piazza");
             totalPubEvents += dailyActivities.getActivityDone("pub");
             totalTownEvents += dailyActivities.getActivityDone("bus_to_town");
+            totalLibraryEvents += dailyActivities.getActivityDone("library");
             if(dailyActivities.isEatenBreakfast()) { score += 50; }
             if(dailyActivities.isEatenLunch()) { score += 50; }
             if(dailyActivities.isEatenDinner()) { score += 50; }
@@ -869,6 +871,12 @@ public class GameScreen implements Screen {
             if(totalTownEvents >= 6) {
                 streaks.add("Explorer");
                 score += 100;
+            }
+
+            // if they go to library 4 times that week (or more), they are a bookworm
+            if(totalLibraryEvents >= 4) {
+                streaks.add("Bookworm");
+                score += 250;
             }
         }
 
