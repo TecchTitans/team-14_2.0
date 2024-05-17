@@ -52,7 +52,7 @@ public class HustleGame extends Game {
 
 	/**
 	 * A class to initialise a lot of the assets required for the game, including the map, sound and UI skin.
-	 * A instance of this object should be shared to most screens to allow resources to be shared and disposed of
+	 * An instance of this object should be shared to most screens to allow resources to be shared and disposed of
 	 * correctly.
 	 * Should be created in DesktopLauncher,
 	 *

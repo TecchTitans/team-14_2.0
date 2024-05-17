@@ -11,12 +11,12 @@ import com.badlogic.gdx.utils.Array;
  *
  */
 public class DialogueBox {
-    private Window dialogueWindow;
-    private Table dialogueTable;
-    private Label textLabel;
-    private Skin skin;
+    private final Window dialogueWindow;
+    private final Table dialogueTable;
+    private final Label textLabel;
+    private final Skin skin;
     private final int MAXCHARS;
-    private SelectBox selectBox;
+    private final SelectBox selectBox;
     private Array<String> textLines;
     private int linePointer = 0;
     private String eventKey = null;
@@ -57,15 +57,15 @@ public class DialogueBox {
     }
 
     /**
-     * A class displaying a little selction box to the user when an input is needed in dialog
+     * A class displaying a little selection box to the user when an input is needed in dialog
      */
     class SelectBox {
-        private Window selectWindow;
-        private Table selectTable;
+        private final Window selectWindow;
+        private final Table selectTable;
         private int choiceIndex = 0;
         private String[] options;
         private String[] events;
-        private Array<Label> optionPointers = new Array<Label>();
+        private final Array<Label> optionPointers = new Array<Label>();
         public SelectBox () {
             selectWindow = new Window("", skin);
             selectTable = new Table();
@@ -267,7 +267,7 @@ public class DialogueBox {
 
     /**
      * Formats the text to be displayed on a label widget. Adds a newline character every MAXCHARS num of characters
-     * accounts for any occuring linebreaks to take use of the size of the most space possible.
+     * accounts for any occurring linebreaks to take use of the size of the most space possible.
      * Stores the formatted text in 3 chunks, which are then queued up to be pushed to the label whenever the user
      * presses e.
      *
@@ -282,7 +282,7 @@ public class DialogueBox {
 
         // Add newline characters where the length of a section between two linebreaks is greater than MAXCHARS
         for (char c : text.toCharArray()) {
-            // Account for any occuring linebreaks
+            // Account for any occurring linebreaks
             if (c == '\n') {
                 index = 0;
             }

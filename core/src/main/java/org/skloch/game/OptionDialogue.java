@@ -9,17 +9,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Align;
 
 /**
- * @deprecated Creates a small window to recieve a yes/no response from the player
+ * @deprecated Creates a small window to receive a yes/no response from the player
  * No longer used, but the code may still be useful
  */
 public class OptionDialogue {
-    private Window window;
+    private final Window window;
     public Label questionLabel;
-    private Label leftArrow;
-    private Label rightArrow;
+    private final Label leftArrow;
+    private final Label rightArrow;
     boolean visible = false;
     boolean choice = false;
-    private SoundManager soundManager;
+    private final SoundManager soundManager;
 
     /**
      * @deprecated

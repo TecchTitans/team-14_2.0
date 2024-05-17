@@ -1,6 +1,5 @@
 package main.java.org.skloch.game;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DailyActivities {
@@ -13,7 +12,7 @@ public class DailyActivities {
     private int hoursRecreational = 0;
     private int hoursSlept = 0;
     //private ArrayList<String> activitiesDone = new ArrayList<String>();
-    private HashMap<String, Integer> activitiesDone = new HashMap<>();
+    private final HashMap<String, Integer> activitiesDone = new HashMap<>();
 
 
     // getters

@@ -39,12 +39,12 @@ public class EventManager {
         activityEnergies.put("shopping", 10);
 
 
-        // Define what to say when interacting with an object who's text won't change
+        // Define what to say when interacting with an object whose text won't change
         objectInteractions = new HashMap<String, String>();
         objectInteractions.put("chest", "Open the chest?");
         objectInteractions.put("comp_sci", "Study in the Computer Science building?");
         objectInteractions.put("piazza", "Meet your friends at the Piazza?");
-        objectInteractions.put("accomodation", "Go to sleep for the night?\nYour alarm is set for 8am.");
+        objectInteractions.put("accommodation", "Go to sleep for the night?\nYour alarm is set for 8am.");
         objectInteractions.put("rch", null); // Changes, dynamically returned in getObjectInteraction
         objectInteractions.put("tree", "Speak to the tree?");
         objectInteractions.put("bus_to_town", "Take a ride to town?");

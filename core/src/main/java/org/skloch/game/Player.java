@@ -82,7 +82,7 @@ public class Player {
 
     /**
      * Handles all the logic involved in moving the player given keyboard inputs
-     * If the player encounters an object, they will not be alowed to move into the space, but will attempt to
+     * If the player encounters an object, they will not be allowed to move into the space, but will attempt to
      * 'slide' off of it.
      * Also updates the player's animation
      *
@@ -106,7 +106,6 @@ public class Player {
         // If not frozen, react to keyboard input presses
         if (!frozen) {
             // Move the player and their 2 other hitboxes
-            moving = false;
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
                 this.setX(sprite.getX() - speed * delta); // Note: Setting all the values with a constant delta removes hitbox desyncing issues
                 direction = 3;
@@ -265,7 +264,7 @@ public class Player {
     }
 
     /**
-     * Adds a GameObeject to the player's list of collidable objects
+     * Adds a GameObject to the player's list of collidable objects
      *
      * @param object a GameObject for the player to collide with
      */
@@ -350,7 +349,7 @@ public class Player {
     }
 
     /**
-     * Returns the euclidian distance from a GameObject to the centre of the player
+     * Returns the euclidean distance from a GameObject to the centre of the player
      *
      * @param object The object to get the distance from
      * @return The distance from the object

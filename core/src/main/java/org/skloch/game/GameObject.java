@@ -19,7 +19,7 @@ public class GameObject extends Rectangle {
     // Create like a normal rectangle
 
     /**
-     * Creates an instance of a GameObject without MapProperties, functions similarily to just a normal rectangle
+     * Creates an instance of a GameObject without MapProperties, functions similarly to just a normal rectangle
      * @param x
      * @param y
      * @param width
@@ -34,7 +34,7 @@ public class GameObject extends Rectangle {
     }
 
     /**
-     * Creates a GameObject using the MapProperties stored in a object when exported with the Tiled map editor
+     * Creates a GameObject using the MapProperties stored in an object when exported with the Tiled map editor
      * Sets x, y, width and height, as well as loading all other properties which can be fetched with get()
      *
      * @param objectProperties An instance of MapProperties loaded from an object layer
