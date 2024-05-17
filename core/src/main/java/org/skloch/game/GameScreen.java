@@ -36,6 +36,7 @@ import java.util.HashSet;
  */
 public class GameScreen implements Screen {
     final HustleGame game;
+    public boolean testGameOver;
     private OrthographicCamera camera;
     private int energy = 100;
     //private int hoursStudied, hoursRecreational, hoursSlept;
@@ -55,10 +56,9 @@ public class GameScreen implements Screen {
     private Table uiTable;
     private Image energyBar;
     public DialogueBox dialogueBox;
-    public final Image blackScreen;
+    public Image blackScreen;
     private boolean sleeping = false;
     public int avatarChoice;
-
 
     /**
      * @param game         An instance of the class HustleGame containing variables that only need to be loaded or
@@ -83,22 +83,22 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new FitViewport(game.WIDTH, game.HEIGHT, camera);
         camera.setToOrtho(false, game.WIDTH, game.HEIGHT);
-        game.shapeRenderer.setProjectionMatrix(camera.combined);
 
+        if (!game.unitTest) {
+            game.shapeRenderer.setProjectionMatrix(camera.combined);
 
+            // Create a stage for the user interface to be on
+            uiStage = new Stage(new FitViewport(game.WIDTH, game.HEIGHT));
+            // Add a black image over everything first
+            blackScreen = new Image(new Texture(Gdx.files.internal("Sprites/black_square.png")));
+            blackScreen.setSize(viewport.getWorldWidth(), viewport.getWorldHeight());
+            blackScreen.addAction(Actions.alpha(0f));
 
-        // Create a stage for the user interface to be on
-        uiStage = new Stage(new FitViewport(game.WIDTH, game.HEIGHT));
-        // Add a black image over everything first
-        blackScreen = new Image(new Texture(Gdx.files.internal("Sprites/black_square.png")));
-        blackScreen.setSize(viewport.getWorldWidth(), viewport.getWorldHeight());
-        blackScreen.addAction(Actions.alpha(0f));
-
-        // UI table to put everything in
-        uiTable = new Table();
-        uiTable.setSize(game.WIDTH, game.HEIGHT);
-        uiStage.addActor(uiTable);
-
+            // UI table to put everything in
+            uiTable = new Table();
+            uiTable.setSize(game.WIDTH, game.HEIGHT);
+            uiStage.addActor(uiTable);
+        }
 
         this.avatarChoice = avatarChoice;
         // Create a player class
@@ -107,7 +107,6 @@ public class GameScreen implements Screen {
         } else {
             player = new Player("avatar2", name);
         }
-
 
 
         // USER INTERFACE
@@ -124,16 +123,18 @@ public class GameScreen implements Screen {
 //        optionDialogue.setVisible(false);
 
         // Interaction label to prompt player
-        interactionLabel = new Label("E - Interact", game.skin, "default");
-
+        if (!game.unitTest) {
+            interactionLabel = new Label("E - Interact", game.skin, "default");
+        }
         // Dialogue box
-        dialogueBox = new DialogueBox(game.skin);
-        dialogueBox.setPos(
-                (viewport.getWorldWidth() - dialogueBox.getWidth()) / 2f,
-                15f);
-        dialogueBox.hide();
+        if (!game.unitTest) {
+            dialogueBox = new DialogueBox(game.skin);
 
-
+            dialogueBox.setPos(
+                    (viewport.getWorldWidth() - dialogueBox.getWidth()) / 2f,
+                    15f);
+            dialogueBox.hide();
+        }
 
 
         // Load energy bar elements
@@ -141,60 +142,66 @@ public class GameScreen implements Screen {
         energyGroup.setDebug(true);
         energyBar = new Image(new Texture(Gdx.files.internal("Interface/Energy Bar/green_bar.png")));
         Image energyBarOutline = new Image(new Texture(Gdx.files.internal("Interface/Energy Bar/bar_outline.png")));
-        energyBarOutline.setPosition(viewport.getWorldWidth()-energyBarOutline.getWidth() - 15, 15);
-        energyBar.setPosition(energyBarOutline.getX()+16, energyBarOutline.getY()+16);
+        energyBarOutline.setPosition(viewport.getWorldWidth() - energyBarOutline.getWidth() - 15, 15);
+        energyBar.setPosition(energyBarOutline.getX() + 16, energyBarOutline.getY() + 16);
         energyGroup.addActor(energyBar);
         energyGroup.addActor(energyBarOutline);
 
 
         // Set initial time
-        daySeconds = (8*60); // 8:00 am
+        daySeconds = (8 * 60); // 8:00 am
 
         // Table to display date and time
         Table timeTable = new Table();
         timeTable.setFillParent(true);
-        timeLabel = new Label(formatTime((int) daySeconds), game.skin, "time");
-        dayLabel = new Label(String.format("Day %d", day), game.skin, "day");
-        timeTable.add(timeLabel).uniformX();
-        timeTable.row();
-        timeTable.add(dayLabel).uniformX().left().padTop(2);
-        timeTable.top().left().padLeft(10).padTop(10);
+        if (!game.unitTest) {
+            timeLabel = new Label(formatTime((int) daySeconds), game.skin, "time");
+            dayLabel = new Label(String.format("Day %d", day), game.skin, "day");
 
-        // Set the order of rendered UI elements
-        uiTable.add(interactionLabel).padTop(300);
-        uiStage.addActor(energyGroup);
-        uiStage.addActor(timeTable);
-        uiStage.addActor(blackScreen);
-        uiStage.addActor(dialogueBox.getWindow());
-        uiStage.addActor(dialogueBox.getSelectBox().getWindow());
-        setupEscapeMenu(uiStage);
+            timeTable.add(timeLabel).uniformX();
+            timeTable.row();
+            timeTable.add(dayLabel).uniformX().left().padTop(2);
+            timeTable.top().left().padLeft(10).padTop(10);
 
+            // Set the order of rendered UI elements
+            uiTable.add(interactionLabel).padTop(300);
+            uiStage.addActor(energyGroup);
+            uiStage.addActor(timeTable);
+            uiStage.addActor(blackScreen);
+            uiStage.addActor(dialogueBox.getWindow());
+            uiStage.addActor(dialogueBox.getSelectBox().getWindow());
+            setupEscapeMenu(uiStage);
+        }
 
 
         // Start music
-        game.soundManager.playOverworldMusic();
+        if (!game.unitTest) {
+            game.soundManager.playOverworldMusic();
 
 
-        // Create the keyboard input adapter that defines events to be called based on
-        // specific button presses
-        InputAdapter gameKeyBoardInput = makeInputAdapter();
+            // Create the keyboard input adapter that defines events to be called based on
+            // specific button presses
+            InputAdapter gameKeyBoardInput = makeInputAdapter();
 
-        // Since we need to listen to inputs from the stage and from the keyboard
-        // Use an input multiplexer to listen for one inputadapter and then the other
-        // inputMultiplexer needs to be established before hand since we reference it on resume() when going
-        // back to this screen from the settings menu
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(gameKeyBoardInput);
-        inputMultiplexer.addProcessor(uiStage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+            // Since we need to listen to inputs from the stage and from the keyboard
+            // Use an input multiplexer to listen for one inputadapter and then the other
+            // inputMultiplexer needs to be established before hand since we reference it on resume() when going
+            // back to this screen from the settings menu
+            inputMultiplexer = new InputMultiplexer();
+            inputMultiplexer.addProcessor(gameKeyBoardInput);
+            inputMultiplexer.addProcessor(uiStage);
+            Gdx.input.setInputProcessor(inputMultiplexer);
+        }
 
         changeToCampusEastMap();
         setupMap();
 
 
         // Display a little good morning message
-        dialogueBox.show();
-        dialogueBox.setText(getWakeUpMessage());
+        if (!game.unitTest) {
+            dialogueBox.show();
+            dialogueBox.setText(getWakeUpMessage());
+        }
     }
 
     // Defaults to using default spawn location
@@ -203,55 +210,60 @@ public class GameScreen implements Screen {
     }
 
     private void setupMap(boolean spawnFromTown) {
-        // Setup map
-        float unitScale = game.mapScale / game.mapSquareSize;
-        mapRenderer = new OrthogonalTiledMapRenderer(game.map, unitScale);
+        if (!game.unitTest) {
+            // Setup map
+            float unitScale = game.mapScale / game.mapSquareSize;
+            mapRenderer = new OrthogonalTiledMapRenderer(game.map, unitScale);
 
-        // Set the player to the middle of the map
-        // Get the dimensions of the top layer
-        TiledMapTileLayer layer0 = (TiledMapTileLayer) game.map.getLayers().get(0);
-        player.setPos(layer0.getWidth()*game.mapScale / 2f, layer0.getHeight()*game.mapScale / 2f);
-        // Put camera on player
-        camera.position.set(player.getCentreX(), player.getCentreY(), 0);
+            // Set the player to the middle of the map
+            // Get the dimensions of the top layer
+            TiledMapTileLayer layer0 = (TiledMapTileLayer) game.map.getLayers().get(0);
+            player.setPos(layer0.getWidth() * game.mapScale / 2f, layer0.getHeight() * game.mapScale / 2f);
+            // Put camera on player
+            camera.position.set(player.getCentreX(), player.getCentreY(), 0);
 
-        // Give objects to player
-        for (int layer : game.objectLayers) {
-            // Get all objects on the layer
-            MapObjects objects = game.map.getLayers().get(layer).getObjects();
+            // Give objects to player
+            for (int layer : game.objectLayers) {
+                // Get all objects on the layer
+                MapObjects objects = game.map.getLayers().get(layer).getObjects();
 
-            // Loop through each, handing them to the player
-            for (int i = 0; i < objects.getCount(); i++) {
-                // Get the properties of each object
-                MapProperties properties = objects.get(i).getProperties();
-                // If this is the spawn object, move the player there and don't collide
-                // This also changes the spawn location if they have just travelled from town
-                if (properties.get("spawn") != null) {
-                    player.setPos(((float) properties.get("x")) *unitScale, ((float) properties.get("y"))*unitScale);
-                    camera.position.set(player.getPosAsVec3());
-                } else if (properties.get("spawnFromTown") != null) {
-                    if (spawnFromTown) {
-                        player.setPos(((float) properties.get("x")) *unitScale, ((float) properties.get("y"))*unitScale);
+                // Loop through each, handing them to the player
+                for (int i = 0; i < objects.getCount(); i++) {
+                    // Get the properties of each object
+                    MapProperties properties = objects.get(i).getProperties();
+                    // If this is the spawn object, move the player there and don't collide
+                    // This also changes the spawn location if they have just travelled from town
+                    if (properties.get("spawn") != null) {
+                        player.setPos(((float) properties.get("x")) * unitScale, ((float) properties.get("y")) * unitScale);
                         camera.position.set(player.getPosAsVec3());
+                    } else if (properties.get("spawnFromTown") != null) {
+                        if (spawnFromTown) {
+                            player.setPos(((float) properties.get("x")) * unitScale, ((float) properties.get("y")) * unitScale);
+                            camera.position.set(player.getPosAsVec3());
+                        }
+                    } else {
+                        // Make a new gameObject with these properties, passing along the scale the map is rendered
+                        // at for accurate coordinates
+                        player.addCollidable(new GameObject(properties, unitScale));
                     }
-                } else {
-                    // Make a new gameObject with these properties, passing along the scale the map is rendered
-                    // at for accurate coordinates
-                    player.addCollidable(new GameObject(properties, unitScale));
                 }
             }
         }
 
         // Set the player to not go outside the bounds of the map
         // Assumes the bottom left corner of the map is at 0, 0
-        player.setBounds(
-                new Rectangle(
-                        0,
-                        0,
-                        game.mapProperties.get("width", Integer.class) * game.mapScale,
-                        game.mapProperties.get("height", Integer.class) * game.mapScale
-                )
-        );
-        game.shapeRenderer.setProjectionMatrix(camera.combined);
+
+        if (!game.unitTest) {
+            player.setBounds(
+                    new Rectangle(
+                            0,
+                            0,
+                            game.mapProperties.get("width", Integer.class) * game.mapScale,
+                            game.mapProperties.get("height", Integer.class) * game.mapScale
+                    )
+            );
+            game.shapeRenderer.setProjectionMatrix(camera.combined);
+        }
     }
 
     @Override
@@ -876,8 +888,9 @@ public class GameScreen implements Screen {
                 score += 250;
             }
         }
-
-        game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreation, totalHoursSlept, score, streaks));
+        if (!game.unitTest) {
+            game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreation, totalHoursSlept, score, streaks));
+        }
     }
 
     // could just do this in the GameOver method, or pass in totalTimesStudied etc. as parameters, rather than repeating code.
@@ -955,5 +968,15 @@ public class GameScreen implements Screen {
 
         game.switchToEastMap();
         setupMap(true);
+    }
+
+    /**
+     * For testing, sets the game over flag to true
+     */
+    public void setDay(int day) {
+        this.day = day;
+        if (day > 7) {
+            testGameOver = true;
+        }
     }
 }

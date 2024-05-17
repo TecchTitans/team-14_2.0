@@ -1,15 +1,27 @@
 package main.java.org.skloch.test.unit;
 
+import main.java.org.skloch.game.GameScreen;
+import main.java.org.skloch.game.HustleGame;
+import main.java.org.skloch.test.integration.GdxTestRunner;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(GdxTestRunner.class)
 public class GameOverScreenTest {
-
+    GameScreen gameScreen;
+    HustleGame game;
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
+        game = new HustleGame(1280, 720);
+        game.unitTest = true;
+        gameScreen = new GameScreen(game, 1, "name");
     }
-
-    @After
-    public void tearDown() throws Exception {
+    @Test
+    public void gameOverScreenAfterSevenDays(){
+        gameScreen.setDay(8);
+        gameScreen.passTime(1);
+        Assert.assertTrue(gameScreen.testGameOver);
     }
 }
