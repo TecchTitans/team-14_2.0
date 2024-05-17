@@ -35,30 +35,26 @@ import java.util.HashSet;
  * Responsible for rendering the player and the map, and calling events.
  */
 public class GameScreen implements Screen {
-    final HustleGame game;
-<<<<<<< HEAD
+    HustleGame game;
     public boolean testGameOver;
     private OrthographicCamera camera;
-=======
-    private final OrthographicCamera camera;
->>>>>>> 4a5e88e20339c90bae3b5daaf98491ac69205f3e
     private int energy = 100;
     //private int hoursStudied, hoursRecreational, hoursSlept;
     private final DailyActivities[] daysInfo = new DailyActivities[7];
     private float daySeconds = 0; // Current seconds elapsed in day
     private int day = 1; // What day the game is on
-    private final Label timeLabel, dayLabel;
+    private Label timeLabel, dayLabel;
     public Player player;
     private Window escapeMenu;
-    private final Viewport viewport;
+    private  Viewport viewport;
     public OrthogonalTiledMapRenderer mapRenderer;
     public Stage uiStage;
-    private final Label interactionLabel;
-    private final EventManager eventManager;
-//    private OptionDialogue optionDialogue;
+    private Label interactionLabel;
+    private EventManager eventManager;
+    //    private OptionDialogue optionDialogue;
     protected InputMultiplexer inputMultiplexer;
-    private final Table uiTable;
-    private final Image energyBar;
+    private Table uiTable;
+    private Image energyBar;
     public DialogueBox dialogueBox;
     public Image blackScreen;
     private boolean sleeping = false;
@@ -179,15 +175,15 @@ public class GameScreen implements Screen {
 
 
         // Start music
+        InputAdapter gameKeyBoardInput = null;
         if (!game.unitTest) {
             game.soundManager.playOverworldMusic();
 
 
             // Create the keyboard input adapter that defines events to be called based on
             // specific button presses
-            InputAdapter gameKeyBoardInput = makeInputAdapter();
+            gameKeyBoardInput = makeInputAdapter();
 
-<<<<<<< HEAD
             // Since we need to listen to inputs from the stage and from the keyboard
             // Use an input multiplexer to listen for one inputadapter and then the other
             // inputMultiplexer needs to be established before hand since we reference it on resume() when going
@@ -197,16 +193,17 @@ public class GameScreen implements Screen {
             inputMultiplexer.addProcessor(uiStage);
             Gdx.input.setInputProcessor(inputMultiplexer);
         }
-=======
+
         // Since we need to listen to inputs from the stage and from the keyboard
         // Use an input multiplexer to listen for one input adapter and then the other
         // inputMultiplexer needs to be established beforehand since we reference it on resume() when going
         // back to this screen from the settings menu
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(gameKeyBoardInput);
-        inputMultiplexer.addProcessor(uiStage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
->>>>>>> 4a5e88e20339c90bae3b5daaf98491ac69205f3e
+        if (!game.unitTest) {
+            inputMultiplexer = new InputMultiplexer();
+            inputMultiplexer.addProcessor(gameKeyBoardInput);
+            inputMultiplexer.addProcessor(uiStage);
+            Gdx.input.setInputProcessor(inputMultiplexer);
+        }
 
         changeToCampusEastMap();
         setupMap();
@@ -316,7 +313,7 @@ public class GameScreen implements Screen {
 
         // Increment the time and possibly day  >>  removed due to user evaluation but kept in case needed
         //if (!escapeMenu.isVisible() && !sleeping) {
-            //passTime(Gdx.graphics.getDeltaTime());
+        //passTime(Gdx.graphics.getDeltaTime());
         //}
         timeLabel.setText(formatTime((int) daySeconds));
 
