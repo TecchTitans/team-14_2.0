@@ -48,6 +48,7 @@ public class HustleGame extends Game {
 	public MapProperties mapProperties;
 	private MapProperties eastMapProperties;
 	private MapProperties townMapProperties;
+	private boolean switchToTownMapCalled = false;
 
 
 	/**
@@ -121,6 +122,7 @@ public class HustleGame extends Game {
 	public void switchToTownMap() {
 		map = townMap;
 		mapProperties = townMapProperties;
+		switchToTownMapCalled = true;
 	}
 
 	public void switchToEastMap() {
@@ -220,4 +222,13 @@ public class HustleGame extends Game {
 
 		return leaderboardData.toArray(new String[0][]);
 	}
+
+	/**
+	 * For testing
+	 * Checks if map has been switched to town
+	 */
+	public boolean isSwitchToTownMapCalled() {
+		return switchToTownMapCalled;
+	}
+
 }
