@@ -17,7 +17,9 @@ Assets:
 Player sprite (Male) - https://cuddle-bug.itch.io/apocalypse (recoloured)
 Player sprite (Female) - E.Giles - Adapted from male sprite
 Buttons - https://paperhatlizard.itch.io/cryos-mini-gui?download (These have been resized and may be edited)
-Map sprites - https://kerrielake.itch.io/star-realms-cozy-forest-pack
+Map sprites - https://kerrielake.itch.io/star-realms-cozy-forest-pack (recoloured version for town)
+House sprites - https://pixeljad.itch.io/villagetopdown
+Bus sprite - https://dai420.itch.io/public-bus (recoloured)
 
 Fonts:
 Font on the buttons - https://www.dafont.com/w95fa.font

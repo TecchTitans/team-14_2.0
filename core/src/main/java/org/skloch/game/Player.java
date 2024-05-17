@@ -22,7 +22,7 @@ public class Player {
     private final Array<Animation<TextureRegion>> walkingAnimation, idleAnimation;
     // Stats
     public String name;
-    public float speed = 300f;
+    public float speed = 500f;
     public Array<GameObject> collidables;
     public int scale = 4;
     private Rectangle bounds;
