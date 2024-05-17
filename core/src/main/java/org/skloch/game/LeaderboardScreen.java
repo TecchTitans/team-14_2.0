@@ -18,9 +18,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class LeaderboardScreen implements Screen {
     final HustleGame game;
-    private Stage leaderboardStage;
+    private final Stage leaderboardStage;
     OrthographicCamera camera;
-    private Viewport viewport;
+    private final Viewport viewport;
 
     public LeaderboardScreen(final HustleGame game, Screen previousScreen) {
         this.game = game;

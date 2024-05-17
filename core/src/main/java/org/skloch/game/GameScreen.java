@@ -36,24 +36,24 @@ import java.util.HashSet;
  */
 public class GameScreen implements Screen {
     final HustleGame game;
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
     private int energy = 100;
     //private int hoursStudied, hoursRecreational, hoursSlept;
-    private DailyActivities[] daysInfo = new DailyActivities[7];
+    private final DailyActivities[] daysInfo = new DailyActivities[7];
     private float daySeconds = 0; // Current seconds elapsed in day
     private int day = 1; // What day the game is on
-    private Label timeLabel, dayLabel;
+    private final Label timeLabel, dayLabel;
     public Player player;
     private Window escapeMenu;
-    private Viewport viewport;
+    private final Viewport viewport;
     public OrthogonalTiledMapRenderer mapRenderer;
     public Stage uiStage;
-    private Label interactionLabel;
-    private EventManager eventManager;
+    private final Label interactionLabel;
+    private final EventManager eventManager;
 //    private OptionDialogue optionDialogue;
     protected InputMultiplexer inputMultiplexer;
-    private Table uiTable;
-    private Image energyBar;
+    private final Table uiTable;
+    private final Image energyBar;
     public DialogueBox dialogueBox;
     public final Image blackScreen;
     private boolean sleeping = false;
@@ -180,8 +180,8 @@ public class GameScreen implements Screen {
         InputAdapter gameKeyBoardInput = makeInputAdapter();
 
         // Since we need to listen to inputs from the stage and from the keyboard
-        // Use an input multiplexer to listen for one inputadapter and then the other
-        // inputMultiplexer needs to be established before hand since we reference it on resume() when going
+        // Use an input multiplexer to listen for one input adapter and then the other
+        // inputMultiplexer needs to be established beforehand since we reference it on resume() when going
         // back to this screen from the settings menu
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(gameKeyBoardInput);
@@ -287,10 +287,10 @@ public class GameScreen implements Screen {
         //timeBar.act(delta);
 
 
-        // Increment the time and possibly day
-        if (!escapeMenu.isVisible() && !sleeping) {
+        // Increment the time and possibly day  >>  removed due to user evaluation but kept in case needed
+        //if (!escapeMenu.isVisible() && !sleeping) {
             //passTime(Gdx.graphics.getDeltaTime());
-        }
+        //}
         timeLabel.setText(formatTime((int) daySeconds));
 
         // Freeze the player's movement for this frame if any menus are visible
@@ -359,9 +359,9 @@ public class GameScreen implements Screen {
         uiStage.draw();
 
 
-        // Focus the camera on the center of the player
+        // Focus the camera in the center of the player
         // Make it slide into place too
-        // Change to camera.positon.set() to remove cool sliding
+        // Change to camera.position.set() to remove cool sliding
         camera.position.slerp(
                 new Vector3(
                         player.getCentreX(),
@@ -636,7 +636,7 @@ public class GameScreen implements Screen {
                     }
                 }
 
-                // If an option dialogue is open it should soak up all keypresses
+                // If an option dialogue is open it should soak up all key presses
                 if (dialogueBox.isVisible() && dialogueBox.getSelectBox().isVisible() && !escapeMenu.isVisible()) {
                     // Up or down
                     if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {

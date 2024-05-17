@@ -20,10 +20,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class MenuScreen implements Screen {
     final HustleGame game;
-    private Stage menuStage;
+    private final Stage menuStage;
     OrthographicCamera camera;
-    private Viewport viewport;
-    private Image titleImage;
+    private final Viewport viewport;
+    private final Image titleImage;
 
     /**
      * A class to display a menu screen, initially gives the player 4 options, Start, Settings, Credits, Quit
@@ -203,11 +203,11 @@ public class MenuScreen implements Screen {
     public void pause() {
     }
 
-    @Override
     /**
      * Correctly sizes the game when resuming it after a pause or switching screens
      * Fixes a small graphical bug
      */
+    @Override
     public void resume() {
         Gdx.input.setInputProcessor(menuStage);
 

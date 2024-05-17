@@ -10,11 +10,11 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class SoundManager implements Disposable {
     public Music overworldMusic, menuMusic;
-    private Sound footstep1, footstep2;
+    private final Sound footstep1, footstep2;
     public boolean footstepBool;
     private float footstepTimer;
     private float sfxVolume = 0.8f, musicVolume = 0.8f;
-    private Sound pauseSound, dialogueOpenSound, dialogueOptionSound, buttonSound;
+    private final Sound pauseSound, dialogueOpenSound, dialogueOptionSound, buttonSound;
 
     /**
      * A class to handle playing sounds in the game, handles loading and playing of music and sounds

@@ -17,11 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  * A screen to display settings to the player, lets the player adjust sound and music volume
  */
 public class SettingsScreen implements Screen {
-    private HustleGame game;
-    private Stage optionStage;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private Window optionMenu;
+    private final HustleGame game;
+    private final Stage optionStage;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
+    private final Window optionMenu;
     public Slider musicSlider;
     public Slider sfxSlider;
     public Screen previousScreen;
@@ -30,7 +30,7 @@ public class SettingsScreen implements Screen {
     /**
      * Handles the configuration of Music and Sound effect volume using two sliders
      * @param game An instance of HustleGame
-     * @param previousScreen The previous screen to return to when the exit button is rpessed
+     * @param previousScreen The previous screen to return to when the exit button is pressed
      */
     public SettingsScreen(final HustleGame game, Screen previousScreen) {
         // An option screen to let the player adjust the volume of music and sound effects
