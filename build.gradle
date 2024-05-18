@@ -52,6 +52,7 @@ project(":desktop") {
                     'Main-Class': 'main.java.org.skloch.game.DesktopLauncher'
             )
         }
+        // test of generation after merge
         archiveBaseName = 'HeslingtonHustle.jar';
     }
 }
