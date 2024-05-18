@@ -76,4 +76,15 @@ jobs:
         with:
           name: Package
           path: desktop/build/libs
+
+      # Uploads JaCoCo coverage report of all tests in the project for every GitHub action. 
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: team-14_2.0/test/build/reports/jacoco/test/html
+
+
+        
           
