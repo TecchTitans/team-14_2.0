@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.concurrent.ThreadLocalRandom;
 import static org.junit.Assert.assertEquals;
 
+// unit test
+
 public class DailyActivitiesTest {
     private final DailyActivities dailyActivities = new DailyActivities();
 
