@@ -74,8 +74,13 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Package
+          name: dist.jar
           path: desktop/build/libs
+
+      # Generates JaCoCo coverage report since it is not automatically generated when built with gradle wrapper
+
+      - name: Generate JaCoCo coverage report
+        run: ./gradlew jacocoTestReport
 
       # Uploads JaCoCo coverage report of all tests in the project for every GitHub action. 
 
@@ -84,6 +89,8 @@ jobs:
         with:
           name: jacoco-report
           path: team-14_2.0/test/build/reports/jacoco/test/html
+
+
 
 
         
