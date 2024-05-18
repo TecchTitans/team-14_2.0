@@ -47,9 +47,9 @@ jobs:
 
       # - name: Build with Gradle 8.5
       #   run: gradle build
-
+      # NOTE: The must be run without jacocoTestReport if JaCoCo is not included
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build jacocoTestReport
 
       # - name: Run tests with Gradle 8.5
       #   run: gradle test
@@ -74,6 +74,24 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Package
+          name: dist.jar
           path: desktop/build/libs
+
+      # Generates JaCoCo coverage report since it is not automatically generated when built with gradle wrapper
+
+      - name: Generate JaCoCo coverage report
+        run: ./gradlew jacocoTestReport
+
+      # Uploads JaCoCo coverage report of all tests in the project for every GitHub action. 
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: team-14_2.0/test/build/reports/jacoco/test/html
+
+
+
+
+        
           

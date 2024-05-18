@@ -51,10 +51,10 @@ public class GameScreen implements Screen {
     public Stage uiStage;
     private Label interactionLabel;
     private EventManager eventManager;
-    //    private OptionDialogue optionDialogue;
+    //private OptionDialogue optionDialogue;
     protected InputMultiplexer inputMultiplexer;
     private Table uiTable;
-    private Image energyBar;
+    private final Image energyBar;
     public DialogueBox dialogueBox;
     public Image blackScreen;
     private boolean sleeping = false;
@@ -313,7 +313,11 @@ public class GameScreen implements Screen {
 
         // Increment the time and possibly day  >>  removed due to user evaluation but kept in case needed
         //if (!escapeMenu.isVisible() && !sleeping) {
+
         //passTime(Gdx.graphics.getDeltaTime());
+
+            //passTime(Gdx.graphics.getDeltaTime());
+
         //}
         timeLabel.setText(formatTime((int) daySeconds));
 
