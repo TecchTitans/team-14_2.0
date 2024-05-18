@@ -47,9 +47,9 @@ jobs:
 
       # - name: Build with Gradle 8.5
       #   run: gradle build
-
+      # NOTE: The must be run without jacocoTestReport if JaCoCo is not included
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build jacocoTestReport
 
       # - name: Run tests with Gradle 8.5
       #   run: gradle test
