@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="main.java.org.skloch.test.DialogueBoxTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-18T18:11:20" hostname="KEELAS_PC" time="0.202">
+  <properties/>
+  <testcase name="testDialogueBoxSetText" classname="main.java.org.skloch.test.DialogueBoxTest" time="0.202"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

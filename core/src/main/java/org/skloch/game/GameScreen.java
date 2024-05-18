@@ -28,6 +28,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+
+import javax.swing.*;
 import java.util.HashSet;
 
 /**
@@ -994,5 +996,9 @@ public class GameScreen implements Screen {
         if (day > 7) {
             testGameOver = true;
         }
+    }
+
+    public DialogueBox getDialogueBox() {
+        return game.gameScreen.getDialogueBox();
     }
 }

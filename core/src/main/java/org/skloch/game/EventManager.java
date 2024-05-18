@@ -207,6 +207,7 @@ public class EventManager {
         }
     }
 
+
     /**
      * @param amount The amount of topics to return
      * @return An array of x random topics the player can chat about

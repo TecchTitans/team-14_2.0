@@ -31,14 +31,6 @@ public class CreditScreenTest {
         assertEquals(CreditScreen.class, creditScreen.getClass());
     }
 
-
-    /** @Test
-    public void testExitButton() {
-        creditScreen.dispose();
-        verify(game).setScreen(previousScreen);
-    }
-     **/
-
     @Test
     public void testRender() {
         creditScreen.render(1.0f);

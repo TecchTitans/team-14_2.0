@@ -1,29 +1,31 @@
 package main.java.org.skloch.test;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import main.java.org.skloch.game.DialogueBox;
+import main.java.org.skloch.game.GameScreen;
 import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 // unit test
-
 public class DialogueBoxTest {
+    private GameScreen gameScreen;
+    private DialogueBox dialogueBox;
 
     @Before
-    public void setUp() {
+    public void setUp(){
+        gameScreen = mock(GameScreen.class);
+        dialogueBox = mock(DialogueBox.class);
+        gameScreen.dialogueBox = dialogueBox;
 
-    }
-
-    @After
-    public void testSetText() {
-
+        when(gameScreen.getDialogueBox()).thenReturn(dialogueBox);
     }
 
     @Test
-    public void testVisibility() {
-
+    public void testDialogueBoxSetText() {
+        String text = "This is a unit test message";
+        gameScreen.getDialogueBox().setText(text);
+        verify(dialogueBox).setText(text);
     }
+
 }
