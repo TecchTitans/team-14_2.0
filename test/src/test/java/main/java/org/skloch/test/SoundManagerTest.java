@@ -32,4 +32,5 @@ public class SoundManagerTest {
         soundManager.setSfxVolume(volume);
         assertEquals(volume, soundManager.getSfxVolume(), 0.001);
     }
+
 }

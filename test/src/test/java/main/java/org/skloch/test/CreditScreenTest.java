@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.badlogic.gdx.Screen;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -37,4 +36,5 @@ public class CreditScreenTest {
     public void testRender() {
         creditScreen.render(1.0f);
     }
+
 }

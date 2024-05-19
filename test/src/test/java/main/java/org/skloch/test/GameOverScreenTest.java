@@ -26,4 +26,5 @@ public class GameOverScreenTest {
         gameScreen.passTime(1);
         assertTrue(gameScreen.testGameOver);
     }
+
 }

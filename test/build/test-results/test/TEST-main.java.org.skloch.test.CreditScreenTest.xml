@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="main.java.org.skloch.test.CreditScreenTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-19T11:11:11" hostname="LUKE-PC" time="0.117">
-  <properties/>
-  <testcase name="testCreditScreenInitialization" classname="main.java.org.skloch.test.CreditScreenTest" time="0.082"/>
-  <testcase name="testRender" classname="main.java.org.skloch.test.CreditScreenTest" time="0.019"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

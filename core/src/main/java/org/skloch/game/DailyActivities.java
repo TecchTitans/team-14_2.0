@@ -11,8 +11,9 @@ public class DailyActivities {
     private int timesRecreational = 0;
     private int hoursRecreational = 0;
     private int hoursSlept = 0;
+
     //private ArrayList<String> activitiesDone = new ArrayList<String>();
-    private final HashMap<String, Integer> activitiesDone = new HashMap<>();
+    private HashMap<String, Integer> activitiesDone = new HashMap<>();
 
 
     // getters
@@ -47,13 +48,14 @@ public class DailyActivities {
     public int getTimesStudied() {
         return timesStudied;
     }
-    //public ArrayList<String> getActivitiesDone() { return activitiesDone; }
 
-    public HashMap<String, Integer> getActivitiesDone() { return activitiesDone; }
+    //public ArrayList<String> getActivitiesDone() { return activitiesDone; }
+    //public HashMap<String, Integer> getActivitiesDone() { return activitiesDone; }
 
     public int getActivityDone(String activity) {
         return activitiesDone.getOrDefault(activity, 0);
     }
+
 
     // setters
     public void setEatenBreakfast(boolean eatenBreakfast) {
@@ -68,6 +70,8 @@ public class DailyActivities {
         this.eatenLunch = eatenLunch;
     }
 
+
+    //other mutators
     public void addHoursRecreation(int hoursRecreation) {
         this.hoursRecreational += hoursRecreation;
         addTimesRecreation(1);
@@ -92,7 +96,6 @@ public class DailyActivities {
     }
 
     //public void addActivityDone(String activity) { this.activitiesDone.add(activity); }
-
     public void addActivityDone(String activity) {
         if(activitiesDone.containsKey(activity)) {
             activitiesDone.put(activity, activitiesDone.get(activity) + 1);
@@ -100,4 +103,5 @@ public class DailyActivities {
           activitiesDone.put(activity, 1);
         }
     }
+
 }

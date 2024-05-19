@@ -28,7 +28,7 @@ public class EventManagerTest {
         when(gameScreen.getSeconds()).thenReturn(8 * 60f);
         eventManager.piazzaEvent(args);
 
-        verify(gameScreen.dialogueBox).setText(String.format("You are too tired to meet your friends right now!"));
+        verify(gameScreen.dialogueBox).setText("You are too tired to meet your friends right now!");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class EventManagerTest {
         when(gameScreen.getEnergy()).thenReturn(0);
         eventManager.compSciEvent(args);
 
-        verify(gameScreen.dialogueBox).setText(String.format("You are too tired to study right now!"));
+        verify(gameScreen.dialogueBox).setText("You are too tired to study right now!");
     }
 
     @Test
@@ -52,7 +52,7 @@ public class EventManagerTest {
         when(gameScreen.getEnergy()).thenReturn(0);
         eventManager.ronCookeEvent(args);
 
-        verify(gameScreen.dialogueBox).setText(String.format("You are too tired to eat right now!"));
+        verify(gameScreen.dialogueBox).setText("You are too tired to eat right now!");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class EventManagerTest {
         when(gameScreen.getEnergy()).thenReturn(0);
         eventManager.pubEvent(args);
 
-        verify(gameScreen.dialogueBox).setText(String.format("You are too tired to have a few cheeky ones!"));
+        verify(gameScreen.dialogueBox).setText("You are too tired to have a few cheeky ones!");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class EventManagerTest {
         when(gameScreen.getEnergy()).thenReturn(0);
         eventManager.himarkEvent(args);
 
-        verify(gameScreen.dialogueBox).setText(String.format("You are too tired to go shopping!"));
+        verify(gameScreen.dialogueBox).setText("You are too tired to go shopping!");
     }
 
     @Test
@@ -87,4 +87,5 @@ public class EventManagerTest {
         verify(gameScreen.dialogueBox).setText("The tree doesn't say anything back.");
         assertTrue(eventManager.isTreeEventCalled());
     }
+
 }

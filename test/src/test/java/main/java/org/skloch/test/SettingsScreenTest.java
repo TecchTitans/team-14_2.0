@@ -36,4 +36,5 @@ public class SettingsScreenTest {
     public void testRender() {
         settingsScreen.render(1.0f);
     }
+
 }

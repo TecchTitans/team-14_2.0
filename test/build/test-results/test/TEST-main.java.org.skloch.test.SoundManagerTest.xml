@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="main.java.org.skloch.test.SoundManagerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-19T11:11:11" hostname="LUKE-PC" time="0.016">
-  <properties/>
-  <testcase name="testSetSfxVolume" classname="main.java.org.skloch.test.SoundManagerTest" time="0.003"/>
-  <testcase name="testSetMusicVolume" classname="main.java.org.skloch.test.SoundManagerTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

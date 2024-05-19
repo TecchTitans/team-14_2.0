@@ -1,13 +1,11 @@
 package main.java.org.skloch.test;
 
-import com.badlogic.gdx.Screen;
 import main.java.org.skloch.game.HustleGame;
 import main.java.org.skloch.game.MenuScreen;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
+import com.badlogic.gdx.Screen;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -35,4 +33,5 @@ import static org.mockito.Mockito.mock;
 //    public void testRender() {
 //        menuScreen.render(1.0f);
 //    }
+//
 //}

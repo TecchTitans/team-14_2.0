@@ -34,4 +34,5 @@ public class LeaderboardScreenTest {
     public void testRender() {
         leaderboardScreen.render(1.0f);
     }
+
 }
