@@ -9,10 +9,13 @@ name: Java CI with Gradle
 
 on:
   push:
-#    on every push to every branch
+    # on every push to every branch
     branches: [ "**" ]
+    # code below runs workflow when a push is given a tag
+    # tags: [ "v[0-9]+.[0-9]+.[0-9]" ]
+    
   pull_request:
-#    on every pr to every branch
+    # on every pr to every branch
     branches: [ "**" ]
 
 jobs:
@@ -88,7 +91,25 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: team-14_2.0/test/build/reports/jacoco/test/html
+          path: test/build/reports/jacoco/test/html
+
+  # if a workflow action has a version tag, creates automatic GitHub version release and also attactches the artifact jar
+  release:
+      runs-on: ubuntu-latest
+      needs: ["build"]
+      if: startsWith(github.ref, 'ref/tags/')
+      permissions:
+        contents: write
+      steps:
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: dist.jar
+        - name: Release
+          uses: softprops/action-gh-release@v2
+          with:
+            files: dist.jar
+       
 
 
 
