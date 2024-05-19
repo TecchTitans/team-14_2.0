@@ -91,7 +91,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: team-14_2.0/test/build/reports/jacoco/test/html
+          path: test/build/reports/jacoco/test/html
 
   # if a workflow action has a version tag, creates automatic GitHub version release and also attactches the artifact jar
   release:
