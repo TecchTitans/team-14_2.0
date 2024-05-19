@@ -58,6 +58,7 @@ public class DailyActivitiesTest {
 
     @Test
     public void testAddActivityDone() {
+
         assertEquals(dailyActivities.getActivityDone("piazza"), 0);
         dailyActivities.addActivityDone("piazza");
         assertEquals(dailyActivities.getActivityDone("piazza"), 1);

@@ -101,6 +101,9 @@ gradle-app.setting
 /test/build/
 /html/build/
 /ios/build/
+/test/build/*
+/build/*
+*/build/*
 
 ## OS Specific
 .DS_Store
@@ -116,5 +119,6 @@ Thumbs.db
 
 ## Leaderboard JSON
 /assets/Jsons/leaderboard.json
+
 
 
