@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 // unit test
+
 public class DialogueBoxTest {
     private GameScreen gameScreen;
     private DialogueBox dialogueBox;

@@ -1,15 +1,17 @@
 package main.java.org.skloch.test;
 
-import org.junit.Before;
-import org.junit.Test;
-import com.badlogic.gdx.Screen;
 import main.java.org.skloch.game.CreditScreen;
 import main.java.org.skloch.game.HustleGame;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.badlogic.gdx.Screen;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+
+// unit test
 
 @RunWith(GdxTestRunner.class)
 

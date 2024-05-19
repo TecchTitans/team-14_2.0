@@ -3,13 +3,9 @@ package main.java.org.skloch.test;
 import main.java.org.skloch.game.DialogueBox;
 import main.java.org.skloch.game.EventManager;
 import main.java.org.skloch.game.GameScreen;
-import main.java.org.skloch.game.HustleGame;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -91,6 +87,4 @@ public class EventManagerTest {
         verify(gameScreen.dialogueBox).setText("The tree doesn't say anything back.");
         assertTrue(eventManager.isTreeEventCalled());
     }
-
-
 }

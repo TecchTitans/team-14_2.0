@@ -1,14 +1,13 @@
 package main.java.org.skloch.test;
 
 import main.java.org.skloch.game.SoundManager;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+
+// unit test
 
 @RunWith(GdxTestRunner.class)
 
@@ -32,10 +31,5 @@ public class SoundManagerTest {
         float volume = 0.5f;
         soundManager.setSfxVolume(volume);
         assertEquals(volume, soundManager.getSfxVolume(), 0.001);
-    }
-
-    @After
-    public void tearDown() {
-        soundManager.dispose();
     }
 }
