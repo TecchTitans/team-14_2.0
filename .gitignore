@@ -98,6 +98,7 @@ gradle-app.setting
 /android/build/
 /core/build/
 /desktop/build/
+/test/build/
 /html/build/
 /ios/build/
 
@@ -115,3 +116,5 @@ Thumbs.db
 
 ## Leaderboard JSON
 /assets/Jsons/leaderboard.json
+
+
