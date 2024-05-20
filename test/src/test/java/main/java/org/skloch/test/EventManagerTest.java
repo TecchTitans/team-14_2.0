@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-// unit test
+// integration test
 
 public class EventManagerTest {
     private GameScreen gameScreen;

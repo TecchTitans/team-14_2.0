@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-// unit test
+// integration test
 
 public class DialogueBoxTest {
     private GameScreen gameScreen;

@@ -10,7 +10,7 @@ import com.badlogic.gdx.Screen;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-// unit test
+// integration test
 
 @RunWith(GdxTestRunner.class)
 
