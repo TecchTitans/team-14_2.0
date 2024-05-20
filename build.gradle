@@ -77,8 +77,9 @@ project(":core") {
 project(":test") {
     apply plugin: "java-library"
     apply plugin: "java"
-    apply plugin: "jacoco"
 
+    sourceSets.test.resources.srcDirs = ["../assets"]
+    apply plugin: "jacoco"
     dependencies {
         implementation project(":core")
         implementation "junit:junit:4.+"
@@ -96,12 +97,10 @@ project(":test") {
 
 
     }
-
     test {
         useJUnit()
         maxHeapSize = '1G'
     }
-
 }
 
 

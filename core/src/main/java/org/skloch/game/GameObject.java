@@ -15,7 +15,6 @@ public class GameObject extends Rectangle {
     public float centreY;
 
 
-
     // Create like a normal rectangle
 
     /**

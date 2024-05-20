@@ -28,7 +28,7 @@ public class HustleGame extends Game {
 	public int HEIGHT;
 	public Skin skin;
 	public TiledMap map;
-	private TiledMap eastMap;
+    private TiledMap eastMap;
 	private TiledMap townMap;
 	public String credits, tutorialText;
 	public String[][] leaderboard;
@@ -45,7 +45,7 @@ public class HustleGame extends Game {
 	public MapProperties mapProperties;
 	private MapProperties eastMapProperties;
 	private MapProperties townMapProperties;
-	private boolean switchToTownMapCalled = false;
+	public boolean unitTest = false;
 
 
 	/**
@@ -74,7 +74,9 @@ public class HustleGame extends Game {
 	 */
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		if (!unitTest) {
+			batch = new SpriteBatch();
+		}
 		skin = new Skin(Gdx.files.internal("Interface/BlockyInterface.json"));
 		// Maps
 		TmxMapLoader mapLoader = new TmxMapLoader();
@@ -91,13 +93,15 @@ public class HustleGame extends Game {
 		// Define background, foreground and object layers
 		// IMPORTANT: CHANGE THESE WHEN UPDATING THE LAYERS IN YOUR EXPORTED MAP FROM TILED
 		// Bottom most layer on 'layers' tab is 0
-		backgroundLayers = new int[] {0, 1, 2, 3, 4, 5, 6}; // Rendered behind player
-		foregroundLayers = new int[] {7}; // Rendered in front of player
-		objectLayers = new int[] {8}; // Rectangles for the player to collide with
+		backgroundLayers = new int[]{0, 1, 2, 3, 4, 5, 6}; // Rendered behind player
+		foregroundLayers = new int[]{7}; // Rendered in front of player
+		objectLayers = new int[]{8}; // Rectangles for the player to collide with
 		mapSquareSize = mapProperties.get("tilewidth", Integer.class);
 		mapScale = 70f;
 
-		shapeRenderer = new ShapeRenderer();
+		if (!unitTest) {
+			shapeRenderer = new ShapeRenderer();
+		}
 		soundManager = new SoundManager();
 
 		// Make a stage with a blue background that any screen can draw
@@ -113,19 +117,25 @@ public class HustleGame extends Game {
 		leaderboardFile = "Jsons/leaderboard.json";
 		leaderboard = parseLeaderboardJSON(leaderboardFile);
 
-		this.setScreen(new MenuScreen(this));
+		if (!unitTest) {
+			this.setScreen(new MenuScreen(this));
+		}
 	}
 
 	public void switchToTownMap() {
 		map = townMap;
 		mapProperties = townMapProperties;
-		switchToTownMapCalled = true;
 	}
 
 	public void switchToEastMap() {
 		map = eastMap;
 		mapProperties = eastMapProperties;
 	}
+
+
+	// getters implemented solely for testing
+	public TiledMap getMap() { return map; }
+	public MapProperties getMapProperties() { return mapProperties; }
 
 	/**
 	 * Very important, renders the game, remove super.render() to get a black screen
@@ -218,14 +228,6 @@ public class HustleGame extends Game {
 		}
 
 		return leaderboardData.toArray(new String[0][]);
-	}
-
-	/**
-	 * For testing
-	 * Checks if map has been switched to town
-	 */
-	public boolean isSwitchToTownMapCalled() {
-		return switchToTownMapCalled;
 	}
 
 }
