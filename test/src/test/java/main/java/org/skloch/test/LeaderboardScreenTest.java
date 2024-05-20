@@ -10,6 +10,8 @@ import com.badlogic.gdx.Screen;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+// integration test
+
 @RunWith(GdxTestRunner.class)
 
 public class LeaderboardScreenTest {

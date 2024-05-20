@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class GameOverScreenTest {
     GameScreen gameScreen;
     HustleGame game;
+
     @Before
     public void setUp(){
         game = new HustleGame(1280, 720);

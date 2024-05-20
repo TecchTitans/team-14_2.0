@@ -28,7 +28,6 @@ public class HustleGame extends Game {
 	public int HEIGHT;
 	public Skin skin;
 	public TiledMap map;
-    public boolean gameTest;
     private TiledMap eastMap;
 	private TiledMap townMap;
 	public String credits, tutorialText;
@@ -132,6 +131,11 @@ public class HustleGame extends Game {
 		map = eastMap;
 		mapProperties = eastMapProperties;
 	}
+
+
+	// getters implemented solely for testing
+	public TiledMap getMap() { return map; }
+	public MapProperties getMapProperties() { return mapProperties; }
 
 	/**
 	 * Very important, renders the game, remove super.render() to get a black screen
