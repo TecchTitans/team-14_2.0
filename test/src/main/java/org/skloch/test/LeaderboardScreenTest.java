@@ -1,12 +1,12 @@
 package main.java.org.skloch.test;
 
-import main.java.org.skloch.game.CreditScreen;
+import com.badlogic.gdx.Screen;
 import main.java.org.skloch.game.HustleGame;
+import main.java.org.skloch.game.LeaderboardScreen;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.badlogic.gdx.Screen;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -14,9 +14,9 @@ import static org.mockito.Mockito.mock;
 
 @RunWith(GdxTestRunner.class)
 
-public class CreditScreenTest {
+public class LeaderboardScreenTest {
     private HustleGame game;
-    private CreditScreen creditScreen;
+    private LeaderboardScreen leaderboardScreen;
     private Screen previousScreen;
 
     @Before
@@ -24,17 +24,17 @@ public class CreditScreenTest {
         game = mock(HustleGame.class);
         game.unitTest = true;
         previousScreen = mock(Screen.class);
-        creditScreen = new CreditScreen(game, previousScreen);
+        leaderboardScreen = new LeaderboardScreen(game, previousScreen);
     }
 
     @Test
-    public void testCreditScreenInitialization() {
-        assertEquals(CreditScreen.class, creditScreen.getClass());
+    public void testLeaderboardScreenInitialization() {
+        assertEquals(LeaderboardScreen.class, leaderboardScreen.getClass());
     }
 
     @Test
     public void testRender() {
-        creditScreen.render(1.0f);
+        leaderboardScreen.render(1.0f);
     }
 
 }

@@ -15,17 +15,17 @@ public class GameObjectTest {
     @Before
     public void setUp() throws Exception {
         gameObject = new GameObject(0, 0, 32, 32);
-        gameObject.put("key", 1);
+        gameObject.put("testKey", 1);
     }
 
     @Test
     public void testGet() {
-        assertEquals(gameObject.get("key"), 1);
+        assertEquals(gameObject.get("testKey"), 1);
     }
 
     @Test
     public void testContainsKey() {
-        assertTrue(gameObject.containsKey("key"));
+        assertTrue(gameObject.containsKey("testKey"));
     }
 
 }

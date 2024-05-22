@@ -832,8 +832,10 @@ public class GameScreen implements Screen {
      * Ends the game, called at the end of the 7th day, switches to a screen that displays a score
      */
     public void GameOver() {
+        this.testGameOver = true;
+
         //game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
-        int score = 500;
+        //int score = 500;
         int totalTimesStudied = 0,
                 totalHoursStudied = 0,
                 totalTimesRecreation = 0,
@@ -843,9 +845,11 @@ public class GameScreen implements Screen {
                 totalPiazzaEvents = 0,
                 totalPubEvents = 0,
                 totalTownEvents = 0,
-                totalLibraryEvents = 0;
-        //ArrayList<Streaks> streaks = new ArrayList<>();
-        HashSet<String> streaks = new HashSet<>();
+                totalLibraryEvents = 0,
+                daysEatenBreakfast = 0,
+                daysEatenLunch = 0,
+                daysEatenDinner = 0;
+
         for (DailyActivities dailyActivities : daysInfo) {
             totalTimesStudied += dailyActivities.getTimesStudied();
             totalTimesRecreation += dailyActivities.getTimesRecreation();
@@ -859,12 +863,16 @@ public class GameScreen implements Screen {
             totalPubEvents += dailyActivities.getActivityDone("pub");
             totalTownEvents += dailyActivities.getActivityDone("bus_to_town");
             totalLibraryEvents += dailyActivities.getActivityDone("library");
-            if(dailyActivities.isEatenBreakfast()) { score += 50; }
-            if(dailyActivities.isEatenLunch()) { score += 50; }
-            if(dailyActivities.isEatenDinner()) { score += 50; }
-
+            //if(dailyActivities.isEatenBreakfast()) { score += 50; }
+            //if(dailyActivities.isEatenLunch()) { score += 50; }
+            //if(dailyActivities.isEatenDinner()) { score += 50; }
+            if(dailyActivities.isEatenBreakfast()) { daysEatenBreakfast++; }
+            if(dailyActivities.isEatenLunch()) { daysEatenLunch++; }
+            if(dailyActivities.isEatenDinner()) { daysEatenDinner++; }
         }
 
+        //scoring and streaks now done in separate methods instead
+        /*
         // if they haven't studied enough days, they fail their exam.
         if(daysStudied < 6) {
             score = 0;
@@ -905,65 +913,88 @@ public class GameScreen implements Screen {
                 streaks.add("Bookworm");
                 score += 250;
             }
-        }
+        }*/
+
+        HashSet<String> streaks = calculateStreaks(totalPiazzaEvents, totalPubEvents, totalTownEvents, totalLibraryEvents);
+        int score = calculateScore(daysStudied, totalTimesStudied, totalHoursStudied, totalHoursRecreation,
+                daysEatenBreakfast, daysEatenLunch, daysEatenDinner, streaks);
+
         if (!game.unitTest) {
             game.setScreen(new GameOverScreen(game, totalHoursStudied, totalHoursRecreation, totalHoursSlept, score, streaks));
         }
     }
 
     // could just do this in the GameOver method, or pass in totalTimesStudied etc. as parameters, rather than repeating code.
-    private int calculateScore() {
-        int score = 500;
-        int totalTimesStudied = 0,
-                totalHoursStudied = 0,
-                totalTimesRecreation = 0,
-                totalHoursRecreation = 0,
-                daysStudied = 0;
-        for (DailyActivities dailyActivities : daysInfo) {
-            totalTimesStudied += dailyActivities.getTimesStudied();
-            totalTimesRecreation += dailyActivities.getTimesRecreation();
-            if(totalTimesStudied > 0){
-                daysStudied++;
-            }
-            totalHoursStudied += dailyActivities.getHoursStudied();
-            totalHoursRecreation += dailyActivities.getHoursRecreation();
-            if(dailyActivities.isEatenBreakfast()) { score += 50; }
-            if(dailyActivities.isEatenLunch()) { score += 50; }
-            if(dailyActivities.isEatenDinner()) { score += 50; }
-            //if(dailyActivities.getTimesRecreation() > 0) { score += 50; }
-        }
+    public static int calculateScore(int daysStudied,
+                               int totalTimesStudied,
+                               int totalHoursStudied,
+                               int totalHoursRecreation,
+                               int daysEatenBreakfast,
+                               int daysEatenLunch,
+                               int daysEatenDinner,
+                               HashSet<String> streaks) {
 
-        // if they haven't studied enough days, they fail their exam.
+        int score = 500;
+
         if(daysStudied < 6) {
             return 0;
         } else if (daysStudied == 6 && totalTimesStudied < 7) {
             // if they didn't catch up from missing a day of studying, they fail their exam.
             return 0;
-        }
+        } else {
+            // reward student for performing recreational activities
+            score += 50 * totalHoursRecreation;
 
-        // reward student for performing recreational activities
-        score += 50 * totalHoursRecreation;
+            //reward student for eating meals at mealtimes each day
+            score += 50 * daysEatenBreakfast;
+            score += 50 * daysEatenLunch;
+            score += 50 * daysEatenDinner;
 
-        // check if studied more than 7 times. Reward them between 8 and 10, punish more than that.
-        // old, punishes based on times studied rather than hours.
-        /*if(totalTimesStudied > 7) {
-            if(totalTimesStudied > 10) {
-                score += 300 - (50 * (totalTimesStudied - 10));
+            // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
+            score += 100 * (totalHoursStudied);
+            if((totalHoursStudied / 7) > 4) {
+                // penalise score depending on how overworked they are.
+                score -= 1000 * ((totalHoursStudied / 7) - 4);
             }
-            else {
-                score += 100 * (totalTimesStudied - 7);
-            }
-        }*/
 
-        // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
-        score += 100 * (totalHoursStudied);
-        if((totalHoursStudied / 7) > 4) {
-            // penalise score depending on how overworked they are.
-            score -= 1000 * ((totalHoursStudied / 7) - 4);
+            //add score from potential streaks
+            if(streaks.contains("Social Butterfly")) { score += 250; }
+            if(streaks.contains("Bookworm")) { score += 250; }
+            if(streaks.contains("Party Animal")) { score += 150; }
+            if(streaks.contains("Explorer")) { score += 100; }
         }
 
         return score;
 
+    }
+
+    public static HashSet<String> calculateStreaks(int totalPiazzaEvents, int totalPubEvents, int totalTownEvents, int totalLibraryEvents) {
+        // If met friends at piazza 6 or more times, they are a social butterfly
+        HashSet<String> streaks = new HashSet<String>();
+        if(totalPiazzaEvents >= 6) {
+            streaks.add("Social Butterfly");
+            //score += 250;
+        }
+
+        // If they've been to the pub 4 or more times, they are a party animal
+        if(totalPubEvents >= 4) {
+            streaks.add("Party Animal");
+            //score += 150;
+        }
+
+        // if they go to town 6 times or more, they are an explorer
+        if(totalTownEvents >= 6) {
+            streaks.add("Explorer");
+            //score += 100;
+        }
+
+        // if they go to library 4 times that week (or more), they are a bookworm
+        if(totalLibraryEvents >= 4) {
+            streaks.add("Bookworm");
+            //score += 250;
+        }
+
+        return streaks;
     }
 
     /**
@@ -986,16 +1017,6 @@ public class GameScreen implements Screen {
 
         game.switchToEastMap();
         setupMap(true);
-    }
-
-    /**
-     * For testing, sets the game over flag to true
-     */
-    public void setDay(int day) {
-        this.day = day;
-        if (day > 7) {
-            testGameOver = true;
-        }
     }
 
     public DialogueBox getDialogueBox() {
