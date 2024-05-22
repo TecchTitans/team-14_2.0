@@ -7,9 +7,9 @@ You can study in the Computer Science building, eat in the Ron Cooke Hub, have f
 If you fail your exam, you will get a score of 0. A baseline score of 500 is given for passing your exams, and additional points are rewarded based on how much you study, eat, and do recreational activities.
 
 Additional points may be rewarded for achieving "streaks" through repeated activites, the following are achievable:
-	- Bookworm: Go to the library 4 or more times.
-	- Social Butterfly: Meet your friends 6 or more times.
-	- Party Animal: Go to the pub 4 or more times.
-	- Explorer: Go to town 6 or more times.
+	- Bookworm: Frequent the library.
+	- Social Butterfly: Meet your friends often.
+	- Party Animal: More pub visits than you maybe should.
+	- Explorer: Visit town many times.
 
 Good luck with your exam!
