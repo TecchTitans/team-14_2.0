@@ -174,7 +174,7 @@ public class HustleGame extends Game {
 		}
 	}
 
-	public void addPlayerToLeaderboard(String name, int score) {
+	public void addPlayerToLeaderboard(String name, int score, boolean writeToFile) {
 		// Create new array and add new player
 		List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(leaderboard));
 		String[] playerArrayToAdd = new String[]{name, String.valueOf(score)};
@@ -189,8 +189,14 @@ public class HustleGame extends Game {
 		// Resize leaderboard if needed to 10 max
 		leaderboard = Arrays.copyOf(newLeaderboardArray, Math.min(newLeaderboardArray.length, 10));
 
-		// Write leaderboard to file
-		writeLeaderboardJSON(leaderboardFile);
+		if (writeToFile) {
+			// Write leaderboard to file
+			writeLeaderboardJSON(leaderboardFile);
+		}
+	}
+
+	public void clearLeaderboard() {
+		this.leaderboard = new String[0][];
 	}
 
 	public void writeLeaderboardJSON(String filepath) {

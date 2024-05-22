@@ -117,7 +117,7 @@ public class GameOverScreen implements Screen {
         gameOverWindow.setY((viewport.getWorldHeight() / 2) - (gameOverWindow.getHeight() / 2));
 
         // Update leaderboard
-        game.addPlayerToLeaderboard(game.gameScreen.player.name, score);
+        game.addPlayerToLeaderboard(game.gameScreen.player.name, score, true);
     }
 
 
