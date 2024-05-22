@@ -1,4 +1,5 @@
-import com.badlogic.gdx.Gdx;
+package main.java.org.skloch.test;
+
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;

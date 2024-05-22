@@ -1,3 +1,5 @@
+package main.java.org.skloch.test;
+
 import main.java.org.skloch.game.DialogueBox;
 import main.java.org.skloch.game.EventManager;
 import main.java.org.skloch.game.GameScreen;
