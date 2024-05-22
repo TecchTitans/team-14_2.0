@@ -1,15 +1,10 @@
-package main.java.org.skloch.test;
-
 import main.java.org.skloch.game.HustleGame;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.Random;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 
 // unit test
 

@@ -1,15 +1,18 @@
-package main.java.org.skloch.test;
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import main.java.org.skloch.game.HustleGame;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 // unit test
 
+@RunWith(GdxTestRunner.class)
 public class HustleGameTest {
     private HustleGame hustleGame;
 
@@ -22,7 +25,7 @@ public class HustleGameTest {
 
     @Before
     public void setUp() throws Exception {
-        hustleGame = new HustleGame(1280, 720);
+        hustleGame = new HustleGame(1000, 1000);
     }
 
     @Test
@@ -38,5 +41,4 @@ public class HustleGameTest {
         assertEquals(hustleGame.getMap(), eastMap);
         assertEquals(hustleGame.getMapProperties(), eastMapProperties);
     }
-
 }

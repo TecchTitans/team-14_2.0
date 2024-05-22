@@ -1,5 +1,3 @@
-package main.java.org.skloch.test;
-
 import com.badlogic.gdx.maps.MapProperties;
 import main.java.org.skloch.game.GameObject;
 import org.junit.Before;

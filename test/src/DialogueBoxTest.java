@@ -1,5 +1,3 @@
-package main.java.org.skloch.test;
-
 import main.java.org.skloch.game.DialogueBox;
 import main.java.org.skloch.game.GameScreen;
 import org.junit.Before;

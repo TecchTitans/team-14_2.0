@@ -1,5 +1,3 @@
-package main.java.org.skloch.test;
-
 import main.java.org.skloch.game.AvatarSelection;
 import org.junit.Before;
 import org.junit.Test;
