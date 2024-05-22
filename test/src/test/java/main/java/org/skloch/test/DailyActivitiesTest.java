@@ -1,4 +1,4 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import main.java.org.skloch.game.DailyActivities;
 import org.junit.Before;

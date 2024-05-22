@@ -1,8 +1,8 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import com.badlogic.gdx.Screen;
+import main.java.org.skloch.game.CreditScreen;
 import main.java.org.skloch.game.HustleGame;
-import main.java.org.skloch.game.LeaderboardScreen;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +14,9 @@ import static org.mockito.Mockito.mock;
 
 @RunWith(GdxTestRunner.class)
 
-public class LeaderboardScreenTest {
+public class CreditScreenTest {
     private HustleGame game;
-    private LeaderboardScreen leaderboardScreen;
+    private CreditScreen creditScreen;
     private Screen previousScreen;
 
     @Before
@@ -24,17 +24,17 @@ public class LeaderboardScreenTest {
         game = mock(HustleGame.class);
         game.unitTest = true;
         previousScreen = mock(Screen.class);
-        leaderboardScreen = new LeaderboardScreen(game, previousScreen);
+        creditScreen = new CreditScreen(game, previousScreen);
     }
 
     @Test
-    public void testLeaderboardScreenInitialization() {
-        assertEquals(LeaderboardScreen.class, leaderboardScreen.getClass());
+    public void testCreditScreenInitialization() {
+        assertEquals(CreditScreen.class, creditScreen.getClass());
     }
 
     @Test
     public void testRender() {
-        leaderboardScreen.render(1.0f);
+        creditScreen.render(1.0f);
     }
 
 }

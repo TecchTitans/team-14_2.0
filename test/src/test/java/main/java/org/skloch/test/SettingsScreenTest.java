@@ -1,8 +1,6 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import main.java.org.skloch.game.HustleGame;
 import main.java.org.skloch.game.SettingsScreen;
 import main.java.org.skloch.game.SoundManager;

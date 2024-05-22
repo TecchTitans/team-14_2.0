@@ -1,8 +1,7 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import main.java.org.skloch.game.HustleGame;
 import org.junit.Before;
 import org.junit.Test;

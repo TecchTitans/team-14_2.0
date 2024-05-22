@@ -1,8 +1,6 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
-import main.java.org.skloch.game.GameOverScreen;
 import main.java.org.skloch.game.GameScreen;
-import main.java.org.skloch.game.HustleGame;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
