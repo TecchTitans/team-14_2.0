@@ -3,12 +3,14 @@ package main.java.org.skloch.test;
 import main.java.org.skloch.game.GameObject;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // unit test
 
+@RunWith(GdxTestRunner.class)
 public class GameObjectTest {
     private GameObject gameObject;
 

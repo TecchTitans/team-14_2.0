@@ -3,6 +3,7 @@ package main.java.org.skloch.test;
 import main.java.org.skloch.game.HustleGame;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 // unit test
 
+@RunWith(GdxTestRunner.class)
 public class LeaderboardTest {
     private HustleGame game;
 
