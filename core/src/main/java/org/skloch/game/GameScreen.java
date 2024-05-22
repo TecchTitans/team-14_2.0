@@ -925,7 +925,7 @@ public class GameScreen implements Screen {
     }
 
     // could just do this in the GameOver method, or pass in totalTimesStudied etc. as parameters, rather than repeating code.
-    private int calculateScore(int daysStudied,
+    public static int calculateScore(int daysStudied,
                                int totalTimesStudied,
                                int totalHoursStudied,
                                int totalHoursRecreation,
@@ -968,7 +968,7 @@ public class GameScreen implements Screen {
 
     }
 
-    private HashSet<String> calculateStreaks(int totalPiazzaEvents, int totalPubEvents, int totalTownEvents, int totalLibraryEvents) {
+    public static HashSet<String> calculateStreaks(int totalPiazzaEvents, int totalPubEvents, int totalTownEvents, int totalLibraryEvents) {
         // If met friends at piazza 6 or more times, they are a social butterfly
         HashSet<String> streaks = new HashSet<String>();
         if(totalPiazzaEvents >= 6) {
