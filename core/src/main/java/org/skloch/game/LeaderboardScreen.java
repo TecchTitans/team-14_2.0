@@ -43,6 +43,11 @@ public class LeaderboardScreen implements Screen {
             Table leaderboardTable = new Table();
             leaderboardMenu.add(leaderboardTable).prefHeight(600);
 
+            // Add title for leaderboard
+            Label title = new Label("Leaderboard", game.skin, "button");
+            leaderboardTable.add(title);
+            leaderboardTable.row();
+
             // Table for things inside the scrollable widget
             Table scrollTable = new Table();
 
