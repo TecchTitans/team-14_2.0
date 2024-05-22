@@ -1,14 +1,17 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import main.java.org.skloch.game.DailyActivities;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.concurrent.ThreadLocalRandom;
+
 import static org.junit.Assert.*;
 
 // unit test
 
+@RunWith(GdxTestRunner.class)
 public class DailyActivitiesTest {
     private DailyActivities dailyActivities;
 

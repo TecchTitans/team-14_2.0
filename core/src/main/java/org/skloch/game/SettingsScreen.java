@@ -25,6 +25,8 @@ public class SettingsScreen implements Screen {
     public Slider musicSlider;
     public Slider sfxSlider;
     public Screen previousScreen;
+    public float musicVolume;
+    public float sfxVolume;
 
 
     /**
@@ -58,10 +60,11 @@ public class SettingsScreen implements Screen {
             TextButton exitButton = new TextButton("Exit", game.skin);
             Label title = new Label("Settings", game.skin, "button");
             Label musicTitle = new Label("Music Volume", game.skin, "interaction");
-            musicSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
             Label sfxTitle = new Label("SFX Volume", game.skin, "interaction");
-            sfxSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
             Table sliderTable = new Table();
+
+            setupSoundSliders();
+
             // optionTable.setDebug(true);
             // sliderTable.setDebug(true);
 
@@ -91,6 +94,8 @@ public class SettingsScreen implements Screen {
             optionMenu.setX((viewport.getWorldWidth() / 2f) - (optionMenu.getWidth() / 2f));
             optionMenu.setY((viewport.getWorldHeight() / 2f) - (optionMenu.getHeight() / 2f));
 
+
+
             // Create exit button listener
             exitButton.addListener(new ChangeListener() {
                 @Override
@@ -104,6 +109,40 @@ public class SettingsScreen implements Screen {
         }
     }
 
+    public void setupSoundSliders() {
+        musicSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
+        sfxSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
+
+        // Set music slider volume when changed
+        musicSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setMusicVolume(musicSlider.getValue() / 100);
+            }
+        });
+
+        // Set music slider volume when changed
+        sfxSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                setSfxVolume(sfxSlider.getValue() / 100);
+            }
+        });
+    }
+
+    public float setMusicVolume(float value) {
+        game.soundManager.setMusicVolume(value);
+        musicVolume = value;
+
+        return value;
+    }
+
+    public float setSfxVolume(float value) {
+        game.soundManager.setSfxVolume(value);
+        sfxVolume = value;
+
+        return value;
+    }
 
     /**
      * Renders a settings screen to let the player configure music and sound volume
@@ -120,10 +159,6 @@ public class SettingsScreen implements Screen {
 
             optionStage.act(delta);
             optionStage.draw();
-
-            // Volumes should be between 0 and 1
-            game.soundManager.setMusicVolume(musicSlider.getValue() / 100);
-            game.soundManager.setSfxVolume(sfxSlider.getValue() / 100);
 
             camera.update();
         }

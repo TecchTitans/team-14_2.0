@@ -1,14 +1,16 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import main.java.org.skloch.game.DialogueBox;
 import main.java.org.skloch.game.GameScreen;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.*;
 
 // integration test
 
+@RunWith(GdxTestRunner.class)
 public class DialogueBoxTest {
     private GameScreen gameScreen;
     private DialogueBox dialogueBox;

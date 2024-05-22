@@ -1,16 +1,18 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
 import main.java.org.skloch.game.DialogueBox;
 import main.java.org.skloch.game.EventManager;
 import main.java.org.skloch.game.GameScreen;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 // integration test
 
+@RunWith(GdxTestRunner.class)
 public class EventManagerTest {
     private GameScreen gameScreen;
 

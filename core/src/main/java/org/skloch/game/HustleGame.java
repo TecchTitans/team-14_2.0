@@ -16,7 +16,7 @@ import org.json.*;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * A class that is initially created by DesktopLauncher, loads consistent files at the start of the game and initialises lots of important classes.
@@ -172,6 +172,31 @@ public class HustleGame extends Game {
 		} else {
 			return file.readString();
 		}
+	}
+
+	public void addPlayerToLeaderboard(String name, int score, boolean writeToFile) {
+		// Create new array and add new player
+		List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(leaderboard));
+		String[] playerArrayToAdd = new String[]{name, String.valueOf(score)};
+		newLeaderboardList.add(playerArrayToAdd);
+
+		String[][] newLeaderboardArray = newLeaderboardList.toArray(new String[0][]);
+
+		// Sort leaderboard in order of score
+		Arrays.sort(newLeaderboardArray, Comparator.comparingInt(o -> Integer.parseInt(o[1])));
+		Collections.reverse(Arrays.asList(newLeaderboardArray));
+
+		// Resize leaderboard if needed to 10 max
+		leaderboard = Arrays.copyOf(newLeaderboardArray, Math.min(newLeaderboardArray.length, 10));
+
+		if (writeToFile) {
+			// Write leaderboard to file
+			writeLeaderboardJSON(leaderboardFile);
+		}
+	}
+
+	public void clearLeaderboard() {
+		this.leaderboard = new String[0][];
 	}
 
 	public void writeLeaderboardJSON(String filepath) {

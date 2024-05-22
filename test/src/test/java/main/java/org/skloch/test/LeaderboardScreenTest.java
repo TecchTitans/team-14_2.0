@@ -1,14 +1,14 @@
-package main.java.org.skloch.test;
+package test.java.main.java.org.skloch.test;
 
+import com.badlogic.gdx.Screen;
 import main.java.org.skloch.game.HustleGame;
 import main.java.org.skloch.game.LeaderboardScreen;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.badlogic.gdx.Screen;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 // integration test
 
