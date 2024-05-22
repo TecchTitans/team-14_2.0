@@ -117,19 +117,7 @@ public class GameOverScreen implements Screen {
         gameOverWindow.setY((viewport.getWorldHeight() / 2) - (gameOverWindow.getHeight() / 2));
 
         // Update leaderboard
-        List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(game.leaderboard));
-        String[] playerArrayToAdd = new String[]{game.gameScreen.player.name, String.valueOf(score)};
-        newLeaderboardList.add(playerArrayToAdd);
-
-        String[][] newLeaderboardArray = newLeaderboardList.toArray(new String[0][]);
-
-        Arrays.sort(newLeaderboardArray, Comparator.comparingInt(o -> Integer.parseInt(o[1])));
-        Collections.reverse(Arrays.asList(newLeaderboardArray));
-
-        game.leaderboard = Arrays.copyOf(newLeaderboardArray, Math.min(newLeaderboardArray.length, 10));
-
-        // Write leaderboard to file
-        game.writeLeaderboardJSON(game.leaderboardFile);
+        game.addPlayerToLeaderboard(game.gameScreen.player.name, score);
     }
 
 
