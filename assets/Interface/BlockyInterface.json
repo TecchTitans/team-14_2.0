@@ -1,10 +1,4 @@
 {
-"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
-	"default": {
-		"background": "window",
-		"titleFont": "W95FA3"
-	}
-},
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	Button_white: {
 		file: W95FA(1).fnt
