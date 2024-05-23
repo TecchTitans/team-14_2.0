@@ -207,6 +207,7 @@ public class GameScreen implements Screen {
             Gdx.input.setInputProcessor(inputMultiplexer);
         }
 
+        // Start on campus east
         changeToCampusEastMap();
         setupMap();
 

@@ -13,7 +13,6 @@ import static org.mockito.Mockito.mock;
 // integration test
 
 @RunWith(GdxTestRunner.class)
-
 public class LeaderboardScreenTest {
     private HustleGame game;
     private LeaderboardScreen leaderboardScreen;

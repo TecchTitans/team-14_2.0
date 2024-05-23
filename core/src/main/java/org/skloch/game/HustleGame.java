@@ -122,11 +122,17 @@ public class HustleGame extends Game {
 		}
 	}
 
+	/**
+	 * Switches the current map to town
+	 */
 	public void switchToTownMap() {
 		map = townMap;
 		mapProperties = townMapProperties;
 	}
 
+	/**
+	 * Switches the current map to east campus
+	 */
 	public void switchToEastMap() {
 		map = eastMap;
 		mapProperties = eastMapProperties;
@@ -174,6 +180,14 @@ public class HustleGame extends Game {
 		}
 	}
 
+	/**
+	 * Adds a player to the leaderboard. This stores their name and score.
+	 * Optionally, the leaderboard can be exported to a file once the player has been added.
+	 *
+	 * @param name - The name of the player to add
+	 * @param score - The score the player was given
+	 * @param writeToFile - boolean to decide if the leaderboard should be exported
+	 */
 	public void addPlayerToLeaderboard(String name, int score, boolean writeToFile) {
 		// Create new array and add new player
 		List<String[]> newLeaderboardList = new ArrayList<>(Arrays.asList(leaderboard));
@@ -195,10 +209,18 @@ public class HustleGame extends Game {
 		}
 	}
 
+	/**
+	 * Clears the leaderboard
+	 */
 	public void clearLeaderboard() {
 		this.leaderboard = new String[0][];
 	}
 
+	/**
+	 * Exports the current leaderboard to a given file.
+	 *
+	 * @param filepath - The path of the file to export to
+	 */
 	public void writeLeaderboardJSON(String filepath) {
 		JSONArray playerArray = new JSONArray();
 
@@ -228,6 +250,12 @@ public class HustleGame extends Game {
 		}
 	}
 
+	/**
+	 * Reads and parses a JSON file to extract leaderboard data
+	 *
+	 * @param filepath The given file to read
+	 * @return A leaderboard in the forms of a array of string arrays.
+	 */
 	public String[][] parseLeaderboardJSON(String filepath) {
 		ArrayList<String[]> leaderboardData = new ArrayList<>();
 
