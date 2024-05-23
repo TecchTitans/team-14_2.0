@@ -16,6 +16,8 @@ public class EventManager {
     private final HashMap<String, String> objectInteractions;
     private final Array<String> talkTopics;
 
+    private boolean isTreeEventCalled = false;
+
     /**
      * A class that maps Object's event strings to actual Java functions.
      * To run a function call event(eventString), to add arguments add dashes.
@@ -151,6 +153,11 @@ public class EventManager {
     public void treeEvent() {
         game.dialogueBox.hideSelectBox();
         game.dialogueBox.setText("The tree doesn't say anything back.");
+        isTreeEventCalled = true;
+    }
+
+    public boolean isTreeEventCalled() {
+        return isTreeEventCalled;
     }
 
     public void chestEvent() {
