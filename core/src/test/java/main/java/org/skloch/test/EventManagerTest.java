@@ -25,12 +25,27 @@ public class EventManagerTest {
     @Test
     public void piazzaEventTest() {
         EventManager eventManager = new EventManager(gameScreen);
-        String[] args = {"piazza", "topic"};
+        String[] args = {"piazza", "testtopic"};
 
         when(gameScreen.getSeconds()).thenReturn(8 * 60f);
+        when(gameScreen.getEnergy()).thenReturn(0);
         eventManager.piazzaEvent(args);
 
         verify(gameScreen.dialogueBox).setText("You are too tired to meet your friends right now!");
+
+
+        when(gameScreen.getSeconds()).thenReturn(7 * 60f);
+        when(gameScreen.getEnergy()).thenReturn(40);
+        eventManager.piazzaEvent(args);
+
+        verify(gameScreen.dialogueBox).setText("It's too early in the morning to meet your friends, go to bed!");
+
+
+        when(gameScreen.getSeconds()).thenReturn(8 * 60f);
+        when(gameScreen.getEnergy()).thenReturn(40);
+        eventManager.piazzaEvent(args);
+
+        verify(gameScreen.dialogueBox).setText("You talked about testtopic for 2 hours!");
     }
 
     @Test

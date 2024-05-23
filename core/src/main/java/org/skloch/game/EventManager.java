@@ -195,7 +195,8 @@ public class EventManager {
             } else {
                 // Say that the player chatted about this topic for 1-3 hours
                 // RNG factor adds a slight difficulty (may consume too much energy to study)
-                int hours = ThreadLocalRandom.current().nextInt(1, 4);
+                //int hours = ThreadLocalRandom.current().nextInt(1, 4);
+                int hours = 2;
                 game.dialogueBox.setText(String.format("You talked about %s for %d hours!", args[1].toLowerCase(), hours));
                 game.decreaseEnergy(energyCost * hours);
                 game.passTime(hours * 60); // in seconds
