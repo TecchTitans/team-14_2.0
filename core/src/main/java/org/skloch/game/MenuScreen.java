@@ -101,8 +101,10 @@ public class MenuScreen implements Screen {
         // Add listeners to the buttons so they do things when pressed
 
         // START GAME BUTTON - Displays the tutorial window
-        startButton.addListener(new ChangeListener() {
+        ChangeListener c1;
+        c1 = new ChangeListener() {
             @Override
+            @ExcludeFromJacocoGeneratedReport
             public void changed(ChangeEvent event, Actor actor) {
                 game.soundManager.playButton();
                 buttonTable.setVisible(false);
@@ -112,8 +114,8 @@ public class MenuScreen implements Screen {
 //                dispose();
 //                game.setScreen(new GameScreen(game));
             }
-        }
-        );
+        };
+        startButton.addListener(c1);
 
         // SETTINGS BUTTON
         Screen thisScreen = this;

@@ -1,4 +1,4 @@
-package test.java.main.java.org.skloch.test; /*******************************************************************************
+package main.java.org.skloch.test; /*******************************************************************************
  * Copyright 2015 See AUTHORS file.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

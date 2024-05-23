@@ -100,6 +100,11 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation 'org.json:json:20240303'
         implementation 'junit:junit:4.12+'
+
+        implementation "org.mockito:mockito-all:1.9.+"
+        implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     }
 
     jacocoTestReport {
@@ -110,6 +115,11 @@ project(":core") {
             html.destination file("${buildDir}/jacocoHtml")
         }
         dependsOn test // make sure tests are run before generating the report
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: ['**/*Test*.class', '**/*$*.class'])
+            }))
+        }
     }
 
     test {

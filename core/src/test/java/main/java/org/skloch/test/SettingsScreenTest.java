@@ -1,4 +1,4 @@
-package test.java.main.java.org.skloch.test;
+package main.java.org.skloch.test;
 
 import com.badlogic.gdx.Screen;
 import main.java.org.skloch.game.HustleGame;

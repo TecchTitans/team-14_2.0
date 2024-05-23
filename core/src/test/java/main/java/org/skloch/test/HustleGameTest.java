@@ -1,4 +1,4 @@
-package test.java.main.java.org.skloch.test;
+package main.java.org.skloch.test;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;

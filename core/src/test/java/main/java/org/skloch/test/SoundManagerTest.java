@@ -1,4 +1,4 @@
-package test.java.main.java.org.skloch.test;
+package main.java.org.skloch.test;
 
 import main.java.org.skloch.game.SoundManager;
 import org.junit.Before;
