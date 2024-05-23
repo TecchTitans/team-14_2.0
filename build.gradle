@@ -94,13 +94,13 @@ project(":test") {
         implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-
-
     }
+
     test {
         useJUnit()
         maxHeapSize = '1G'
     }
+
 }
 
 

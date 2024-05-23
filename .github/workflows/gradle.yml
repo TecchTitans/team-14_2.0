@@ -61,6 +61,14 @@ jobs:
       - name: Run tests with Gradle Wrapper
         run: ./gradlew test
 
+      # Uploads JaCoCo coverage report of all tests in the project for every GitHub action.
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: test/build/reports/tests/test
+
       # - name: Build a distributable .jar executable with Gradle 8.5
       #   run: gradle desktop:dist
 
@@ -79,19 +87,6 @@ jobs:
         with:
           name: dist.jar
           path: desktop/build/libs
-
-      # Generates JaCoCo coverage report since it is not automatically generated when built with gradle wrapper
-
-      - name: Generate JaCoCo coverage report
-        run: ./gradlew jacocoTestReport
-
-      # Uploads JaCoCo coverage report of all tests in the project for every GitHub action. 
-
-      - name: Upload JaCoCo coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacoco-report
-          path: test/build/reports/jacoco/test/html
 
   # if a workflow action has a version tag, creates automatic GitHub version release and also attactches the artifact jar
   release:
