@@ -32,6 +32,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import javax.swing.*;
 import java.util.HashSet;
 
+// Modifications made. Store daily activities in an array of DailyActivities now, instead of
+// just using variables.
+
 /**
  * Handles the majority of the game logic, rendering and user inputs of the game.
  * Responsible for rendering the player and the map, and calling events.
@@ -247,6 +250,9 @@ public class GameScreen implements Screen {
                     MapProperties properties = objects.get(i).getProperties();
                     // If this is the spawn object, move the player there and don't collide
                     // This also changes the spawn location if they have just travelled from town
+
+                    // MODIFICATION FROM ORIGINAL
+
                     if (properties.get("spawn") != null) {
                         player.setPos(((float) properties.get("x")) * unitScale, ((float) properties.get("y")) * unitScale);
                         camera.position.set(player.getPosAsVec3());
@@ -536,6 +542,8 @@ public class GameScreen implements Screen {
         mapRenderer.dispose();
     }
 
+    // NEW METHODS
+
     public int getWidth() {
         return game.WIDTH;
     }
@@ -717,6 +725,7 @@ public class GameScreen implements Screen {
         energyBar.setScaleY(this.energy / 100f);
     }
 
+    // NEW METHODS:
     // Functions related to game score and requirements
 
     /**
@@ -737,6 +746,7 @@ public class GameScreen implements Screen {
         daysInfo[day - 1].addHoursRecreation(hours);
     }
 
+    // MODIFIED FROM ORIGINAL
     /**
      * Gets what meal should be eaten, given the time of day.
      * @return Returns 'breakfast', 'lunch' or 'dinner' as a string, depending on the time of day
@@ -757,6 +767,8 @@ public class GameScreen implements Screen {
             return "food";
         }
     }
+
+    // NEW METHOD
 
     /**
      * Sets the daily parameter of whether a certain meal has been eaten that day, true or false.
@@ -804,6 +816,7 @@ public class GameScreen implements Screen {
         return sleeping;
     }
 
+    // NEW METHOD
     /**
      * @param hours Add this amount of hours to the total hours slept
      */
@@ -812,6 +825,7 @@ public class GameScreen implements Screen {
         daysInfo[day - 1].addHoursSlept(hours);
     }
 
+    // NEW METHOD
     /**
      * Add an activity to the current day's activities done.
      * @param activity Name of specific activity done as a String
@@ -827,6 +841,7 @@ public class GameScreen implements Screen {
         return daySeconds;
     }
 
+    // MODIFIED FROM ORIGINAL: Now passes score and streak calculation into game over screen
     /**
      * Ends the game, called at the end of the 7th day, switches to a game over screen that displays
      * score, streaks and more. Calculates the final stats of the activities performed over the week,
@@ -877,6 +892,7 @@ public class GameScreen implements Screen {
         }
     }
 
+    // NEW METHOD
     /**
      * Calculates a final score based upon the stats of the final game, given as parameters.
      * If a player hasn't studied enough, they get a final score of 0. Otherwise, score is added
@@ -937,6 +953,7 @@ public class GameScreen implements Screen {
 
     }
 
+    // NEW METHOD
     /**
      * Calculates what streaks were achieved, if any, given the amount of times
      * certain places were visited, given as parameters. If they were visited
@@ -972,6 +989,7 @@ public class GameScreen implements Screen {
         return streaks;
     }
 
+    // NEW METHOD
     /**
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
@@ -983,6 +1001,7 @@ public class GameScreen implements Screen {
         setupMap();
     }
 
+    // NEW METHOD
     /**
      * Sets the town screen, called when bus event is triggered, switches to town screen
      */
@@ -994,6 +1013,7 @@ public class GameScreen implements Screen {
         setupMap(true);
     }
 
+    // NEW METHOD
     /**
      * Returns the current dialogue box in the game screen
      * @return a DialogueBox object.

@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+// MODIFIED: Added name to player
 /**
  * A class handling everything needed to control and draw a player, including animation, movement and collision
  */
@@ -29,6 +30,7 @@ public class Player {
     private GameObject closestObject;
     public boolean frozen, moving;
 
+    // MODIFIED: Initialises name, doesn't create texture atlas if performing a unit test
     /**
      * A player character, contains methods to move the player and update animations, also includes collision handling
      * and can be used to trigger events of objects near the player.

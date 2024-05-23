@@ -2,6 +2,8 @@ package main.java.org.skloch.game;
 
 import java.util.HashMap;
 
+// THIS IS A NEW CLASS
+
 /**
  * A class that tracks the players activities throughout the day.
  *

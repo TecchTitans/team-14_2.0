@@ -25,6 +25,7 @@ public class MenuScreen implements Screen {
     private final Viewport viewport;
     private final Image titleImage;
 
+    // MODIFIED: Added leaderboard button to menu
     /**
      * A class to display a menu screen, initially gives the player 4 options, Start, Settings, Credits, Quit
      * Upon hitting start, a tutorial window is shown, and then an avatar select screen is shown, and then it is
@@ -284,6 +285,7 @@ public class MenuScreen implements Screen {
     }
 
 
+    // MODIFIED FROM ORIGINAL: Selection now also has a name field for use in leaderboard
     /**
      * Creates an avatar selection screen, consisting of a label and two buttons
      *

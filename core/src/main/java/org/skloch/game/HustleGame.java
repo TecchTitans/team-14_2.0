@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 
+// MODIFIED: added support for multiple maps and leaderboard
 /**
  * A class that is initially created by DesktopLauncher, loads consistent files at the start of the game and initialises lots of important classes.
  * Loads the map, ui skin, text files and makes sound manager and more
@@ -72,6 +73,8 @@ public class HustleGame extends Game {
 	 * Loads credit and tutorial texts
 	 * Creates a stage with a blue background for screens to use
 	 */
+
+	// MODIFIED: creates both East and town map, along with loading leaderboard data.
 	@Override
 	public void create () {
 		if (!unitTest) {
@@ -122,6 +125,7 @@ public class HustleGame extends Game {
 		}
 	}
 
+	// NEW METHOD
 	/**
 	 * Switches the current map to town
 	 */
@@ -130,6 +134,7 @@ public class HustleGame extends Game {
 		mapProperties = townMapProperties;
 	}
 
+	// NEW METHOD
 	/**
 	 * Switches the current map to east campus
 	 */
@@ -138,6 +143,8 @@ public class HustleGame extends Game {
 		mapProperties = eastMapProperties;
 	}
 
+
+	// NEW METHODS
 
 	// getters implemented solely for testing
 	public TiledMap getMap() { return map; }
@@ -180,6 +187,7 @@ public class HustleGame extends Game {
 		}
 	}
 
+	// NEW METHOD
 	/**
 	 * Adds a player to the leaderboard. This stores their name and score.
 	 * Optionally, the leaderboard can be exported to a file once the player has been added.
@@ -209,6 +217,7 @@ public class HustleGame extends Game {
 		}
 	}
 
+	// NEW METHOD
 	/**
 	 * Clears the leaderboard
 	 */
@@ -216,6 +225,7 @@ public class HustleGame extends Game {
 		this.leaderboard = new String[0][];
 	}
 
+	// NEW METHOD
 	/**
 	 * Exports the current leaderboard to a given file.
 	 *
@@ -250,6 +260,7 @@ public class HustleGame extends Game {
 		}
 	}
 
+	// NEW METHOD
 	/**
 	 * Reads and parses a JSON file to extract leaderboard data
 	 *

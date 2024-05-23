@@ -92,6 +92,7 @@ public class EventManager {
             case "accomodation":
                 accomEvent(args);
                 break;
+            // All events below this are new to assessment 2
             case "bus_to_town":
                 goToTownEvent(args);
                 break;
@@ -155,6 +156,8 @@ public class EventManager {
         game.dialogueBox.setText("The tree doesn't say anything back.");
         isTreeEventCalled = true;
     }
+
+    // NEW METHOD
 
     /**
      * Returns whether tree event has been called.
@@ -335,6 +338,8 @@ public class EventManager {
         fadeToBlack(setTextAction);
     }
 
+    // NEW METHOD
+
     /**
      * The event to be run when the player interacts with the bus
      * Gives the player the choice to go to town
@@ -346,6 +351,8 @@ public class EventManager {
         game.changeToTownMap();
     }
 
+    // NEW METHOD
+
     /**
      * The event to be run when the player interacts with the bus
      * Gives the player the choice to go to east campus
@@ -356,6 +363,8 @@ public class EventManager {
         game.addActivityDone(args[0]);
         game.changeToCampusEastMap();
     }
+
+    // NEW METHOD
 
     /**
      * The event to be run when the player interacts with the pub in town
@@ -387,6 +396,8 @@ public class EventManager {
         }
     }
 
+    // NEW METHOD
+
     /**
      * The event to be run when the player interacts with himark
      * Gives the player the choice how long they choose to stay
@@ -415,6 +426,8 @@ public class EventManager {
             game.dialogueBox.setText("It's too early to go shopping, go to bed!");
         }
     }
+
+    // NEW METHOD
 
     /**
      * The event to be run when the player interacts with the library
@@ -451,6 +464,8 @@ public class EventManager {
         }
     }
 
+    // NEW METHOD
+
     /**
      * The event to be run when the player interacts with kosta koffee
      * @param args
@@ -481,6 +496,8 @@ public class EventManager {
             game.dialogueBox.setText("It's too early in the morning to meet your friends, go to bed!");
         }
     }
+
+    // NEW METHOD
 
     /**
      * The event to be run when the player interacts with luigi's pizza

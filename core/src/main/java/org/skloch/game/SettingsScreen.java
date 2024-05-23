@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+// MODIFIED: Now stores current music volume and SFX volume
 /**
  * A screen to display settings to the player, lets the player adjust sound and music volume
  */
@@ -28,7 +29,7 @@ public class SettingsScreen implements Screen {
     public float musicVolume;
     public float sfxVolume;
 
-
+    // MODIFIED: Check if game is a unit test, sets up sound sliders
     /**
      * Handles the configuration of Music and Sound effect volume using two sliders
      * @param game An instance of HustleGame
@@ -109,6 +110,7 @@ public class SettingsScreen implements Screen {
         }
     }
 
+    // NEW METHOD: Moved code to setup sound sliders to separate method
     public void setupSoundSliders() {
         musicSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
         sfxSlider = new Slider(0, 100, 1, false, game.skin, "default-horizontal");
@@ -130,6 +132,7 @@ public class SettingsScreen implements Screen {
         });
     }
 
+    // NEW METHOD
     /**
      * Sets the music volume in the sounds manager and the musicVolume field.
      *
@@ -143,6 +146,7 @@ public class SettingsScreen implements Screen {
         return value;
     }
 
+    // NEW METHOD
     /**
      * Sets the sfx volume in the sounds manager and the sfxVolume field.
      *
@@ -156,6 +160,7 @@ public class SettingsScreen implements Screen {
         return value;
     }
 
+    // MODIFICATION: Doesn't render if the game is a unit test
     /**
      * Renders a settings screen to let the player configure music and sound volume
      * @param delta The time in seconds since the last render.

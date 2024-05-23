@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+// NEW CLASS ENTIRELY
+
 /**
  * A screen to display a leaderboard showing the top 10 players.
  */

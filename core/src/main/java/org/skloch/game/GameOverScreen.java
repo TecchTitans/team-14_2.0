@@ -24,6 +24,8 @@ public class GameOverScreen implements Screen {
     Viewport viewport;
     OrthographicCamera camera;
 
+    // Modified game over screen to show streaks and a calculated score.
+
     /**
      * A screen to display a 'Game Over' screen when the player finishes their exams
      * Currently does not calculate a score, just shows the player's stats to them, as requested in assessment 1
