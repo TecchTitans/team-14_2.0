@@ -6,11 +6,32 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         google()
     }
-    dependencies {}
+    dependencies {
+        classpath "org.jacoco:org.jacoco.core:0.8.9"
+    }
+}
+
+task codeCoverageReport(type: JacocoReport) {
+
+    // Gather execution data from all subprojects
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    reports {
+        xml.required = false
+        html.required = true
+        csv.required = false
+    }
+
+}
+
+// always run the tests before generating the report
+codeCoverageReport.dependsOn {
+    subprojects*.test
 }
 
 allprojects {
     apply plugin: "eclipse"
+    apply plugin: "jacoco"
 
     version = '1.0'
     ext {
@@ -37,6 +58,8 @@ allprojects {
 project(":desktop") {
     apply plugin: "java-library"
 
+    sourceSets.test.resources.srcDirs = ["src/"]
+
     dependencies {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
@@ -58,6 +81,7 @@ project(":desktop") {
 project(":core") {
     apply plugin: "java-library"
 
+    sourceSets.test.resources.srcDirs = ["src/"]
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -78,8 +102,8 @@ project(":test") {
     apply plugin: "java-library"
     apply plugin: "java"
 
-    sourceSets.test.resources.srcDirs = ["../assets"]
-    apply plugin: "jacoco"
+    sourceSets.test.resources.srcDirs = ["src/", "../assets"]
+
     dependencies {
         implementation project(":core")
         implementation "junit:junit:4.+"
