@@ -105,9 +105,9 @@ public class GameScreen implements Screen {
         this.avatarChoice = avatarChoice;
         // Create a player class
         if (avatarChoice == 1) {
-            player = new Player("avatar1", name);
+            player = new Player("avatar1", name, false);
         } else {
-            player = new Player("avatar2", name);
+            player = new Player("avatar2", name, false);
         }
 
 

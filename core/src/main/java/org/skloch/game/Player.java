@@ -25,7 +25,7 @@ public class Player {
     public float speed = 500f;
     public Array<GameObject> collidables;
     public int scale = 4;
-    private Rectangle bounds;
+    public Rectangle bounds;
     private GameObject closestObject;
     public boolean frozen, moving;
 
@@ -38,27 +38,30 @@ public class Player {
      * @param avatar "avatar1" for the more masculine character, "avatar2" for the more feminine character,
      *               player animations are packed in the player_sprites atlas
      */
-    public Player (String avatar, String name) {
-        // Load the player's textures from the atlas
-        TextureAtlas playerAtlas = new TextureAtlas(Gdx.files.internal("Sprites/Player/player_sprites.atlas"));
-
+    public Player (String avatar, String name, boolean isUnitTest) {
         walkingAnimation = new Array<Animation<TextureRegion>>(4);
         idleAnimation = new Array<Animation<TextureRegion>>(4);
+        if (!isUnitTest) {
+            // Load the player's textures from the atlas
+            TextureAtlas playerAtlas = new TextureAtlas(Gdx.files.internal("Sprites/Player/player_sprites.atlas"));
 
-        // Load walking animation from Sprite atlas
-        walkingAnimation.add(
-                new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_back"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_right"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_front"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_left"), Animation.PlayMode.LOOP));
-        // Load idle animation
-        idleAnimation.add(
-                new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_back"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_right"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_front"), Animation.PlayMode.LOOP),
-                new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_left"), Animation.PlayMode.LOOP)
-        );
 
+
+
+            // Load walking animation from Sprite atlas
+            walkingAnimation.add(
+                    new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_back"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_right"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_front"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.25f, playerAtlas.findRegions(avatar + "_walk_left"), Animation.PlayMode.LOOP));
+            // Load idle animation
+            idleAnimation.add(
+                    new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_back"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_right"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_front"), Animation.PlayMode.LOOP),
+                    new Animation<TextureRegion>(0.40f, playerAtlas.findRegions(avatar + "_idle_left"), Animation.PlayMode.LOOP)
+            );
+        }
         collidables = new Array<GameObject>();
 
         // Sprite is a rectangle covering the whole player
@@ -190,6 +193,7 @@ public class Player {
         updateAnimation();
 
     }
+
 
     /**
      * Advances the current animation based on the time since the last render
@@ -354,7 +358,7 @@ public class Player {
      * @param object The object to get the distance from
      * @return The distance from the object
      */
-    private float distanceFrom (GameObject object) {
+    public float distanceFrom (GameObject object) {
         return (float) Math.sqrt((Math.pow((centreX - object.centreX), 2) + Math.pow((centreY - object.centreY), 2)));
     }
 
