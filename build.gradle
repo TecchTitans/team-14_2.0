@@ -13,14 +13,20 @@ buildscript {
 
 task codeCoverageReport(type: JacocoReport) {
 
-    // Gather execution data from all subprojects
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
     reports {
         xml.required = false
         html.required = true
         csv.required = false
     }
+
+    def excludesFiles = ['**/*Test*.class']
+
+    //java compiled classes
+    def javaTree = fileTree(dir: "$project.buildDir/classes/java", excludes: excludesFiles)
+    def mainSrc = "$project.rootDir.absolutePath/core/src/main/java"
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([javaTree])
+    executionData = fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
 }
 
@@ -53,6 +59,11 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url "https://jitpack.io" }
     }
+
+    jacoco {
+        toolVersion = "0.8.9"
+    }
+
 }
 
 project(":desktop") {
@@ -76,6 +87,7 @@ project(":desktop") {
             )
         }
     }
+
 }
 
 project(":core") {
@@ -90,9 +102,25 @@ project(":core") {
         implementation 'junit:junit:4.12+'
     }
 
+    jacocoTestReport {
+        reports {
+            xml.required = false
+            csv.required = false
+            html.required = true
+            html.destination file("${buildDir}/jacocoHtml")
+        }
+        dependsOn test // make sure tests are run before generating the report
+    }
+
     test {
         useJUnit()
         maxHeapSize = '1G'
+        finalizedBy jacocoTestReport // report is always generated after tests run
+
+        jacoco {
+            includes = ['main.java.org.skloch.game.*']
+        }
+
     }
 
 }
@@ -123,6 +151,11 @@ project(":test") {
     test {
         useJUnit()
         maxHeapSize = '1G'
+
+        jacoco {
+            includes = ['main.java.org.skloch.game.*']
+        }
+
     }
 
 }
