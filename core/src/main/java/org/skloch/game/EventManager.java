@@ -156,6 +156,10 @@ public class EventManager {
         isTreeEventCalled = true;
     }
 
+    /**
+     * Returns whether tree event has been called.
+     * @return true or false if tree has been called or not
+     */
     public boolean isTreeEventCalled() {
         return isTreeEventCalled;
     }

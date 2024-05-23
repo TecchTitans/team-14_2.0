@@ -136,38 +136,3 @@ project(":core") {
 }
 
 
-project(":test") {
-    apply plugin: "java-library"
-    apply plugin: "java"
-
-    sourceSets.test.resources.srcDirs = ["src/", "../assets"]
-
-    dependencies {
-        implementation project(":core")
-        implementation "junit:junit:4.+"
-        implementation "org.mockito:mockito-all:1.9.+"
-
-        implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-
-        implementation 'junit:junit:4.+'
-        implementation "org.mockito:mockito-all:1.9.+"
-
-        implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-    }
-
-    test {
-        useJUnit()
-        maxHeapSize = '1G'
-
-        jacoco {
-            includes = ['main.java.org.skloch.game.*']
-        }
-
-    }
-
-}
-
-
