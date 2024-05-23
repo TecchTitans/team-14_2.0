@@ -13,7 +13,6 @@ import static org.mockito.Mockito.mock;
 // integration test
 
 @RunWith(GdxTestRunner.class)
-
 public class CreditScreenTest {
     private HustleGame game;
     private CreditScreen creditScreen;
