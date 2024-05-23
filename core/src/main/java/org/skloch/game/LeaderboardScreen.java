@@ -22,6 +22,12 @@ public class LeaderboardScreen implements Screen {
     OrthographicCamera camera;
     private Viewport viewport;
 
+    /**
+     * Handles the configuration of the leaderboard screen
+     *
+     * @param game an instance of HustleGame
+     * @param previousScreen The previous screen to return to when the exit button is pressed
+     */
     public LeaderboardScreen(final HustleGame game, Screen previousScreen) {
         this.game = game;
         this.game.leaderboardScreen = this;
@@ -140,6 +146,11 @@ public class LeaderboardScreen implements Screen {
 
     }
 
+    /**
+     * Renders the leaderboard screen to show the leaderboard to the player
+     *
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
