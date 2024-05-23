@@ -130,6 +130,12 @@ public class SettingsScreen implements Screen {
         });
     }
 
+    /**
+     * Sets the music volume in the sounds manager and the musicVolume field.
+     *
+     * @param value - value to set the volume to
+     * @return the value of the volume
+     */
     public float setMusicVolume(float value) {
         game.soundManager.setMusicVolume(value);
         musicVolume = value;
@@ -137,6 +143,12 @@ public class SettingsScreen implements Screen {
         return value;
     }
 
+    /**
+     * Sets the sfx volume in the sounds manager and the sfxVolume field.
+     *
+     * @param value - value to set the volume to
+     * @return the value of the volume
+     */
     public float setSfxVolume(float value) {
         game.soundManager.setSfxVolume(value);
         sfxVolume = value;

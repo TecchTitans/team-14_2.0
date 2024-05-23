@@ -1,4 +1,7 @@
 Made By:
+ENG1 Group 2-14
+
+Built upon the work of:
 ENG1 Group 2-16
 
 Game Engine:
@@ -8,12 +11,15 @@ Tools:
 LibGDX Skin Composer
 LibGDX Texture Packer
 Tiled Map Editor
+JSON-java
 
 Assets:
 Male Player sprite - https://cuddle-bug.itch.io/apocalypse
 Female Player sprite - E.Giles
 Buttons - https://paperhatlizard.itch.io/cryos-mini-gui?download
 Map sprites - https://kerrielake.itch.io/star-realms-cozy-forest-pack
+House sprites - https://pixeljad.itch.io/villagetopdown
+Bus sprites - https://dai420.itch.io/public-bus
 
 Fonts:
 https://www.dafont.com/w95fa.font

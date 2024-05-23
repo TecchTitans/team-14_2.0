@@ -153,7 +153,7 @@ public class EventManager {
     public void treeEvent() {
         game.dialogueBox.hideSelectBox();
         game.dialogueBox.setText("The tree doesn't say anything back.");
-        isTreeEventCalled  = true;
+        isTreeEventCalled = true;
     }
 
     public boolean isTreeEventCalled() {
