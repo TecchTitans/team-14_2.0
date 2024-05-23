@@ -41,7 +41,6 @@ public class GameScreen implements Screen {
     public boolean testGameOver;
     private OrthographicCamera camera;
     private int energy = 100;
-    //private int hoursStudied, hoursRecreational, hoursSlept;
     private final DailyActivities[] daysInfo = new DailyActivities[7];
     private float daySeconds = 0; // Current seconds elapsed in day
     private int day = 1; // What day the game is on
@@ -316,8 +315,6 @@ public class GameScreen implements Screen {
 
         // Increment the time and possibly day  >>  removed due to user evaluation but kept in case needed
         //if (!escapeMenu.isVisible() && !sleeping) {
-
-        //passTime(Gdx.graphics.getDeltaTime());
 
             //passTime(Gdx.graphics.getDeltaTime());
 
@@ -741,7 +738,8 @@ public class GameScreen implements Screen {
     }
 
     /**
-     * @return Returns 'breakfast', 'lunch' or 'dinner' depending on the time of day
+     * Gets what meal should be eaten, given the time of day.
+     * @return Returns 'breakfast', 'lunch' or 'dinner' as a string, depending on the time of day
      */
     public String getMeal() {
         int hours = Math.floorDiv((int) daySeconds, 60);
@@ -830,13 +828,13 @@ public class GameScreen implements Screen {
     }
 
     /**
-     * Ends the game, called at the end of the 7th day, switches to a screen that displays a score
+     * Ends the game, called at the end of the 7th day, switches to a game over screen that displays
+     * score, streaks and more. Calculates the final stats of the activities performed over the week,
+     * then invokes the calculateScore and calculateStreaks methods to pass these into the game over screen.
      */
     public void GameOver() {
         this.testGameOver = true;
 
-        //game.setScreen(new GameOverScreen(game, hoursStudied, hoursRecreational, hoursSlept));
-        //int score = 500;
         int totalTimesStudied = 0,
                 totalHoursStudied = 0,
                 totalTimesRecreation = 0,
@@ -864,57 +862,11 @@ public class GameScreen implements Screen {
             totalPubEvents += dailyActivities.getActivityDone("pub");
             totalTownEvents += dailyActivities.getActivityDone("bus_to_town");
             totalLibraryEvents += dailyActivities.getActivityDone("library");
-            //if(dailyActivities.isEatenBreakfast()) { score += 50; }
-            //if(dailyActivities.isEatenLunch()) { score += 50; }
-            //if(dailyActivities.isEatenDinner()) { score += 50; }
             if(dailyActivities.isEatenBreakfast()) { daysEatenBreakfast++; }
             if(dailyActivities.isEatenLunch()) { daysEatenLunch++; }
             if(dailyActivities.isEatenDinner()) { daysEatenDinner++; }
         }
 
-        //scoring and streaks now done in separate methods instead
-        /*
-        // if they haven't studied enough days, they fail their exam.
-        if(daysStudied < 6) {
-            score = 0;
-        } else if (daysStudied == 6 && totalTimesStudied < 7) {
-            // if they didn't catch up from missing a day of studying, they fail their exam.
-            score = 0;
-        } else {
-            // reward student for performing recreational activities
-            score += 50 * totalHoursRecreation;
-
-            // check if daily hours studied avg is more than 4. If so, overworked, penalise score.
-            score += 100 * (totalHoursStudied);
-            if((totalHoursStudied / 7) > 4) {
-                // penalise score depending on how overworked they are.
-                score -= 1000 * ((totalHoursStudied / 7) - 4);
-            }
-
-            // If met friends at piazza 6 or more times, they are a social butterfly
-            if(totalPiazzaEvents >= 6) {
-                streaks.add("Social Butterfly");
-                score += 250;
-            }
-
-            // If they've been to the pub 4 or more times, they are a party animal
-            if(totalPubEvents >= 4) {
-                streaks.add("Party Animal");
-                score += 150;
-            }
-
-            // if they go to town 6 times or more, they are an explorer
-            if(totalTownEvents >= 6) {
-                streaks.add("Explorer");
-                score += 100;
-            }
-
-            // if they go to library 4 times that week (or more), they are a bookworm
-            if(totalLibraryEvents >= 4) {
-                streaks.add("Bookworm");
-                score += 250;
-            }
-        }*/
 
         HashSet<String> streaks = calculateStreaks(totalPiazzaEvents, totalPubEvents, totalTownEvents, totalLibraryEvents);
         int score = calculateScore(daysStudied, totalTimesStudied, totalHoursStudied, totalHoursRecreation,
@@ -925,7 +877,22 @@ public class GameScreen implements Screen {
         }
     }
 
-    // could just do this in the GameOver method, or pass in totalTimesStudied etc. as parameters, rather than repeating code.
+    /**
+     * Calculates a final score based upon the stats of the final game, given as parameters.
+     * If a player hasn't studied enough, they get a final score of 0. Otherwise, score is added
+     * based upon how much they studied (score is deducted if they are overworked), how many
+     * recreational hours they had, if they ate at regular intervals, etc. This is added upon
+     * a baseline score of 500. The higher the score, the better they did on their exam.
+     * @param daysStudied - How many days the player studied throughout the week.
+     * @param totalTimesStudied - How many times the player studied throughout the week.
+     * @param totalHoursStudied - How many hours the player studied throughout the week.
+     * @param totalHoursRecreation - How many recreational hours the player did throughout the week.
+     * @param daysEatenBreakfast - How many days the player ate breakfast.
+     * @param daysEatenLunch - How many days the player ate lunch.
+     * @param daysEatenDinner - How many days the player ate dinner.
+     * @param streaks - The streaks that the player achieved.
+     * @return final score as an integer
+     */
     public static int calculateScore(int daysStudied,
                                int totalTimesStudied,
                                int totalHoursStudied,
@@ -938,6 +905,7 @@ public class GameScreen implements Screen {
         int score = 500;
 
         if(daysStudied < 6) {
+            // if they didn't study enough days, they fail their exam.
             return 0;
         } else if (daysStudied == 6 && totalTimesStudied < 7) {
             // if they didn't catch up from missing a day of studying, they fail their exam.
@@ -958,7 +926,7 @@ public class GameScreen implements Screen {
                 score -= 1000 * ((totalHoursStudied / 7) - 4);
             }
 
-            //add score from potential streaks
+            // add score from potential streaks achieved.
             if(streaks.contains("Social Butterfly")) { score += 250; }
             if(streaks.contains("Bookworm")) { score += 250; }
             if(streaks.contains("Party Animal")) { score += 150; }
@@ -969,30 +937,36 @@ public class GameScreen implements Screen {
 
     }
 
+    /**
+     * Calculates what streaks were achieved, if any, given the amount of times
+     * certain places were visited, given as parameters. If they were visited
+     * enough times in the week, a streak is achieved.
+     * @param totalPiazzaEvents - Number of times the piazza was visited throughout the week.
+     * @param totalPubEvents - Number of times the pub was visited throughout the week.
+     * @param totalTownEvents - Number of times town was visited throughout the week.
+     * @param totalLibraryEvents - Number of times the library was visited throughout the week.
+     * @return streaks that were achieved, given as a set of strings.
+     */
     public static HashSet<String> calculateStreaks(int totalPiazzaEvents, int totalPubEvents, int totalTownEvents, int totalLibraryEvents) {
         // If met friends at piazza 6 or more times, they are a social butterfly
         HashSet<String> streaks = new HashSet<String>();
         if(totalPiazzaEvents >= 6) {
             streaks.add("Social Butterfly");
-            //score += 250;
         }
 
         // If they've been to the pub 4 or more times, they are a party animal
         if(totalPubEvents >= 4) {
             streaks.add("Party Animal");
-            //score += 150;
         }
 
         // if they go to town 6 times or more, they are an explorer
         if(totalTownEvents >= 6) {
             streaks.add("Explorer");
-            //score += 100;
         }
 
         // if they go to library 4 times that week (or more), they are a bookworm
         if(totalLibraryEvents >= 4) {
             streaks.add("Bookworm");
-            //score += 250;
         }
 
         return streaks;
@@ -1020,6 +994,10 @@ public class GameScreen implements Screen {
         setupMap(true);
     }
 
+    /**
+     * Returns the current dialogue box in the game screen
+     * @return a DialogueBox object.
+     */
     public DialogueBox getDialogueBox() {
         return game.gameScreen.getDialogueBox();
     }
